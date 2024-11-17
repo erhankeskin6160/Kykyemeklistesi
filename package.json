@@ -4,7 +4,8 @@
   "description": "Kyk yemek listesi",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "sass:build": "sass Kykyemeklistesi/wwwroot/scss:Kykyemeklistesi/wwwroot/css --no-source-map",
+    "sass:watch": "sass Kykyemeklistesi/wwwroot/scss:Kykyemeklistesi/wwwroot/css --watch --no-source-map"
   },
   "author": "Erdal Keskin",
   "license": "MIT",
