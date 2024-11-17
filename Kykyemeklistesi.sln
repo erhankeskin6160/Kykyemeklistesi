@@ -5,6 +5,8 @@ VisualStudioVersion = 17.12.35506.116 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kykyemeklistesi", "Kykyemeklistesi\Kykyemeklistesi.csproj", "{48E419B7-6349-456E-9834-B22D9226911C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KykyemeklistesiDataAcces", "KykyemeklistesiDataAcces\KykyemeklistesiDataAcces.csproj", "{B559B404-7988-4538-9F29-177389DE2609}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{48E419B7-6349-456E-9834-B22D9226911C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48E419B7-6349-456E-9834-B22D9226911C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48E419B7-6349-456E-9834-B22D9226911C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B559B404-7988-4538-9F29-177389DE2609}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B559B404-7988-4538-9F29-177389DE2609}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B559B404-7988-4538-9F29-177389DE2609}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B559B404-7988-4538-9F29-177389DE2609}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
