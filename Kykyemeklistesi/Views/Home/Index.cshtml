@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using System.Globalization
+@model List<Yemek>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -7,7 +9,11 @@
     <title>Document</title>
 </head>
 KYK YEMEK LİSTESİ BASLANGIÇ
-
+@foreach (var item in Model)
+{
+    CultureInfo culture = new CultureInfo("tr,Tr");
+     @item.Day.ToString("dd.MM.yyyy",culture)
+}
 <body>
 
 </body>

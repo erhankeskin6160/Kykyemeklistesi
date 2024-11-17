@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using Kykyemeklistesi.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,27 +5,20 @@ namespace Kykyemeklistesi.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        AppDbContext dbContext= new AppDbContext();
+        public HomeController(AppDbContext appContext )
         {
-            _logger = logger;
+                dbContext = appContext;
         }
+
 
         public IActionResult Index()
         {
+            dbContext.YemekListesi.ToList();
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }
