@@ -15,8 +15,8 @@ namespace Kykyemeklistesi.Controllers
 
         public IActionResult Index()
         {
-            dbContext.YemekListesi.ToList();
-            return View();
+           var yemeklistesi= dbContext.YemekListesi.ToList();
+            return View(yemeklistesi);
         }
 
 
