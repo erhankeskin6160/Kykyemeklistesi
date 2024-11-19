@@ -1,10 +1,9 @@
-<<<<<<< Updated upstream
 /* Error: Can't find stylesheet to import.
  *   ,
- * 1 | @use "/node_modules/bootstrap/scss/bootstrap.scss";
- *   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ * 1 | @import "/node_modules/bootstrap/scss/bootstrap.scss";
+ *   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
  *   '
- *   Kykyemeklistesi\wwwroot\scss\bootstrap.scss 1:1  root stylesheet */
+ *   Kykyemeklistesi\wwwroot\scss\bootstrap.scss 1:9  root stylesheet */
 
 body::before {
   font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
@@ -14,8 +13,5 @@ body::before {
   padding: 1em;
   margin-bottom: 1em;
   border-bottom: 2px solid black;
-  content: "Error: Can't find stylesheet to import.\a   \2577 \a 1 \2502  @use \"/node_modules/bootstrap/scss/bootstrap.scss\";\a   \2502  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\a   \2575 \a   Kykyemeklistesi\\wwwroot\\scss\\bootstrap.scss 1:1  root stylesheet";
+  content: "Error: Can't find stylesheet to import.\a   \2577 \a 1 \2502  @import \"/node_modules/bootstrap/scss/bootstrap.scss\";\a   \2502          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\a   \2575 \a   Kykyemeklistesi\\wwwroot\\scss\\bootstrap.scss 1:9  root stylesheet";
 }
-=======
-
->>>>>>> Stashed changes
