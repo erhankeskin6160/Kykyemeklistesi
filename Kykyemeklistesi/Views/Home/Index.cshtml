@@ -1,6 +1,6 @@
 ﻿@using System.Globalization
-@* @model List<Yemek>
- *@<!DOCTYPE html>
+ @model List<Yemek>
+ <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -10,12 +10,13 @@
     <title>Document</title>
 </head>
 KYK YEMEK LİSTESİ BASLANGIÇ
-@* @foreach (var item in Model)
+@foreach (var item in Model)
 {
-    CultureInfo culture = new CultureInfo("tr,Tr");
-    @item.Day.ToString("dd.MM.yyyy", culture)
+ 
+    @item.Day.ToString("dd MMMM yyyy",CultureInfo.GetCultureInfo("tr"));
+    @item.City;
 }
- *@
+
 <body>
 
 </body>
