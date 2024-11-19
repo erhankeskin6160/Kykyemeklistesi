@@ -10,6 +10,7 @@
   "author": "Erdal Keskin",
   "license": "MIT",
   "dependencies": {
+    "bootstrap": "^5.3.3",
     "sass": "^1.81.0"
   }
 }
