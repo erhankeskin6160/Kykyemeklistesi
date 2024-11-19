@@ -1,24 +1,21 @@
 ﻿@using System.Globalization
- @model List<Yemek>
- <!DOCTYPE html>
+@model List<Yemek>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles.css">
+
     <title>Document</title>
 </head>
 KYK YEMEK LİSTESİ BASLANGIÇ
 @foreach (var item in Model)
 {
- 
-    @item.Day.ToString("dd MMMM yyyy",CultureInfo.GetCultureInfo("tr"));
-    @item.City;
-}
 
-<body>
-
-</body>
-
-</html>
+    @item.Day.ToString("dd MMMM yyyy", CultureInfo.GetCultureInfo("tr"))
+    ;
+    @item.City
+    ;
+};
