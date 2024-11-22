@@ -20,12 +20,12 @@
         <form>
             <div class="mb-4 sehirsec d-flex justify-content-center">
                 <span class="mx-2 fw-bolder"> Şehrini Seç </span>
-                <select class="form-select-sm px-3">
+               @*  <select class="form-select-sm px-3">
                     @foreach (var item in ViewBag.City as List<SelectListItem>)
                     {
                         <option value="@item.Value">@item.Text</option>
                     }
-                </select>
+                </select> *@
             </div>
         </form>
     </div>
@@ -41,13 +41,13 @@
 
 
 
-                            <div class="tarih">@item.Day.ToLongDateString();</div>
+                            <div class="tarih">@item.Day.ToLongDateString()</div>
 
-                            <div class="col-md-6 p-0 h-100">
+                            <div class="col-md-6 p-0">
 
 
 
-                                <div class="card card-container-left shadow-sm border-0 bg-primary">
+                                <div class="card card-container-left shadow-sm border-0 bg-primary h-100">
                                     <div class="card-body">
                                         <h2 class=" fw-bold text-dark">Sabah</h2>
                                         <hr>
@@ -76,8 +76,8 @@
 
                             </div>
 
-                            <div class="col-md-6 p-0 h-100">
-                                <div class="card card-container-right  text-bg-secondary shadow-sm border-0">
+                            <div class="col-md-6 p-0">
+                                <div class="card card-container-right  text-bg-secondary shadow-sm border-0 h-100">
                                     <div class="card-body">
                                         <h2 class="fw-bold"> Akşam</h2>
                                         <hr>

@@ -17,14 +17,14 @@ namespace Kykyemeklistesi.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<SelectListItem> selectListItems = dbContext.YemekListesi.Distinct().Select(x => new SelectListItem
-            {
-                Value = x.Id.ToString(),
-                Text = x.City
-            }).ToList();
+            //List<SelectListItem> selectListItems = dbContext.YemekListesi.Distinct().Select(x => new SelectListItem
+            //{
+            //    Value = x.Id.ToString(),
+            //    Text = x.City
+            //}).ToList();
 
-            var city=selectListItems.FirstOrDefault();
-            ViewBag.City = city;
+            //var city=selectListItems.FirstOrDefault();
+            //ViewBag.City = city;
             var yemeklistesi = dbContext.YemekListesi.ToList();
             return View(yemeklistesi);
         }
