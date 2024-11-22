@@ -30,6 +30,9 @@ namespace Kykyemeklistesi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("AksamYemekListesi")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("Calorie")
                         .HasColumnType("float");
 
@@ -40,8 +43,7 @@ namespace Kykyemeklistesi.Migrations
                     b.Property<DateTime>("Day")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("FoodList")
-                        .IsRequired()
+                    b.Property<string>("SabahYemekListesi")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

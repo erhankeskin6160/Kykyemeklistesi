@@ -6,7 +6,12 @@
         public DateTime Day { get; set; } = DateTime.Now;
 
         public string City { get; set; }
-        public string FoodList { get; set; }
+         
+      public  string? SabahYemekListesi { get; set; }
+        public string? AksamYemekListesi { get; set; }
         public double Calorie { get; set; }
+ 
     }
+
+   
 }

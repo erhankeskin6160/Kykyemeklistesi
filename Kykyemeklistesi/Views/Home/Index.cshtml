@@ -1,25 +1,108 @@
 ﻿@using System.Globalization
- @model List<Yemek>
- <!DOCTYPE html>
+@model List<Yemek>
+<!DOCTYPE html>
 <html lang="en">
+
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/fontawesome.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/styles.css">
     <title>Document</title>
 </head>
-KYK YEMEK LİSTESİ BASLANGIÇ
-@foreach (var item in Model)
-{
- 
-    @item.Day.ToString("dd MMMM yyyy",CultureInfo.GetCultureInfo("tr"));
-    @item.FoodList;
-    @item.City;
-}
+
+
 
 <body>
+    <div class="container mt-5">
+        <form>
+            <div class="mb-4 sehirsec d-flex justify-content-center">
+                <span class="mx-2 fw-bolder"> Şehrini Seç </span>
+                <select class="form-select-sm px-3">
+                    <option>Seçiniz</option>
+                    <option value="morning">Ankara</option>
+                    <option value="afternoon">İstanbul</option>
+                    <option value="evening">İzmir</option>
+                </select>
+            </div>
+        </form>
+    </div>
+    <div class="container-xl">
+        <div class="row mb-5">
 
+            @foreach (var item in Model)
+            {
+
+                <div class="col-md-4">
+                    <div class="card-container me-4">
+                        <div class="row ">
+
+
+
+                            <div class="tarih">@item.Day.ToLongDateString();</div>
+
+                            <div class="col-md-6 p-0 h-100">
+
+
+
+                                <div class="card card-container-left shadow-sm border-0 bg-primary">
+                                    <div class="card-body">
+                                        <h2 class=" fw-bold text-dark">Sabah</h2>
+                                        <hr>
+                                        <ul class="list-group list-group-flush fs-5 mb-3 gap-2">
+                                            @if (!string.IsNullOrEmpty(item.SabahYemekListesi))
+                                            {
+
+
+                                                @foreach (var sabahyemek in item.SabahYemekListesi.Split(","))
+                                                {
+
+
+                                                    <li class="list-group-item border-0 text-bg-primary text-dark fw-bolder">@sabahyemek.Trim().ToString()</li>
+
+
+                                                }
+                                            }
+                                            else
+                                            { }
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-6 p-0 h-100">
+                                <div class="card card-container-right  text-bg-secondary shadow-sm border-0">
+                                    <div class="card-body">
+                                        <h2 class="fw-bold"> Akşam</h2>
+                                        <hr>
+                                        <ul class="list-group list-group-flush fs-5 mb-3 gap-2">
+                                            @if (!string.IsNullOrEmpty(item.SabahYemekListesi))
+                                            {
+                                                @foreach (var Aksamyemek in item.AksamYemekListesi.Split(","))
+                                                {
+
+                                                    <li class="list-group-item border-0 text-bg-secondary fw-bold">@Aksamyemek.Trim().ToString()</li>
+                                                }
+                                            }
+
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+            }
+
+        </div>
 </body>
 
 </html>
