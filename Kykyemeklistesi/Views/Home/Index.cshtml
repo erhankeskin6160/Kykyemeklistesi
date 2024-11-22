@@ -21,10 +21,10 @@
             <div class="mb-4 sehirsec d-flex justify-content-center">
                 <span class="mx-2 fw-bolder"> Şehrini Seç </span>
                 <select class="form-select-sm px-3">
-                    <option>Seçiniz</option>
-                    <option value="morning">Ankara</option>
-                    <option value="afternoon">İstanbul</option>
-                    <option value="evening">İzmir</option>
+                    @foreach (var item in ViewBag.City as List<SelectListItem>)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
                 </select>
             </div>
         </form>
@@ -66,7 +66,9 @@
                                                 }
                                             }
                                             else
-                                            { }
+                                            { 
+                                                <span>Ürün Daha Eklenmedi</span>
+                                            }
                                         </ul>
                                     </div>
                                 </div>
@@ -88,7 +90,7 @@
                                                 }
                                             }
 
-                                            ss
+                                           
                                         </ul>
                                     </div>
                                 </div>
