@@ -1,3 +1,32 @@
 body {
-  background-color: red;
+  background-color: #FFF8E7;
+}
+
+.tarih {
+  text-align: center;
+  border: 2px solid none;
+  background-color: #64B5F6;
+  font-size: 25px;
+  color: white;
+  border-top-left-radius: 40%;
+  border-top-right-radius: 40%;
+}
+
+.card-container-left {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 0px;
+}
+
+.card-container-right {
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 0px;
+}
+
+.sehirsec {
+  display: flex;
+  justify-content: center;
 }
