@@ -13,19 +13,34 @@ namespace Kykyemeklistesi.Controllers
                 dbContext = appContext;
         }
 
+        
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(string ?selectedlist="Ankara")
         {
-            //List<SelectListItem> selectListItems = dbContext.YemekListesi.Distinct().Select(x => new SelectListItem
-            //{
-            //    Value = x.Id.ToString(),
-            //    Text = x.City
-            //}).ToList();
+            List<SelectListItem> selectListItem = dbContext.YemekListesi.GroupBy(x => x.City).Select(x => new SelectListItem
+            {
+                Value = x.Key,
+                Text=x.Key,
+            }
+            ).ToList();
 
-            //var city=selectListItems.FirstOrDefault();
-            //ViewBag.City = city;
-            var yemeklistesi = dbContext.YemekListesi.ToList();
+            ViewBag.City= selectListItem;
+            var yemeklistesi = string.IsNullOrEmpty(selectedlist) ? dbContext.YemekListesi.ToList() : dbContext.YemekListesi.Where(x => x.City == selectedlist).ToList();
+            return View(yemeklistesi);
+
+        
+        
+        
+        }
+        [HttpPost]
+        public IActionResult Index(string selectedCity ,string ?a)
+        {
+            // Seçili þehre göre yemek listesini döndür
+            var yemeklistesi = dbContext.YemekListesi
+                .Where(x => x.City == selectedCity)
+                .ToList();
+
             return View(yemeklistesi);
         }
 

@@ -17,16 +17,20 @@
 
 <body>
     <div class="container mt-5">
-        <form>
+        <form method="post" action="Index">
             <div class="mb-4 sehirsec d-flex justify-content-center">
                 <span class="mx-2 fw-bolder"> Şehrini Seç </span>
-               @*  <select class="form-select-sm px-3">
+                <select class="form-select-sm px-3" name="selectedlist">
                     @foreach (var item in ViewBag.City as List<SelectListItem>)
                     {
-                        <option value="@item.Value">@item.Text</option>
+                        
+                       <option value="@item.Value">
+                @item.Text
+            </option>
                     }
-                </select> *@
+                </select>  
             </div>
+            <input type="submit" name="name" value="" />
         </form>
     </div>
     <div class="container-xl">
