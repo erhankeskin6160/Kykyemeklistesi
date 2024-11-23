@@ -36,7 +36,7 @@ namespace Kykyemeklistesi.Controllers
         [HttpPost]
         public IActionResult Index(string selectedCity ,string ?a)
         {
-            // Seçili þehre göre yemek listesini döndür
+            // Seçili þehre göre yemek listesini döndürh
             var yemeklistesi = dbContext.YemekListesi
                 .Where(x => x.City == selectedCity)
                 .ToList();
