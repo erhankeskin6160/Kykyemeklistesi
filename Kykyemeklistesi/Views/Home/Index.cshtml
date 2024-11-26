@@ -17,20 +17,28 @@
 
 <body>
     <div class="container mt-5">
-        <form method="post" action="Index">
+        <form method="get" action="/Home/Index">
+
             <div class="mb-4 sehirsec d-flex justify-content-center">
                 <span class="mx-2 fw-bolder"> Şehrini Seç </span>
-                <select class="form-select-sm px-3" name="selectedlist">
-                    @foreach (var item in ViewBag.City as List<SelectListItem>)
-                    {
-                        
-                       <option value="@item.Value">
-                @item.Text
-            </option>
+                <select class="form-select-sm px-3" name="selectedCity" onchange="this.form.submit()">
+                  @foreach (var item in ViewBag.City as List<SelectListItem>)
+                    { 
+                        if (item.Selected)
+                        {
+                            <option value="@item.Value" selected>@item.Text</option>
+
+                        }
+                        else
+                        {
+                            <option value="@item.Value">@item.Text</option>
+
+                        }
                     }
-                </select>  
+                </select>
+
             </div>
-            <input type="submit" name="name" value="" />
+             
         </form>
     </div>
     <div class="container-xl">
