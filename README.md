@@ -13,7 +13,7 @@ Proje, kullanıcıların yemek listelerini seçtikleri şehirlere göre filtrele
 - C#
 - ASP.NET Core MVC
 - Entity Framework Core
-- HTML, CSS, JavaScript (Bootstrap ile)
+- HTML, CSS, JavaScript Bootstrap
 - LINQ
 - Sass
 - Node.js
