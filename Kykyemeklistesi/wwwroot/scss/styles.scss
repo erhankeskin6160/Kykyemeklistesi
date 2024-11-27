@@ -38,6 +38,16 @@ body {
     justify-content: center;
 }
 
-.navs:hover {
-    color: #333;
+.navbar .nav-link:hover {
+    color: #333 !important;
+    text-decoration: none;
+}
+
+.today-meal {
+    box-shadow: 0px 0px 49px #d34e0b;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 40%;
+    border-top-right-radius: 40%;
+
 }

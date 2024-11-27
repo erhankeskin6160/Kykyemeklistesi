@@ -33,13 +33,13 @@ body {
 
 .navbar .nav-link:hover {
   color: #333 !important;
-  /* Rengi koyu gri yapar */
   text-decoration: none;
-  /* İsteğe bağlı: Alt çizgiyi kaldırır */
 }
 
-
 .today-meal {
-  border: 3px solid red;
-  /* K�rm�z� renkli kal�n bir �izgi */
+  box-shadow: 0px 0px 49px #d34e0b;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 40%;
+  border-top-right-radius: 40%;
 }
