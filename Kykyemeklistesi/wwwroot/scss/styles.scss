@@ -12,9 +12,11 @@ body {
     border-top-left-radius: 40%;
     border-top-right-radius: 40%;
 
+
 }
 
 .card-container-left {
+
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
 
@@ -23,6 +25,7 @@ body {
 }
 
 .card-container-right {
+
     border-top-right-radius: 0px;
     border-top-left-radius: 0px;
 
@@ -33,4 +36,8 @@ body {
 .sehirsec {
     display: flex;
     justify-content: center;
+}
+
+.navs:hover {
+    color: #333;
 }

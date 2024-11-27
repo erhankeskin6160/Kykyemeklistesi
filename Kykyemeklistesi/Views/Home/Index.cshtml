@@ -23,7 +23,7 @@
                 <select class="form-select-sm px-3" name="selectedlist">
                     @foreach (var item in ViewBag.City as List<SelectListItem>)
                     {
-                        
+                            
                        <option value="@item.Value">
                 @item.Text
             </option>
@@ -32,26 +32,29 @@
             </div>
             <input type="submit" name="name" value="" />
         </form>
+
+
     </div>
+ <section class="d-flex justify-content-center align-items-center h-100 min-vh-100">
     <div class="container-xl">
-        <div class="row mb-5">
+        <div class="row mb-5 gy-4">
 
             @foreach (var item in Model)
             {
 
-                <div class="col-md-4">
+                <div class="col-md-4 col-sm-6">
                     <div class="card-container me-4">
-                        <div class="row ">
+                        <div class="row">
 
 
-
+ 
                             <div class="tarih">@item.Day.ToLongDateString()</div>
 
-                            <div class="col-md-6 p-0">
+                            <div class="col-md-6 col-sm-6 p-0">
 
 
-
-                                <div class="card card-container-left shadow-sm border-0 bg-primary h-100">
+                                
+                                <div class="card card-container-left custom-card shadow-sm border-0 bg-primary h-100">
                                     <div class="card-body">
                                         <h2 class=" fw-bold text-dark">Sabah</h2>
                                         <hr>
@@ -77,16 +80,15 @@
                                         </ul>
                                     </div>
                                 </div>
-
                             </div>
 
-                            <div class="col-md-6 p-0">
-                                <div class="card card-container-right  text-bg-secondary shadow-sm border-0 h-100">
+                            <div class="col-md-6 col-sm-6 p-0">
+                                <div class="card card-container-right custom-card  text-bg-secondary shadow-sm border-0 h-100">
                                     <div class="card-body">
                                         <h2 class="fw-bold"> Akşam</h2>
                                         <hr>
                                         <ul class="list-group list-group-flush fs-5 mb-3 gap-2">
-                                            @if (!string.IsNullOrEmpty(item.SabahYemekListesi))
+                                            @if (!string.IsNullOrEmpty(item.AksamYemekListesi))
                                             {
                                                 @foreach (var Aksamyemek in item.AksamYemekListesi.Split(","))
                                                 {
@@ -110,6 +112,8 @@
             }
 
         </div>
+        </section>
+    </div>
 </body>
 
 </html>

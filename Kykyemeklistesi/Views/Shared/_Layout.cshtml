@@ -1,29 +1,35 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Kykyemeklistesi</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Kykyemeklistesi.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/bootstraps.css" asp-append-version="true" />
+
 </head>
+
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar  navbar-expand-lg  navbar-light text-light  border-bottom box-shadow mb-1 m-0 p-0"
+            style="background-color: #64B5F6;">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Kykyemeklistesi</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand " asp-area="" asp-controller="Home" asp-action="Index"><span><img
+                            class="rounded-circle" src="~/images/Backgroundss.png" alt="logo"
+                            style="width: 85px ; margin-: 0.1px;"></span></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarButton">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                <div class="navbar-collapse collapse justify-content-between " id="#NavbarButton">
+                    <ul class="navbar-nav flex-grow-1 ms-auto">
+                        <li class="nav-item mx-3">
+                            <a class="nav-link text-light fw-semibold" asp-area="" asp-controller="Home"
+                                asp-action="Index">Ana Sayfa</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li class="nav-item mx-3">
+                            <a class="nav-link text-light fw-semibold " asp-area="" asp-controller="Home"
+                                asp-action="Privacy">Bugünün Yemekleri</a>
                         </li>
                     </ul>
                 </div>
@@ -36,9 +42,10 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - Kykyemeklistesi - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="border-top footer text-muted text-light d-flex">
+        <div class="container-fluid " style="background-color: #64B5F6;">
+            &copy; 2024 - Kykyemeklistesi - <a class="text-muted" asp-area="" asp-controller=" Home" asp-action="Index"
+                style=" text-decoration: none;">Ana Sayfa</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -46,4 +53,5 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>

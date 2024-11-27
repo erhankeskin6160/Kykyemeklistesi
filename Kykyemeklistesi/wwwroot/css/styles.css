@@ -30,4 +30,10 @@ body {
   display: flex;
   justify-content: center;
 }
-    
+
+.navbar .nav-link:hover {
+  color: #333 !important;
+  /* Rengi koyu gri yapar */
+  text-decoration: none;
+  /* İsteğe bağlı: Alt çizgiyi kaldırır */
+}
