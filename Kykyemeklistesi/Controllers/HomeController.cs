@@ -1,54 +1,100 @@
 using Kykyemeklistesi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace Kykyemeklistesi.Controllers
 {
     public class HomeController : Controller
     {
+        private static AppDbContext _dbContext;
 
-        AppDbContext dbContext= new AppDbContext();
-        public HomeController(AppDbContext appContext )
+        public HomeController(AppDbContext appContext)
         {
-                dbContext = appContext;
+            _dbContext = appContext;
         }
+
+
 
         [HttpGet]
-        public IActionResult Index() 
+        public IActionResult Index(string? selectedCity = "Ankara")
         {
-            var data = dbContext.YemekListesi.ToList();
-            List<SelectListItem> selectListItem = dbContext.YemekListesi.GroupBy(x => x.City).Select(x => new SelectListItem
-            {
-                Value = x.Key,
-                Text = x.Key,
-            }
-           ).ToList();
+            DateTime currentDate = DateTime.Now;
 
-            ViewBag.City = selectListItem;
-            return View(data);
+
+            // Þehirler için SelectList
+
+            var selectList = _dbContext.YemekListesi
+
+
+                .GroupBy(x => x.City.CityName)
+                .Select(x => new SelectListItem
+                {
+                    Value = x.Key,
+                    Text = x.Key,
+                    Selected = x.Key == selectedCity
+                }).ToList();
+
+            // Seçilen þehre göre yemek listesi
+            var yemekListesi = _dbContext.YemekListesi.Include(x => x.City).OrderBy(x=>x.Day)
+                .Where(x => x.City.CityName == selectedCity)
+                .ToList();
+
+            ViewBag.City = selectList;
+            ViewBag.SelectedCity = selectedCity;
+
+            return View(yemekListesi);
+        }
+
+        //[HttpPost]
+        //public IActionResult Index(string selectedCity, string? a)
+        //{
+        //    var selectList = _dbContext.YemekListesi
+        //           .GroupBy(x => x.City)
+        //           .Select(x => new SelectListItem
+        //           {
+        //               Value = x.Key,
+        //               Text = x.Key,
+        //               Selected = x.Key == selectedCity
+        //           }).ToList();
+
+        //    var yemekListesi = _dbContext.YemekListesi
+        //            .Where(x => x.City == selectedCity)
+        //            .ToList();
+
+        //    ViewBag.City = selectList;
+        //    return View(yemekListesi);
+        //}
+
+
+        public IActionResult Bugunyemeklistesi(string? selectedCity = "Ankara")
+        {
+            var selectList = _dbContext.YemekListesi
+
+
+               .GroupBy(x => x.City.CityName)
+               .Select(x => new SelectListItem
+               {
+                   Value = x.Key,
+                   Text = x.Key,
+                   Selected = x.Key == selectedCity
+               }).ToList();
+
+            ViewBag.City = selectList;
+            
+            var bugunyemeklistesi=_dbContext.YemekListesi.Include(x => x.City).OrderBy(x => x.Day)
+                .Where(x => x.City.CityName == selectedCity && x.Day == DateTime.Now.Date)
+                .ToList();
+
+            return View(bugunyemeklistesi);
         }
 
 
+    }    
 
-        [HttpPost]
-        public IActionResult Index(string ?selectedlist="Ankara")
-        {
-            List<SelectListItem> selectListItem = dbContext.YemekListesi.GroupBy(x => x.City).Select(x => new SelectListItem
-            {
-                Value = x.Key,
-                Text=x.Key,
-            }
-            ).ToList();
 
-            ViewBag.City= selectListItem;
-            var yemeklistesi = string.IsNullOrEmpty(selectedlist) ? dbContext.YemekListesi.ToList() : dbContext.YemekListesi.Where(x => x.City == selectedlist).ToList();
-            return View(yemeklistesi);
-
-        
-        
-        
-        }
-       
-
-    }
 }
+
+
+
+

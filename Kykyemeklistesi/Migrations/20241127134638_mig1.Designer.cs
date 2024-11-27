@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kykyemeklistesi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241117153704_mig2")]
-    partial class mig2
+    [Migration("20241127134638_mig1")]
+    partial class mig1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,23 @@ namespace Kykyemeklistesi.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Kykyemeklistesi.Models.City", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CityName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cities");
+                });
+
             modelBuilder.Entity("Kykyemeklistesi.Models.Yemek", b =>
                 {
                     b.Property<int>("Id")
@@ -33,23 +50,42 @@ namespace Kykyemeklistesi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("AksamYemekListesi")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("Calorie")
                         .HasColumnType("float");
 
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Day")
                         .HasColumnType("datetime2");
 
-                    b.PrimitiveCollection<string>("FoodList")
-                        .IsRequired()
+                    b.Property<string>("SabahYemekListesi")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CityId");
+
                     b.ToTable("YemekListesi");
+                });
+
+            modelBuilder.Entity("Kykyemeklistesi.Models.Yemek", b =>
+                {
+                    b.HasOne("Kykyemeklistesi.Models.City", "City")
+                        .WithMany("Yemeks")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("City");
+                });
+
+            modelBuilder.Entity("Kykyemeklistesi.Models.City", b =>
+                {
+                    b.Navigation("Yemeks");
                 });
 #pragma warning restore 612, 618
         }

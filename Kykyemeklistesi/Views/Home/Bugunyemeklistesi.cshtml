@@ -18,13 +18,13 @@
 
 <body>
     <div class="container mt-5">
-        <form method="get" action="/Home/Index">
+        <form method="get" action="/Home/Bugunyemeklistesi">
 
             <div class="mb-4 sehirsec d-flex justify-content-center">
                 <span class="mx-2 fw-bolder"> Şehrini Seç </span>
                 <select class="form-select-sm px-3" name="selectedCity" onchange="this.form.submit()">
                     @foreach (var item in ViewBag.City as List<SelectListItem>)
-                    { 
+                    {
                         if (item.Selected)
                         {
                             <option value="@item.Value" selected>@item.Text</option>
@@ -41,33 +41,31 @@
             </div>
 
         </form>
-
-
     </div>
- <section class="d-flex justify-content-center align-items-center h-100 min-vh-100">
     <div class="container-xl">
-        <div class="row mb-5 gy-4">
+        <div class="row mb-5">
 
             @foreach (var item in Model)
             {
 
-         
-               
+
                 bool istoday = item.Day.ToLongDateString() == DateTime.Now.Date.ToLongDateString();
-                <div class="col-md-4 col-sm-6">
+                <div class="col-md-4">
                     <div class="card-container me-4 ">
                         <div class="row @(istoday ? "today-meal " : "") ">
 
-                            
 
- 
+
                             <div class="tarih">@item.Day.ToLongDateString()</div>
 
-                            <div class="col-md-6 col-sm-6 p-0">
+                            <div class="col-md-6 p-0">
 
 
-                                
-                                <div class="card card-container-left custom-card shadow-sm border-0 bg-primary h-100">
+
+                                <div class="card card-container-left shadow-sm border-0 bg-primary h-100">
+
+
+
 
                                     <div class="card-body">
 
@@ -90,22 +88,23 @@
                                             else
                                             {
                                                 <li class="list-group-item border-0 text-bg-primary text-dark fw-bolder"> <span>Ürün Daha Eklenmedi</span></li>
-                                               
+
                                             }
- 
+
                                         </ul>
                                     </div>
                                 </div>
+
                             </div>
 
-                            <div class="col-md-6 col-sm-6 p-0">
-                                <div class="card card-container-right custom-card  text-bg-secondary shadow-sm border-0 h-100">
- 
+                            <div class="col-md-6 p-0">
+                                <div class="card card-container-right  text-bg-secondary shadow-sm border-0 h-100">
+
                                     <div class="card-body">
                                         <h2 class="fw-bold"> Akşam</h2>
                                         <hr>
                                         <ul class="list-group list-group-flush fs-5 mb-3 gap-2">
-                                            @if (!string.IsNullOrEmpty(item.AksamYemekListesi))
+                                            @if (!string.IsNullOrEmpty(item.SabahYemekListesi))
                                             {
                                                 @foreach (var Aksamyemek in item.AksamYemekListesi.Split(","))
                                                 {
@@ -114,7 +113,7 @@
                                                 }
                                             }
 
-                                           
+
                                         </ul>
                                     </div>
                                 </div>
@@ -126,12 +125,10 @@
 
 
                 </div>
-               
+
             }
 
         </div>
-        </section>
-    </div>
 </body>
 
 </html>

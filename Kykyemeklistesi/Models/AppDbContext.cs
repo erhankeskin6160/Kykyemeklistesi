@@ -12,6 +12,20 @@ namespace Kykyemeklistesi.Models
         {
                 
         }
-       public DbSet<Yemek> YemekListesi { get; set; }
+        public DbSet<Yemek> YemekListesi { get; set; }
+        public DbSet<City> Cities { get; set; }
+
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Yemek>()
+                .HasOne(y => y.City)
+                .WithMany(c => c.Yemeks) // City -> Yemeks ilişkilendirilmiş
+                .HasForeignKey(y => y.CityId)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
+
+
     }
 }
