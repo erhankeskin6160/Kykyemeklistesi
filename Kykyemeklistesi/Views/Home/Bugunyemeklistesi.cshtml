@@ -18,13 +18,13 @@
 
 <body>
     <div class="container mt-5">
-        <form method="get" action="/Home/Index">
+        <form method="get" action="/Home/Bugunyemeklistesi">
 
             <div class="mb-4 sehirsec d-flex justify-content-center">
                 <span class="mx-2 fw-bolder"> Şehrini Seç </span>
                 <select class="form-select-sm px-3" name="selectedCity" onchange="this.form.submit()">
                     @foreach (var item in ViewBag.City as List<SelectListItem>)
-                    { 
+                    {
                         if (item.Selected)
                         {
                             <option value="@item.Value" selected>@item.Text</option>
@@ -47,14 +47,14 @@
 
             @foreach (var item in Model)
             {
-               
-               
+
+
                 bool istoday = item.Day.ToLongDateString() == DateTime.Now.Date.ToLongDateString();
                 <div class="col-md-4">
                     <div class="card-container me-4 ">
                         <div class="row @(istoday ? "today-meal " : "") ">
 
-                            
+
 
                             <div class="tarih">@item.Day.ToLongDateString()</div>
 
@@ -63,7 +63,7 @@
 
 
                                 <div class="card card-container-left shadow-sm border-0 bg-primary h-100">
-                                   
+
 
 
 
@@ -88,9 +88,9 @@
                                             else
                                             {
                                                 <li class="list-group-item border-0 text-bg-primary text-dark fw-bolder"> <span>Ürün Daha Eklenmedi</span></li>
-                                               
+
                                             }
- 
+
                                         </ul>
                                     </div>
                                 </div>
@@ -113,7 +113,7 @@
                                                 }
                                             }
 
-                                           
+
                                         </ul>
                                     </div>
                                 </div>
@@ -125,7 +125,7 @@
 
 
                 </div>
-               
+
             }
 
         </div>

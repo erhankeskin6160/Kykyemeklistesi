@@ -1,30 +1,33 @@
 using Kykyemeklistesi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace Kykyemeklistesi.Controllers
 {
     public class HomeController : Controller
     {
-        private static  AppDbContext _dbContext;
+        private static AppDbContext _dbContext;
 
         public HomeController(AppDbContext appContext)
         {
-          _dbContext = appContext;
+            _dbContext = appContext;
         }
 
-        
+
 
         [HttpGet]
-        public IActionResult Index(string? selectedCity="Ankara")
+        public IActionResult Index(string? selectedCity = "Ankara")
         {
+            DateTime currentDate = DateTime.Now;
+
 
             // Þehirler için SelectList
 
             var selectList = _dbContext.YemekListesi
 
 
-                .GroupBy(x => x.City)
+                .GroupBy(x => x.City.CityName)
                 .Select(x => new SelectListItem
                 {
                     Value = x.Key,
@@ -33,8 +36,8 @@ namespace Kykyemeklistesi.Controllers
                 }).ToList();
 
             // Seçilen þehre göre yemek listesi
-            var yemekListesi = _dbContext.YemekListesi
-                .Where(x => x.City == selectedCity)
+            var yemekListesi = _dbContext.YemekListesi.Include(x => x.City).OrderBy(x=>x.Day)
+                .Where(x => x.City.CityName == selectedCity)
                 .ToList();
 
             ViewBag.City = selectList;
@@ -62,10 +65,36 @@ namespace Kykyemeklistesi.Controllers
         //    ViewBag.City = selectList;
         //    return View(yemekListesi);
         //}
-    }
+
+
+        public IActionResult Bugunyemeklistesi(string? selectedCity = "Ankara")
+        {
+            var selectList = _dbContext.YemekListesi
+
+
+               .GroupBy(x => x.City.CityName)
+               .Select(x => new SelectListItem
+               {
+                   Value = x.Key,
+                   Text = x.Key,
+                   Selected = x.Key == selectedCity
+               }).ToList();
+
+            ViewBag.City = selectList;
+            
+            var bugunyemeklistesi=_dbContext.YemekListesi.Include(x => x.City).OrderBy(x => x.Day)
+                .Where(x => x.City.CityName == selectedCity && x.Day == DateTime.Now.Date)
+                .ToList();
+
+            return View(bugunyemeklistesi);
+        }
+
+
+    }    
+
+
 }
- 
 
 
 
- 
+

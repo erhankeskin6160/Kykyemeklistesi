@@ -30,4 +30,53 @@ body {
   display: flex;
   justify-content: center;
 }
-    
+
+
+/* Border renk geçiþi için animasyon */
+/* Border renk geçiþi için animasyon */
+/* Border renk geçiþi için animasyon */
+/*@keyframes rainbow-border {
+    0% {
+        border-color: red;
+    }*/
+    /* Kýrmýzý */
+    /*14% {
+        border-color: orange;
+    }*/
+    /* Turuncu */
+    /*28% {
+        border-color: yellow;
+    }*/
+    /* Sarý */
+    /*42% {
+        border-color: green;
+    }*/
+    /* Yeþil */
+    /*57% {
+        border-color: blue;
+    }*/
+    /* Mavi */
+    /*71% {
+        border-color: indigo;
+    }*/
+    /* Mor */
+    /*85% {
+        border-color: violet;
+    }*/
+    /* Menekþe */
+    /*100% {
+        border-color: red;
+    }*/
+    /* Kýrmýzýya geri dön */
+/*}*/
+
+/* Animasyonlu kenarlýk */
+/*.highlight-border {
+    border: 5px solid red;*/ /* Baþlangýçta kýrmýzý border */
+    /*animation: rainbow-border 5s infinite linear;*/ /* 5 saniye döngü ile renk geçiþi */
+/*}*/
+
+
+.today-meal {
+    border: 3px solid red; /* Kýrmýzý renkli kalýn bir çizgi */
+}

@@ -22,6 +22,23 @@ namespace Kykyemeklistesi.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Kykyemeklistesi.Models.City", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CityName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cities", (string)null);
+                });
+
             modelBuilder.Entity("Kykyemeklistesi.Models.Yemek", b =>
                 {
                     b.Property<int>("Id")
@@ -36,9 +53,8 @@ namespace Kykyemeklistesi.Migrations
                     b.Property<double>("Calorie")
                         .HasColumnType("float");
 
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Day")
                         .HasColumnType("datetime2");
@@ -48,7 +64,25 @@ namespace Kykyemeklistesi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("YemekListesi");
+                    b.HasIndex("CityId");
+
+                    b.ToTable("YemekListesi", (string)null);
+                });
+
+            modelBuilder.Entity("Kykyemeklistesi.Models.Yemek", b =>
+                {
+                    b.HasOne("Kykyemeklistesi.Models.City", "City")
+                        .WithMany("Yemeks")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("City");
+                });
+
+            modelBuilder.Entity("Kykyemeklistesi.Models.City", b =>
+                {
+                    b.Navigation("Yemeks");
                 });
 #pragma warning restore 612, 618
         }
