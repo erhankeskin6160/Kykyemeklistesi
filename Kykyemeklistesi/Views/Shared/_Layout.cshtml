@@ -6,51 +6,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Kykyemeklistesi</title>
     <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/bootstraps.css" asp-append-version="true" />
-
+    <link rel="stylesheet" href="~/css/bootstrap.css" asp-append-version="true" />
 </head>
 
 <body>
     <header>
-        <nav class="navbar  navbar-expand-lg  navbar-light text-light  border-bottom box-shadow mb-1 m-0 p-0"
+        <nav class="navbar navbar-expand-lg navbar-light text-light border-bottom box-shadow mb-1 m-0 p-0"
             style="background-color: #64B5F6;">
             <div class="container-fluid">
-                <a class="navbar-brand " asp-area="" asp-controller="Home" asp-action="Index"><span><img
-                            class="rounded-circle" src="~/images/Backgroundss.png" alt="logo"
-                            style="width: 85px ; margin-: 0.1px;"></span></a>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                    <img class="rounded-circle" src="~/images/Backgroundss.png" alt="logo"
+                        style="width: 85px; margin: 0.1px;">
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarButton">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse justify-content-between " id="#NavbarButton">
+                <div class="navbar-collapse collapse justify-content-between" id="navbarButton">
                     <ul class="navbar-nav flex-grow-1 ms-auto">
                         <li class="nav-item mx-3">
-                            <a class="nav-link text-light fw-semibold" asp-area="" asp-controller="Home"
-                                asp-action="Index">Ana Sayfa</a>
+                            <a class="nav-link text-light fw-semibold" asp-controller="Home" asp-action="Index">Ana
+                                Sayfa</a>
                         </li>
-
                         <li class="nav-item mx-3">
-                            <a class="nav-link text-light fw-semibold" asp-area="" asp-action="Bugunyemeklistesi"
-                                asp-controller="Home">Bügünün Yemek Listesi</a>
+                            <a class="nav-link text-light fw-semibold" asp-controller="Home"
+                                asp-action="Bugunyemeklistesi">Bügünün Yemek Listesi</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted text-light d-flex">
-        <div class="container-fluid " style="background-color: #64B5F6;">
-            &copy; 2024 - Kykyemeklistesi - <a class="text-muted" asp-area="" asp-controller=" Home" asp-action="Index"
-                style=" text-decoration: none;">Ana Sayfa</a>
+    <footer class="border-top footer text-muted d-flex">
+        <div class="container-fluid" style="background-color: #64B5F6;">
+            &copy; 2024 - Kykyemeklistesi -
+            <a class="text-muted" asp-controller="Home" asp-action="Index" style="text-decoration: none;">
+                Ana Sayfa
+            </a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
