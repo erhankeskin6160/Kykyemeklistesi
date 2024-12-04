@@ -36,8 +36,10 @@ namespace Kykyemeklistesi.Controllers
                 }).ToList();
 
             // Seçilen þehre göre yemek listesi
-            var yemekListesi = _dbContext.YemekListesi.Include(x => x.City).OrderBy(x=>x.Day)
-                .Where(x => x.City.CityName == selectedCity)
+            var yemekListesi = _dbContext.YemekListesi.Include(x => x.City).OrderBy(x => x.Day)
+                .Where(x => x.City.CityName == selectedCity &&
+                x.Day.Month == DateTime.Now.Month &&
+                x.Day.Year == DateTime.Now.Year)
                 .ToList();
 
             ViewBag.City = selectList;
