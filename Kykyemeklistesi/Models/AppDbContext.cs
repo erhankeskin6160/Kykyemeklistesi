@@ -15,6 +15,7 @@ namespace Kykyemeklistesi.Models
         public DbSet<Yemek> YemekListesi { get; set; }
         public DbSet<City> Cities { get; set; }
 
+        public DbSet<Admin> Admins { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
