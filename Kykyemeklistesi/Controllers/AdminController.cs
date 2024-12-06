@@ -70,18 +70,89 @@ namespace Kykyemeklistesi.Controllers
         }
 
         [Authorize(Roles = "SuperAdmin")]
+        [HttpGet]
         public IActionResult ManageAdmins() 
         {
-            return View();  
+            var admins=_db.Admins.ToList();
+            return View(admins);  
         }
 
-        public IActionResult Login() { return View(); }
+        [Authorize(Roles = "SuperAdmin")]
+        public IActionResult AddAdmin()
+        {
+            return View();
+        }
 
-       [HttpPost]
-       public async Task<IActionResult> Login(Admin admin) 
+        [HttpPost]
+        [Authorize(Roles = "SuperAdmin")]
+        public IActionResult AddAdmin(Admin newAdmin)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Admins.Add(newAdmin);  // Yeni admini veritabanına ekle
+                _db.SaveChanges();
+                return RedirectToAction("ManageAdmins");
+            }
+            return View(newAdmin);
+        }
+
+        [HttpGet]
+        [Authorize(Roles= "SuperAdmin")]
+        public IActionResult EditAdmin(int id) 
+        {
+            var editadmin= _db.Admins.Find(id);
+            if (editadmin==null)
+            {
+                return RedirectToAction("ManageAdmins");
+            }
+            return View(editadmin);
+        }
+        [HttpPost]
+        [Authorize(Roles = "SuperAdmin")]
+        public IActionResult EditAdmin(Admin admin) 
         {
 
-            var info = _db.Admins.FirstOrDefault(x => x.AdminName == admin.AdminName && x.AdminPassword ==admin.AdminPassword);
+            var editadmin = _db.Admins.SingleOrDefault(x => x.Id == admin.Id);
+            if (editadmin!=null)
+            {
+                editadmin.AdminName = admin.AdminName;
+                editadmin.AdminRole = admin.AdminRole;
+                editadmin.AdminPassword = admin.AdminPassword;
+                _db.SaveChanges();
+                return RedirectToAction("ManageAdmins");
+            }
+            return View(admin);
+        }
+        [Authorize(Roles = "SuperAdmin")]
+        public IActionResult DeleteAdmin(int id) 
+        {
+            var deleteadmin= _db.Admins.Find(id);
+            if (deleteadmin != null) 
+            {
+                _db.Remove(deleteadmin);
+                _db.SaveChanges();
+                TempData["SuccesDeleteMessage"] = "Silme İşlemi Başarılı Admin Silindi!";
+                return RedirectToAction("Index"); 
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Silme İşlemi Başarısız";
+                return RedirectToAction("ManageAdmins");
+               
+            }
+        }
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Login() { return View(); }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login(Admin admin)
+        {
+
+            var info = _db.Admins.FirstOrDefault(x => x.AdminName == admin.AdminName && x.AdminPassword == admin.AdminPassword);
 
             if (info != null)
             {
@@ -94,16 +165,32 @@ namespace Kykyemeklistesi.Controllers
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
 
-              await  HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-                return RedirectToAction("Index","Admin");
+                return RedirectToAction("Index", "Admin");
             }
 
-            else 
+            else
             {
                 ViewBag.ErrorMessage = "Kullanıcı Adı Şifre";
                 return View();
             }
+        
+
+
+
+        }
+
+        public  async Task<IActionResult> Logut() 
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login", "Admin");
+        }
+
+        [AllowAnonymous]
+        public IActionResult AccessDenied() 
+        {
+            return View();
         }
     }
 }

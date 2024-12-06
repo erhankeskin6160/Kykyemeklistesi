@@ -16,11 +16,11 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
 });
 
-builder.Services.AddAuthentication("Cookies") // Varsayýlan kimlik doðrulama þemasý
+builder.Services.AddAuthentication("Cookies") 
     .AddCookie("Cookies", options =>
     {
-        options.LoginPath = "/Login";          // Giriþ sayfasý
-        options.AccessDeniedPath = "/AccessDenied"; // Yetkisiz eriþim
+        options.LoginPath = "/Admin/Login";          
+        options.AccessDeniedPath = "/Admin/AccessDenied";
     });
 var app = builder.Build();
 

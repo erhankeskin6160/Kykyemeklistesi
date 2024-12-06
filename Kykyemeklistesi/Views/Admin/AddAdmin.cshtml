@@ -1,0 +1,22 @@
+﻿@model Kykyemeklistesi.Models.Admin
+
+<h2>Yeni Admin Ekle</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label for="AdminName">Admin Adı</label>
+        <input type="text" id="AdminName" name="AdminName" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="AdminPassword">Şifre</label>
+        <input type="password" id="AdminPassword" name="AdminPassword" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="AdminRole">Admin Rolü</label>
+        <select id="AdminRole" name="AdminRole" class="form-control">
+            <option value="Admin">Admin</option>
+            <option value="SuperAdmin">SuperAdmin</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+</form>

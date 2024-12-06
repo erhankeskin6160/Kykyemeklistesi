@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Erişim Reddedildi";
+}
+
+<div class="container-fluid d-flex justify-content-center align-items-center" style="height: 100vh; background-color: #f8d7da;">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6 text-center">
+            <div class="card shadow-lg border-0" style="border-radius: 15px; background-color: #ffffff;">
+                <div class="card-body p-5">
+                    <h1 class="display-4 text-danger mb-4"><i class="fas fa-ban"></i> Erişim Reddedildi</h1>
+                    <p class="lead mb-4" style="font-size: 1.25rem; color: #6c757d;">
+                        Üzgünüz, bu sayfayı görüntülemeye yetkiniz yok. Yalnızca <strong>yetkili kullanıcılar</strong> bu sayfaya erişebilir.
+                    </p>
+                    <div>
+                        <a href="/" class="btn btn-outline-danger btn-lg" style="border-radius: 25px; padding: 10px 30px;">
+                            <i class="fas fa-arrow-left"></i> Ana Sayfaya Dön
+                        </a>
+                        <a href="@Url.Action("Login", "Admin")" class="btn btn-danger btn-lg" style="border-radius: 25px; padding: 10px 30px;">
+                            <i class="fas fa-sign-in-alt"></i> Giriş Yap
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Font Awesome CDN -->
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
