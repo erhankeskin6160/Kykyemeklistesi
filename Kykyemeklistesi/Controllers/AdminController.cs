@@ -52,7 +52,7 @@ namespace Kykyemeklistesi.Controllers
             if (dbyemek != null)
             {
                 dbyemek.City = yemek.City; // 
-                dbyemek.SabahYemekListesi = yemek.SabahYemekListesi; / 
+                dbyemek.SabahYemekListesi = yemek.SabahYemekListesi; 
                 dbyemek.AksamYemekListesi = yemek.AksamYemekListesi;
                 dbyemek.Calorie = yemek.Calorie;
                 _db.SaveChanges();
