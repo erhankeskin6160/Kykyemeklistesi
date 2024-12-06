@@ -8,6 +8,7 @@ using System.Security.Claims;
 
 namespace Kykyemeklistesi.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
 
