@@ -51,8 +51,8 @@ namespace Kykyemeklistesi.Controllers
             var dbyemek = _db.YemekListesi.Find(yemek.Id);
             if (dbyemek != null)
             {
-                dbyemek.City = yemek.City; // Örnek bir alan, yemek verisine göre güncelleyin
-                dbyemek.SabahYemekListesi = yemek.SabahYemekListesi; // Yemek ismi gibi başka alanlar eklenebilir
+                dbyemek.City = yemek.City; // 
+                dbyemek.SabahYemekListesi = yemek.SabahYemekListesi; / 
                 dbyemek.AksamYemekListesi = yemek.AksamYemekListesi;
                 dbyemek.Calorie = yemek.Calorie;
                 _db.SaveChanges();
