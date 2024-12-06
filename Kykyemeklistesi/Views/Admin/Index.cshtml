@@ -11,5 +11,15 @@
     <title>Index</title>
 </head>
 <body>
+    @if (TempData["SuccesDeleteMessage"]!=null)
+    {
+        <div class="alert  alert-info">
+            @TempData["SuccesDeleteMessage"]
+        </div>
+    }
+
+
+    
+    
 </body>
 </html>
