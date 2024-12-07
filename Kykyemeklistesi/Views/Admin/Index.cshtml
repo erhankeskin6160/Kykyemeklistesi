@@ -1,25 +1,76 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
 <!DOCTYPE html>
 
 <html>
+
 <head>
+
+
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Lato", sans-serif;
+        }
+
+        .sidebar {
+            margin: 0;
+            padding: 0;
+            width: 200px;
+            background-color: #64B5F6;
+            position: fixed;
+            height: 100%;
+            overflow: auto;
+        }
+
+        .sidebar a {
+            display: block;
+            color: black;
+            padding: 16px;
+            text-decoration: none;
+        }
+
+        .sidebar a.active {
+            background-color: #64B5F6;
+            color: white;
+        }
+
+        .sidebar a:hover:not(.active) {
+            background-color: #ae3b3b;
+            color: white;
+        }
+
+        div.content {
+            margin-left: 200px;
+            padding: 1px 16px;
+            height: 1000px;
+        }
+    </style>
 </head>
+
 <body>
-    @if (TempData["SuccesDeleteMessage"]!=null)
+    @if (TempData["SuccesDeleteMessage"] != null)
     {
         <div class="alert  alert-info">
             @TempData["SuccesDeleteMessage"]
         </div>
     }
 
+    <div class="sidebar bg-info">
+        <a href="Admin/AddAdmin">Admin Ekle</a>
+        <a href="Admin/EditAdmin">Admin Düzenle</a>
+        <a href="Admin/ManageAdmins">Admin Yönetim</a>
+        <a href="Admin/YemekListesiEkle">Yemek Listesi Ekle</a>
+        <a href="Admin/YemekListesiDüzenle">Yemek Listesi Düzenle</a>
 
-    
-    
+    </div>
+
+
+
 </body>
+
 </html>
