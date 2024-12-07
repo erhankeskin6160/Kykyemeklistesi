@@ -1,15 +1,44 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
 <!DOCTYPE html>
 
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/fontawesome.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href="/css/styles.css" rel="stylesheet" />
     <title>YemekListesiEkle</title>
 </head>
+
 <body>
+
+    <form>
+        <!-- Select Fields -->
+        <div class="mb-3 d-flex justify-content-center">
+            <select class="form-select my-5 w-75 box-shadow text-center">
+                <option>Best time to call</option>
+                <option>Yaz</option>
+                <option>Yaz 2</option>
+                <option>Yaz 3</option>
+            </select>
+
+
+        </div>
+
+        <div class="my-2 p-2">
+            <textarea class="form-control" placeholder="Sabah"></textarea>
+        </div>
+
+        <div class="my-2 p-2">
+            <textarea class="form-control" placeholder="Akşam"></textarea>
+        </div>
+    </form>
 </body>
+
 </html>
