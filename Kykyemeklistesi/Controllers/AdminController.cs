@@ -50,9 +50,34 @@ namespace Kykyemeklistesi.Controllers
         }
 
         [HttpGet]
-        public IActionResult YemeklListesiDüzenle(int id) 
+        public IActionResult YemekListesi() 
         {
-          var yemek = _db.YemekListesi.Where(x=>x.Id==id).SingleOrDefault();
+
+            var yemekListesi= _db.YemekListesi.Include(x=>x.City).ToList();
+
+            var sehir = _db.Cities.Select(x => new SelectListItem { Value =x.CityName, Text = x.CityName }).ToList();
+            ViewBag.Sehir=sehir;
+            return View(yemekListesi);
+        }
+        [HttpPost]
+        public IActionResult YemekListesi(string Şehir) 
+        {
+            var yemeklistesi = _db.YemekListesi.Include(x=>x.City).Where(x => x.City.CityName == Şehir).ToList();
+            var sehir = _db.Cities.Select(x => new SelectListItem { Value = x.CityName, Text = x.CityName }).ToList();
+            ViewBag.Sehir = sehir;
+            return View(yemeklistesi);
+        }
+        [HttpGet]
+        public IActionResult YemekListesiDüzenle(int id) 
+        {
+            var sehir = _db.Cities.Select(x => new SelectListItem
+            {
+                Value = x.CityName,
+                Text = x.CityName
+            }).ToList();
+            ViewBag.Sehir = sehir;
+            
+            var yemek = _db.YemekListesi.Where(x=>x.Id==id).SingleOrDefault();
             return View(yemek);
         }
         [HttpPost]
