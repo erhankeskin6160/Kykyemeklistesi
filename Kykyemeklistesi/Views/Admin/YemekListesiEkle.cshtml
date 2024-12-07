@@ -19,34 +19,35 @@
 
 <body>
 
-    <form class=" px-3 my-2 " method="post" asp-action="YemekListesiEkle" asp-controller="Admin ">
-        <!-- Select Fields -->
+    <form class=" px-3 my-2 " method="post" asp-action="YemekListesiEkle" asp-controller="Admin">
+        
         <div class="mb-3 d-flex justify-content-center">
-            <select class="form-select my-5 w-75 box-shadow text-center">
+            <select class="form-select my-5 w-75 box-shadow text-center" asp-for="CityId">
                 @foreach (var item in ViewBag.Sehir as List<SelectListItem>)
                 {
-                    if (item.Selected)
+                    @if (item.Selected)
                     {
                         <option value="@item.Value" selected>@item.Text</option>
-
                     }
                     else
                     {
                         <option value="@item.Value">@item.Text</option>
-
                     }
                 }
             </select>
+
+
+
 
         </div>
         <div class="row">
             <div class="col-6">
 
-                <textarea class="form-control my-3" placeholder="Sabah"></textarea>
+                <textarea class="form-control my-3" asp-for=SabahYemekListesi placeholder="Sabah"></textarea>
             </div>
 
             <div class="col-6">
-                <textarea class="form-control my-3" placeholder="Akşam"></textarea>
+                <textarea class="form-control my-3" asp-for=AksamYemekListesi placeholder="Akşam"></textarea>
 
             </div>
             <div class="my-2">

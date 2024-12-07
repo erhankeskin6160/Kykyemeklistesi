@@ -27,12 +27,17 @@ namespace Kykyemeklistesi.Controllers
         {
             return View();
         }
-        public IActionResult YemekListesiEkle() 
+        public IActionResult YemekListesiEkle()
         {
-            var sehir = _db.Cities.GroupBy(x => x.CityName).Select(x => new SelectListItem { Value = x.Key, Text = x.Key }).ToList();
-            ViewBag.Sehir = sehir;
+            var sehir = _db.Cities.Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.CityName
+            }).ToList();  
+            ViewBag.Sehir = sehir;   
             return View();
         }
+
 
         [HttpPost]
         public IActionResult YemekListesiEkle(Yemek yemek)
