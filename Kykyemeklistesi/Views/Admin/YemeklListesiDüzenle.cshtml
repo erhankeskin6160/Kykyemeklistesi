@@ -1,4 +1,4 @@
-﻿
+﻿@model Yemek
 @{
     Layout = null;
 }
@@ -6,10 +6,60 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>YemeklListesiDüzenle</title>
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/fontawesome.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href="/css/styles.css" rel="stylesheet" />
+    <title>YemekListesiEkle</title>
 </head>
+
 <body>
+
+    <form class=" px-3 my-2 " method="post" asp-action="YemekListesiEkle" asp-controller="Admin ">
+        <!-- Select Fields -->
+        <div class="mb-3 d-flex justify-content-center">
+            <select class="form-select my-5 w-75 box-shadow text-center">
+                @foreach (var item in ViewBag.Sehir as List<SelectListItem>)
+                {
+                    if (item.Selected)
+                    {
+                        <option value="@item.Value" selected>@item.Text</option>
+
+                    }
+                    else
+                    {
+                        <option value="@item.Value">@item.Text</option>
+
+                    }
+                }
+            </select>
+
+        </div>
+        <div class="row">
+            <div class="col-6">
+
+                <textarea class="form-control my-3" placeholder="Sabah"></textarea>
+            </div>
+
+            <div class="col-6">
+                <textarea class="form-control my-3" placeholder="Akşam"></textarea>
+
+            </div>
+            <div class="my-2">
+
+                <span class="px-3">Tarih Ekle</span> <input type="date" class="form-control w-50 d-inline" />
+            </div>
+            <button class="btn btn-info pe-3   w-100 text-center  fw-medium">Yemek
+                Listesini
+                Ekle</button>
+
+        </div>
+
+    </form>
 </body>
+
 </html>
