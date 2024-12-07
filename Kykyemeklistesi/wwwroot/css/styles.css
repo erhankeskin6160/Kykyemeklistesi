@@ -43,3 +43,19 @@ body {
   border-top-left-radius: 40%;
   border-top-right-radius: 40%;
 }
+
+@media (max-width: 577px) {
+  .card-container-left {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 1px;
+  }
+
+  .card-container-right {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+}
