@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.Net;
 using System.Security.Claims;
 
@@ -27,6 +29,8 @@ namespace Kykyemeklistesi.Controllers
         }
         public IActionResult YemekListesiEkle() 
         {
+            var sehir = _db.Cities.GroupBy(x => x.CityName).Select(x => new SelectListItem { Value = x.Key, Text = x.Key }).ToList();
+            ViewBag.Sehir = sehir;
             return View();
         }
 
@@ -34,6 +38,7 @@ namespace Kykyemeklistesi.Controllers
         public IActionResult YemekListesiEkle(Yemek yemek)
         {
             
+
             _db.YemekListesi.Add(yemek);  
             _db.SaveChanges();
            return RedirectToAction("Index");

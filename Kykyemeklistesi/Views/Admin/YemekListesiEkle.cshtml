@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Yemek
+@{
     Layout = null;
 }
 
@@ -18,7 +19,7 @@
 
 <body>
 
-    <form class=" px-3 my-2">
+    <<<<<<< HEAD <form class=" px-3 my-2">
         <!-- Select Fields -->
         <div class="mb-3 d-flex justify-content-center">
             <select class="form-select my-5 w-75 box-shadow text-center">
@@ -26,26 +27,55 @@
                 <option>Yaz 2</option>
                 <option>Yaz 3</option>
             </select>
+            =======
+            <form method="post" asp-action="YemekListesiEkle" asp-controller="Admin " class=" px-3 my-2>
+        <select class=" form-select-sm px-3">
+                @foreach (var item in ViewBag.Sehir as List<SelectListItem>)
+                {
+                    if (item.Selected)
+                    {
+                        <option value="@item.Value" selected>@item.Text</option>
+                    >>>>>>> 614d3462365cb79103d2c113996328ae32fee8bf
+
+                    }
+                    else
+                    {
+                        <option value="@item.Value">@item.Text</option>
+
+                    }
+                }
+                </select>
+
+                <div class="my-2 p-2">
+                    <textarea class="form-control" asp-for=SabahYemekListesi placeholder="Sabah"></textarea>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+
+                        <<<<<<< HEAD <textarea class="form-control my-3" placeholder="Sabah"></textarea>
+                    </div>
+
+                    <div class="col-6">
+                        <textarea class="form-control my-3" placeholder="Akşam"></textarea>
+
+                    </div>
+                    <button class="btn btn-info pe-3   w-100 text-center  fw-medium">Yemek
+                        Listesini
+                        Ekle</button>
+                </div>
 
 
-        </div>
-        <div class="row">
-            <div class="col-6">
+                =======
+                <div class="my-2 p-2">
+                    <textarea class="form-control" asp-for=AksamYemekListesi placeholder="Akşam"></textarea>
+                </div>
 
-                <textarea class="form-control my-3" placeholder="Sabah"></textarea>
-            </div>
+                <label>Kalori Miktarı</label>
 
-            <div class="col-6">
-                <textarea class="form-control my-3" placeholder="Akşam"></textarea>
+                <input type="number" asp-for="Calorie" value="" />
 
-            </div>
-            <button class="btn btn-info pe-3   w-100 text-center  fw-medium">Yemek
-                Listesini
-                Ekle</button>
-        </div>
-
-
-    </form>
+                >>>>>>> 614d3462365cb79103d2c113996328ae32fee8bf
+            </form>
 </body>
 
 </html>
