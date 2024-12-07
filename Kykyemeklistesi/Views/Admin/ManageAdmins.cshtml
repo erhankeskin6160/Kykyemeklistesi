@@ -1,35 +1,53 @@
 ﻿@model List<Kykyemeklistesi.Models.Admin>
 
-<h2>Admin Yönetimi</h2>
+<!DOCTYPE html>
+<html lang="en">
 
-@if (TempData["ErrorMessage"] != null)
-{
-    <div class="alert alert-danger">
-        @TempData["ErrorMessage"]
-    </div>
-}
-<table class="table">
-    <thead>
-        <tr>
-            <th>Admin Adı</th>
-            <th>Admin Rolü</th>
-            <th>İşlem</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var admin in Model)
-        {
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/fontawesome.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href="/css/styles.css" rel="stylesheet" />
+</head>
+
+<body>
+    <h2 class="tarih mb-0 mt-5 pb-0">Admin Yönetimi</h2>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+    <table class="table table-info">
+        <thead>
             <tr>
-                <td>@admin.AdminName</td>
-                <td>@admin.AdminRole</td>
-                <td>
-                    <!-- Admini düzenleme ve silme butonları -->
-                    <a href="@Url.Action("EditAdmin", new { id = admin.Id })">Düzenle</a> |
-                    <a href="@Url.Action("DeleteAdmin", new { id = admin.Id })" onclick="return confirm('Silmek istediğinizden emin misiniz?')">Sil</a>
-                </td>
+                <th>Admin Adı</th>
+                <th>Admin Rolü</th>
+                <th>İşlem</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var admin in Model)
+            {
+                <tr>
+                    <td>@admin.AdminName</td>
+                    <td>@admin.AdminRole</td>
+                    <td>
+                        <!-- Admini düzenleme ve silme butonları -->
+                        <a class="btn btn-danger" href="@Url.Action("EditAdmin", new { id = admin.Id })">Düzenle</a>
+                        <a class="btn btn-danger" href="@Url.Action("DeleteAdmin", new { id = admin.Id })"
+                            onclick="return confirm('Silmek istediğinizden emin misiniz?')">Sil</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
-<a href="@Url.Action("AddAdmin")">Yeni Admin Ekle</a>
+    <a class="btn btn-primary w-100 fw-bolder" href="@Url.Action("AddAdmin")">Yeni Admin Ekle</a>
+</body>
+
+</html>

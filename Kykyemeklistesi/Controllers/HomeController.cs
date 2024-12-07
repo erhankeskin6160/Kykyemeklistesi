@@ -22,7 +22,7 @@ namespace Kykyemeklistesi.Controllers
             DateTime currentDate = DateTime.Now;
 
 
-            // Þehirler için SelectList
+            // ï¿½ehirler iï¿½in SelectList
 
             var selectList = _dbContext.YemekListesi
 
@@ -35,7 +35,7 @@ namespace Kykyemeklistesi.Controllers
                     Selected = x.Key == selectedCity
                 }).ToList();
 
-            // Seçilen þehre göre yemek listesi
+            // Seï¿½ilen ï¿½ehre gï¿½re yemek listesi
             var yemekListesi = _dbContext.YemekListesi.Include(x => x.City).OrderBy(x => x.Day)
                 .Where(x => x.City.CityName == selectedCity &&
                 x.Day.Month == DateTime.Now.Month &&
@@ -83,8 +83,8 @@ namespace Kykyemeklistesi.Controllers
                }).ToList();
 
             ViewBag.City = selectList;
-            
-            var bugunyemeklistesi=_dbContext.YemekListesi.Include(x => x.City).OrderBy(x => x.Day)
+
+            var bugunyemeklistesi = _dbContext.YemekListesi.Include(x => x.City).OrderBy(x => x.Day)
                 .Where(x => x.City.CityName == selectedCity && x.Day == DateTime.Now.Date)
                 .ToList();
 
@@ -92,7 +92,7 @@ namespace Kykyemeklistesi.Controllers
         }
 
 
-    }    
+    }
 
 
 }
