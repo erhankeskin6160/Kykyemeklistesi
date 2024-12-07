@@ -36,23 +36,23 @@
                 }
             </select>
 
-
+          <input  type="hidden" asp-for="Id"/>
 
 
         </div>
         <div class="row">
             <div class="col-6">
 
-                <textarea class="form-control my-3" asp-for=SabahYemekListesi placeholder="Sabah"></textarea>
+                <textarea class="form-control my-3" style="height:200px;" asp-for=SabahYemekListesi placeholder="Sabah"></textarea>
             </div>
 
             <div class="col-6">
-                <textarea class="form-control my-3" asp-for=AksamYemekListesi placeholder="Akşam"></textarea>
+                <textarea class="form-control my-3 "style="height:200px;" asp-for=AksamYemekListesi placeholder="Akşam"></textarea>
 
             </div>
             <div class="my-2">
 
-                <span class="px-3">Tarih Ekle</span> <input type="date" class="form-control w-50 d-inline" />
+                <span class="px-3">Tarih Ekle</span> <input type="date" asp-for="Day" class="form-control my-4 w-50 d-inline" />
             </div>
             <button class="btn btn-info pe-3   w-100 text-center  fw-medium">Yemek
                 Listesini
