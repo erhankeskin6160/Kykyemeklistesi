@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Yemek
+@{
     Layout = null;
 }
 
@@ -18,26 +19,35 @@
 
 <body>
 
-    <form>
-        <!-- Select Fields -->
-        <div class="mb-3 d-flex justify-content-center">
-            <select class="form-select my-5 w-75 box-shadow text-center">
-                <option>Best time to call</option>
-                <option>Yaz</option>
-                <option>Yaz 2</option>
-                <option>Yaz 3</option>
-            </select>
+    <form method="post" asp-action="YemekListesiEkle"asp-controller="Admin">
+        <select class="form-select-sm px-3">
+        @foreach (var item in ViewBag.Sehir as List<SelectListItem>)
+        {
+            if (item.Selected)
+            {
+                <option value="@item.Value" selected>@item.Text</option>
 
+            }
+            else
+            {
+                <option value="@item.Value">@item.Text</option>
 
+            }
+        }
+        </select>
+
+        <div class="my-2 p-2">
+            <textarea class="form-control" asp-for=SabahYemekListesi placeholder="Sabah"></textarea>
         </div>
 
         <div class="my-2 p-2">
-            <textarea class="form-control" placeholder="Sabah"></textarea>
+            <textarea class="form-control" asp-for=AksamYemekListesi placeholder="Akşam"></textarea>
         </div>
 
-        <div class="my-2 p-2">
-            <textarea class="form-control" placeholder="Akşam"></textarea>
-        </div>
+        <label>Kalori Miktarı</label>
+        
+            <input type="number" asp-for="Calorie" value="" /> 
+       
     </form>
 </body>
 
