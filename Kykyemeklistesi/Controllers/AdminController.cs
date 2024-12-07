@@ -63,7 +63,12 @@ namespace Kykyemeklistesi.Controllers
         public IActionResult YemekListesi(string Şehir) 
         {
             var yemeklistesi = _db.YemekListesi.Include(x=>x.City).Where(x => x.City.CityName == Şehir).ToList();
-            var sehir = _db.Cities.Select(x => new SelectListItem { Value = x.CityName, Text = x.CityName }).ToList();
+            var sehir = _db.Cities.Select(x => new SelectListItem
+            {
+                Value = x.CityName,
+                Text = x.CityName,
+                Selected = x.CityName == Şehir 
+            }).ToList();
             ViewBag.Sehir = sehir;
             return View(yemeklistesi);
         }
@@ -73,7 +78,9 @@ namespace Kykyemeklistesi.Controllers
             var sehir = _db.Cities.Select(x => new SelectListItem
             {
                 Value = x.CityName,
-                Text = x.CityName
+                Text = x.CityName,
+               
+                
             }).ToList();
             ViewBag.Sehir = sehir;
             
@@ -92,7 +99,7 @@ namespace Kykyemeklistesi.Controllers
                 dbyemek.Calorie = yemek.Calorie;
                 _db.SaveChanges();
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("YemekListesi");
         }
 
         public IActionResult  YemekListesiSİl(int id) 
