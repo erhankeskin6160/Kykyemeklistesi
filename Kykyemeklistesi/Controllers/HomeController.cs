@@ -37,7 +37,7 @@ namespace Kykyemeklistesi.Controllers
                     Selected = x.Key == selectedCity
                 }).ToList();
 
-            // Se�ilen �ehre g�re yemek listesi
+            
             var yemekListesi = _dbContext.YemekListesi.Include(x => x.City).OrderBy(x => x.Day)
                 .Where(x => x.City.CityName == selectedCity &&
                 x.Day.Month == DateTime.Now.Month &&
@@ -97,30 +97,30 @@ namespace Kykyemeklistesi.Controllers
 
         public IActionResult GenerateSitemap()
         {
-            // XmlDocument ile yeni bir XML belgesi oluşturuyoruz
+         
             XmlDocument xmlDoc = new XmlDocument();
 
-            // XML Belgesinin başını oluşturuyoruz
+             
             XmlElement urlSetElement = xmlDoc.CreateElement("urlset");
             urlSetElement.SetAttribute("xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9");
             urlSetElement.SetAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
             urlSetElement.SetAttribute("xsi:schemaLocation", "http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd");
 
-            // XML Belgesini oluşturuyoruz
+            
             xmlDoc.AppendChild(urlSetElement);
 
-            // Şehirleri veritabanından alıyoruz
+       
             var cities = _dbContext.Cities.ToList();
 
             foreach (var city in cities)
             {
-                // Şehir sayfası için URL
+                
                 string cityUrl = $"https://kykyemeklistesi.com.tr/Home/Index?selectedCity={city.CityName}";
 
-                // Bugün yemek listesi sayfası için URL
+                
                 string todayMenuUrl = $"https://kykyemeklistesi.com.tr/Home/Bugunyemeklistesi?selectedCity={city.CityName}";
 
-                // Şehir sayfası için URL tag'ini oluşturuyoruz
+               
                 XmlElement cityUrlElement = xmlDoc.CreateElement("url");
                 XmlElement cityLoc = xmlDoc.CreateElement("loc");
                 cityLoc.InnerText = cityUrl;
@@ -161,7 +161,7 @@ namespace Kykyemeklistesi.Controllers
                 urlSetElement.AppendChild(todayMenuUrlElement);
             }
 
-            // XML belgesini bir string'e dönüştürmek
+          
             using (var stringWriter = new StringWriter())
             {
                 xmlDoc.Save(stringWriter);
@@ -170,6 +170,12 @@ namespace Kykyemeklistesi.Controllers
                 // Sitemap XML içeriğini UTF-8 formatında döndürüyoruz
                 return Content(xmlContent, "text/xml", Encoding.UTF8);
             }
+
+
+        }
+        public IActionResult NotFound() 
+        {
+            return View();
         }
 
 

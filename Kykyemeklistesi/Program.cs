@@ -1,4 +1,5 @@
 using Kykyemeklistesi.Models;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -30,12 +31,17 @@ builder.Services.AddAuthentication("Cookies")
     });
 var app = builder.Build();
 
+ app.UseStatusCodePagesWithRedirects("/404Error.html");
+ 
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+
+   
+
     app.UseHsts();
 }
 
@@ -46,6 +52,12 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapControllerRoute(
+    name: "404Error",
+    pattern: "404Error.html",
+    defaults: new { controller = "Home", action = "NotFound" }
+);
+
 app.MapControllerRoute(
     name: "sitemap",
     pattern: "sitemap.xml",

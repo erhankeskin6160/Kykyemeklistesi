@@ -1,0 +1,54 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Sayfa Bulunamadı</title>
+    <link href="/css/NotFound" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="container">
+        <h1>404</h1>
+        <h2>Bu sayfa mevcut değil veya silinmiş olabilir.</h2>
+        <a href="/" class="button">Ana Sayfaya Dön</a>
+    </div>
+
+    <div class="background-404"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let numCount = 50;
+            let container = document.querySelector('.container');
+
+            for (let i = 0; i < numCount; i++) {
+                let div = document.createElement('div');
+                div.classList.add('falling-number');
+                div.textContent = '404';
+                container.appendChild(div);
+                animateNumber(div);
+            }
+
+            function animateNumber(element) {
+                let randomX = Math.random() * window.innerWidth;
+                let randomDelay = Math.random() * 2 + 1;
+                let randomDuration = Math.random() * 2 + 2;
+
+                element.style.position = 'absolute';
+                element.style.left = randomX + 'px';
+                element.style.top = '-50px';
+                element.style.fontSize = '30px';
+                element.style.opacity = '0.8';
+                element.style.animation = `fall ${randomDuration}s ${randomDelay}s infinite`;
+
+                element.style.animationFillMode = 'forwards';
+            }
+        });
+    </script>
+
+</body>
+</html>
