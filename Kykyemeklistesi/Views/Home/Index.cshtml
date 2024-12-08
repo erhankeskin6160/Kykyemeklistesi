@@ -83,7 +83,7 @@
                                             {
 
 
-                                                @foreach (var sabahyemek in item.SabahYemekListesi.Split(","))
+                                                    @foreach (var sabahyemek in item.SabahYemekListesi.Split('\n'))
                                                 {
 
 
@@ -112,7 +112,7 @@
                                         <ul class="list-group list-group-flush fs-5 mb-3 gap-2">
                                             @if (!string.IsNullOrEmpty(item.AksamYemekListesi))
                                             {
-                                                @foreach (var Aksamyemek in item.AksamYemekListesi.Split(","))
+                                                    @foreach (var Aksamyemek in item.AksamYemekListesi.Split('\n'))
                                                 {
 
                                                     <li class="list-group-item border-0 text-bg-secondary fw-bold">@Aksamyemek.Trim().ToString()</li>
