@@ -53,8 +53,8 @@ namespace Kykyemeklistesi.Controllers
         public IActionResult YemekListesi() 
         {
 
-            var yemekListesi= _db.YemekListesi.Include(x=>x.City).ToList();
-
+            var yemekListesi = _db.YemekListesi.Include(x => x.City).OrderBy(x => x.Day).Where(x => x.Day.Month == DateTime.Now.Month &&
+                x.Day.Year == DateTime.Now.Year).ToList();
             var sehir = _db.Cities.Select(x => new SelectListItem { Value =x.CityName, Text = x.CityName }).ToList();
             ViewBag.Sehir=sehir;
             return View(yemekListesi);
@@ -62,7 +62,8 @@ namespace Kykyemeklistesi.Controllers
         [HttpPost]
         public IActionResult YemekListesi(string Şehir="Sivas") 
         {
-            var yemeklistesi = _db.YemekListesi.Include(x=>x.City).Where(x => x.City.CityName == Şehir).ToList();
+            var yemeklistesi = _db.YemekListesi.Include(x=>x.City).OrderBy(x=>x.Day).Where(x => x.City.CityName == Şehir & x.Day.Month == DateTime.Now.Month &&
+                x.Day.Year == DateTime.Now.Year).ToList();
             var sehir = _db.Cities.Select(x => new SelectListItem
             {
                 Value = x.CityName,
