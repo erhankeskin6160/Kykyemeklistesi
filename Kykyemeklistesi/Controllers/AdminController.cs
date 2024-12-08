@@ -103,11 +103,11 @@ namespace Kykyemeklistesi.Controllers
             return RedirectToAction("YemekListesi");
         }
 
-        public IActionResult  YemekListesiSİl(int id) 
+        public IActionResult  YemekListesiSil(int id) 
         
         {
            var silinecekyemeklistesi= _db.YemekListesi.Find(id);
-            _db.Remove(id);
+            _db.Remove(silinecekyemeklistesi);
             _db.SaveChanges();
             return RedirectToAction("Index");   
         }
