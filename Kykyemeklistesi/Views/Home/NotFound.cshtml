@@ -1,21 +1,29 @@
 ﻿@{
-    Layout = "_Layout";
+    Layout = null;
 }
 
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 - Sayfa Bulunamadı</title>
     <link href="/css/NotFound" rel="stylesheet" />
+    <style>
+        * {
+            background-image: image(url("~/images/404hata.png"));
+            background-position: center center;
+            /* Resmi yatay ve dikey ortalar */
+
+        }
+    </style>
 </head>
+
 <body>
 
     <div class="container">
-        <h1>404</h1>
-        <h2>Bu sayfa mevcut değil veya silinmiş olabilir.</h2>
-        <a href="/" class="button">Ana Sayfaya Dön</a>
+        <img src="~/images/404hata.png" alt="404 not found">
     </div>
 
     <div class="background-404"></div>
@@ -51,4 +59,5 @@
     </script>
 
 </body>
+
 </html>
