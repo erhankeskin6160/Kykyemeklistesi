@@ -58,7 +58,7 @@
          
                
                 bool istoday = item.Day.ToLongDateString() == DateTime.Now.Date.ToLongDateString();
-                <div class="col-md-4 col-sm-6">
+                <div class="col-xl-4 col-lg-12  col-sm-12">
                     <div class="card-container me-4 ">
                         <div class="row @(istoday ? "today-meal " : "") ">
 
@@ -81,7 +81,7 @@
                                             {
 
 
-                                                @foreach (var sabahyemek in item.SabahYemekListesi.Split('\n'))
+                                                @foreach (var sabahyemek in item.SabahYemekListesi.Split(","))
                                                 {
 
 
@@ -110,10 +110,10 @@
                                         <ul class="list-group list-group-flush fs-5 mb-3 gap-2">
                                             @if (!string.IsNullOrEmpty(item.AksamYemekListesi))
                                             {
-                                                    @foreach (var Aksamyemek in item.AksamYemekListesi.Split('\n'))
+                                                @foreach (var Aksamyemek in item.AksamYemekListesi.Split(","))
                                                 {
 
-                                                    <li class="list-group-item border-0 py-1 text-bg-secondary fw-bold">@Aksamyemek.Trim().ToString()</li>
+                                                    <li class="list-group-item border-0 text-bg-secondary fw-bold">@Aksamyemek.Trim().ToString()</li>
                                                 }
                                             }
 
