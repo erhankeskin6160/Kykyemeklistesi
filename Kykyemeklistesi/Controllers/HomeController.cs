@@ -2,6 +2,8 @@ using Kykyemeklistesi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
+using System.Xml;
 
 namespace Kykyemeklistesi.Controllers
 {
@@ -22,7 +24,7 @@ namespace Kykyemeklistesi.Controllers
             DateTime currentDate = DateTime.Now;
 
 
-            // �ehirler i�in SelectList
+            
 
             var selectList = _dbContext.YemekListesi
 
@@ -90,6 +92,90 @@ namespace Kykyemeklistesi.Controllers
 
             return View(bugunyemeklistesi);
         }
+
+
+
+        public IActionResult GenerateSitemap()
+        {
+            // XmlDocument ile yeni bir XML belgesi oluşturuyoruz
+            XmlDocument xmlDoc = new XmlDocument();
+
+            // XML Belgesinin başını oluşturuyoruz
+            XmlElement urlSetElement = xmlDoc.CreateElement("urlset");
+            urlSetElement.SetAttribute("xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9");
+            urlSetElement.SetAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+            urlSetElement.SetAttribute("xsi:schemaLocation", "http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd");
+
+            // XML Belgesini oluşturuyoruz
+            xmlDoc.AppendChild(urlSetElement);
+
+            // Şehirleri veritabanından alıyoruz
+            var cities = _dbContext.Cities.ToList();
+
+            foreach (var city in cities)
+            {
+                // Şehir sayfası için URL
+                string cityUrl = $"https://kykyemeklistesi.com.tr/Home/Index?selectedCity={city.CityName}";
+
+                // Bugün yemek listesi sayfası için URL
+                string todayMenuUrl = $"https://kykyemeklistesi.com.tr/Home/Bugunyemeklistesi?selectedCity={city.CityName}";
+
+                // Şehir sayfası için URL tag'ini oluşturuyoruz
+                XmlElement cityUrlElement = xmlDoc.CreateElement("url");
+                XmlElement cityLoc = xmlDoc.CreateElement("loc");
+                cityLoc.InnerText = cityUrl;
+                cityUrlElement.AppendChild(cityLoc);
+
+                XmlElement cityLastMod = xmlDoc.CreateElement("lastmod");
+                cityLastMod.InnerText = DateTime.UtcNow.ToString("yyyy-MM-dd");
+                cityUrlElement.AppendChild(cityLastMod);
+
+                XmlElement cityChangeFreq = xmlDoc.CreateElement("changefreq");
+                cityChangeFreq.InnerText = "daily";
+                cityUrlElement.AppendChild(cityChangeFreq);
+
+                XmlElement cityPriority = xmlDoc.CreateElement("priority");
+                cityPriority.InnerText = "0.8";
+                cityUrlElement.AppendChild(cityPriority);
+
+                urlSetElement.AppendChild(cityUrlElement);
+
+                // Bugün yemek listesi için URL tag'ini oluşturuyoruz
+                XmlElement todayMenuUrlElement = xmlDoc.CreateElement("url");
+                XmlElement todayMenuLoc = xmlDoc.CreateElement("loc");
+                todayMenuLoc.InnerText = todayMenuUrl;
+                todayMenuUrlElement.AppendChild(todayMenuLoc);
+
+                XmlElement todayMenuLastMod = xmlDoc.CreateElement("lastmod");
+                todayMenuLastMod.InnerText = DateTime.UtcNow.ToString("yyyy-MM-dd");
+                todayMenuUrlElement.AppendChild(todayMenuLastMod);
+
+                XmlElement todayMenuChangeFreq = xmlDoc.CreateElement("changefreq");
+                todayMenuChangeFreq.InnerText = "daily";
+                todayMenuUrlElement.AppendChild(todayMenuChangeFreq);
+
+                XmlElement todayMenuPriority = xmlDoc.CreateElement("priority");
+                todayMenuPriority.InnerText = "0.7";
+                todayMenuUrlElement.AppendChild(todayMenuPriority);
+
+                urlSetElement.AppendChild(todayMenuUrlElement);
+            }
+
+            // XML belgesini bir string'e dönüştürmek
+            using (var stringWriter = new StringWriter())
+            {
+                xmlDoc.Save(stringWriter);
+                string xmlContent = stringWriter.ToString();
+
+                // Sitemap XML içeriğini UTF-8 formatında döndürüyoruz
+                return Content(xmlContent, "text/xml", Encoding.UTF8);
+            }
+        }
+
+
+
+
+
 
 
     }
