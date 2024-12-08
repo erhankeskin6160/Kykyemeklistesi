@@ -60,7 +60,7 @@ namespace Kykyemeklistesi.Controllers
             return View(yemekListesi);
         }
         [HttpPost]
-        public IActionResult YemekListesi(string Şehir) 
+        public IActionResult YemekListesi(string Şehir="Sivas") 
         {
             var yemeklistesi = _db.YemekListesi.Include(x=>x.City).Where(x => x.City.CityName == Şehir).ToList();
             var sehir = _db.Cities.Select(x => new SelectListItem
