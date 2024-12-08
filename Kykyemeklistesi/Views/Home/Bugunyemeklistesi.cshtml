@@ -1,23 +1,26 @@
 ﻿@using System.Globalization
 @model List<Yemek>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="KYK yemek listesi ile yurtlardaki öğrenciler için bugünün yemek menülerini görüntüleyin. Sabah ve akşam yemeklerini takip edin, duyuruları kaçırmayın.">
+    <meta name="keywords"
+        content="KYK yemek listesi, KYK yemek menüsü, kyk yemek listesi bugün, günlük yemek menüsü, kyk yemek, KYK yurt yemekleri">
+   <title>KYK Yemek Listesi Bugün | kykyemeklistesi.com.tr </title>
     <meta name="google-adsense-account" content="ca-pub-5290089711270021">
     <link rel="stylesheet" href="/css/fontawesome.css">
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/styles.css">
     <link href="/css/styles.css" rel="stylesheet" />
-    <title>Document</title>
-    <meta name="description" content="KYK yemek listesi ile yurtlardaki öğrenciler için günlük yemek menülerini görüntüleyin. Sabah ve akşam yemeklerini takip edin, duyuruları kaçırmayın.">
-    <meta name="keywords" content="KYK yemek listesi, KYK yemek menüsü, öğrenci yemek listesi, günlük yemek menüsü, KYK duyuruları, KYK yurt yemekleri">
-
+ 
+    
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5290089711270021"
-            crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script>
 </head>
 
 
@@ -86,14 +89,16 @@
                                                 {
 
 
-                                                    <li class="list-group-item border-0 text-bg-primary text-dark fw-bolder">@sabahyemek.Trim().ToString()</li>
+                                                    <li class="list-group-item border-0 text-bg-primary text-dark fw-bolder">
+                                                        @sabahyemek.Trim().ToString()</li>
 
 
                                                 }
                                             }
                                             else
                                             {
-                                                <li class="list-group-item border-0 text-bg-primary text-dark fw-bolder"> <span>Ürün Daha Eklenmedi</span></li>
+                                                <li class="list-group-item border-0 text-bg-primary text-dark fw-bolder">
+                                                    <span>Ürün Daha Eklenmedi</span></li>
 
                                             }
 
@@ -115,7 +120,8 @@
                                                 @foreach (var Aksamyemek in item.AksamYemekListesi.Split('\n'))
                                                 {
 
-                                                    <li class="list-group-item border-0 text-bg-secondary fw-bold">@Aksamyemek.Trim().ToString()</li>
+                                                    <li class="list-group-item border-0 text-bg-secondary fw-bold">
+                                                        @Aksamyemek.Trim().ToString()</li>
                                                 }
                                             }
 
