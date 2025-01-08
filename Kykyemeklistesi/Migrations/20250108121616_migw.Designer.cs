@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kykyemeklistesi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241204135221_mig19")]
-    partial class mig19
+    [Migration("20250108121616_migw")]
+    partial class migw
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,49 @@ namespace Kykyemeklistesi.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Kykyemeklistesi.Models.Admin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AdminName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AdminPassword")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("AdminRole")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Admins");
+                });
+
+            modelBuilder.Entity("Kykyemeklistesi.Models.Anket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("YemekId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("ısBegenme")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Ankets");
+                });
 
             modelBuilder.Entity("Kykyemeklistesi.Models.City", b =>
                 {
@@ -50,17 +93,20 @@ namespace Kykyemeklistesi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("AksamCaloriee")
+                        .HasColumnType("int");
+
                     b.Property<string>("AksamYemekListesi")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("Calorie")
-                        .HasColumnType("float");
 
                     b.Property<int>("CityId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Day")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("SabahCalorie")
+                        .HasColumnType("int");
 
                     b.Property<string>("SabahYemekListesi")
                         .HasColumnType("nvarchar(max)");

@@ -1,0 +1,4 @@
+﻿User-agent: *
+Disallow: /Admin/
+
+Sitemap: https://kykyemeklistesi.com.tr/sitemap.xml

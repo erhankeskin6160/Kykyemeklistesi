@@ -17,6 +17,7 @@ namespace Kykyemeklistesi.Models
 
         public DbSet<Admin> Admins { get; set; }
 
+        public DbSet<Anket> Ankets { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

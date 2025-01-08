@@ -97,7 +97,8 @@ namespace Kykyemeklistesi.Controllers
                 dbyemek.City = yemek.City; // 
                 dbyemek.SabahYemekListesi = yemek.SabahYemekListesi; 
                 dbyemek.AksamYemekListesi = yemek.AksamYemekListesi;
-                dbyemek.Calorie = yemek.Calorie;
+                dbyemek.SabahCalorie = yemek.SabahCalorie;
+                dbyemek.AksamCaloriee = yemek.AksamCaloriee;
                 _db.SaveChanges();
             }
             return RedirectToAction("YemekListesi");

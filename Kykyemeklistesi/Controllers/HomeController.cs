@@ -16,8 +16,7 @@ namespace Kykyemeklistesi.Controllers
             _dbContext = appContext;
         }
 
-
-
+ 
         [HttpGet]
         public IActionResult Index(string? selectedCity = "Sivas")
         {
@@ -93,6 +92,25 @@ namespace Kykyemeklistesi.Controllers
             return View(bugunyemeklistesi);
         }
 
+
+
+        [HttpPost]
+        //public IActionResult Anket([FromBody] Anket model)
+        //{
+        //    // Modelde mealId: yemek ID'si, isLiked: beğenip beğenmediği
+        //    if (model.ıs)
+        //    {
+        //        _feedbackService.IncrementLikes(model.MealId);
+        //    }
+        //    else
+        //    {
+        //        _feedbackService.IncrementDislikes(model.MealId);
+        //    }
+
+        //    var feedbackCounts = _feedbackService.GetFeedbackCounts(model.MealId);
+
+        //    return Json(new { likes = feedbackCounts.Likes, dislikes = feedbackCounts.Dislikes });
+        //}
 
 
         public IActionResult GenerateSitemap()
