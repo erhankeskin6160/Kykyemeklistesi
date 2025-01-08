@@ -16,14 +16,15 @@ namespace Kykyemeklistesi.Controllers
             _dbContext = appContext;
         }
 
- 
+
+
         [HttpGet]
         public IActionResult Index(string? selectedCity = "Sivas")
         {
             DateTime currentDate = DateTime.Now;
 
 
-            
+
 
             var selectList = _dbContext.YemekListesi
 
@@ -36,7 +37,7 @@ namespace Kykyemeklistesi.Controllers
                     Selected = x.Key == selectedCity
                 }).ToList();
 
-            
+
             var yemekListesi = _dbContext.YemekListesi.Include(x => x.City).OrderBy(x => x.Day)
                 .Where(x => x.City.CityName == selectedCity &&
                 x.Day.Month == DateTime.Now.Month &&
@@ -94,51 +95,32 @@ namespace Kykyemeklistesi.Controllers
 
 
 
-        [HttpPost]
-        //public IActionResult Anket([FromBody] Anket model)
-        //{
-        //    // Modelde mealId: yemek ID'si, isLiked: beğenip beğenmediği
-        //    if (model.ıs)
-        //    {
-        //        _feedbackService.IncrementLikes(model.MealId);
-        //    }
-        //    else
-        //    {
-        //        _feedbackService.IncrementDislikes(model.MealId);
-        //    }
-
-        //    var feedbackCounts = _feedbackService.GetFeedbackCounts(model.MealId);
-
-        //    return Json(new { likes = feedbackCounts.Likes, dislikes = feedbackCounts.Dislikes });
-        //}
-
-
         public IActionResult GenerateSitemap()
         {
-         
+
             XmlDocument xmlDoc = new XmlDocument();
 
-             
+
             XmlElement urlSetElement = xmlDoc.CreateElement("urlset");
             urlSetElement.SetAttribute("xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9");
             urlSetElement.SetAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
             urlSetElement.SetAttribute("xsi:schemaLocation", "http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd");
 
-            
+
             xmlDoc.AppendChild(urlSetElement);
 
-       
+
             var cities = _dbContext.Cities.ToList();
 
             foreach (var city in cities)
             {
-                
+
                 string cityUrl = $"https://kykyemeklistesi.com.tr/Home/Index?selectedCity={city.CityName}";
 
-                
+
                 string todayMenuUrl = $"https://kykyemeklistesi.com.tr/Home/Bugunyemeklistesi?selectedCity={city.CityName}";
 
-               
+
                 XmlElement cityUrlElement = xmlDoc.CreateElement("url");
                 XmlElement cityLoc = xmlDoc.CreateElement("loc");
                 cityLoc.InnerText = cityUrl;
@@ -179,7 +161,7 @@ namespace Kykyemeklistesi.Controllers
                 urlSetElement.AppendChild(todayMenuUrlElement);
             }
 
-          
+
             using (var stringWriter = new StringWriter())
             {
                 xmlDoc.Save(stringWriter);
@@ -191,7 +173,7 @@ namespace Kykyemeklistesi.Controllers
 
 
         }
-        public IActionResult NotFound() 
+        public IActionResult NotFound()
         {
             return View();
         }

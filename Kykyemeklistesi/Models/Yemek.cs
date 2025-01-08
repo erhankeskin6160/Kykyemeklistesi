@@ -11,7 +11,7 @@
 
         public int? AksamCaloriee { get; set; }
 
-        
+
         public City City { get; set; }
     }
 }

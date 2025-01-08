@@ -51,10 +51,16 @@ body {
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
   }
+
   .card-container-right {
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
   }
+}
+
+.breadcrumb {
+  text-decoration: none;
+  flex-direction: column-reverse;
 }
