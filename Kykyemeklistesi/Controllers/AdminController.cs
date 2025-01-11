@@ -33,8 +33,8 @@ namespace Kykyemeklistesi.Controllers
             {
                 Value = x.Id.ToString(),
                 Text = x.CityName
-            }).ToList();  
-            ViewBag.Sehir = sehir;   
+            }).ToList();
+            ViewBag.Sehir = sehir;
             return View();
         }
 
@@ -42,50 +42,50 @@ namespace Kykyemeklistesi.Controllers
         [HttpPost]
         public IActionResult YemekListesiEkle(Yemek yemek)
         {
-            
 
-            _db.YemekListesi.Add(yemek);  
+
+            _db.YemekListesi.Add(yemek);
             _db.SaveChanges();
-           return RedirectToAction("Index");
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
-        public IActionResult YemekListesi() 
+        public IActionResult YemekListesi()
         {
 
             var yemekListesi = _db.YemekListesi.Include(x => x.City).OrderBy(x => x.Day).Where(x => x.Day.Month == DateTime.Now.Month &&
                 x.Day.Year == DateTime.Now.Year).ToList();
-            var sehir = _db.Cities.Select(x => new SelectListItem { Value =x.CityName, Text = x.CityName }).ToList();
-            ViewBag.Sehir=sehir;
+            var sehir = _db.Cities.Select(x => new SelectListItem { Value = x.CityName, Text = x.CityName }).ToList();
+            ViewBag.Sehir = sehir;
             return View(yemekListesi);
         }
         [HttpPost]
-        public IActionResult YemekListesi(string Şehir="Sivas") 
+        public IActionResult YemekListesi(string Şehir = "Sivas")
         {
-            var yemeklistesi = _db.YemekListesi.Include(x=>x.City).OrderBy(x=>x.Day).Where(x => x.City.CityName == Şehir & x.Day.Month == DateTime.Now.Month &&
+            var yemeklistesi = _db.YemekListesi.Include(x => x.City).OrderBy(x => x.Day).Where(x => x.City.CityName == Şehir & x.Day.Month == DateTime.Now.Month &&
                 x.Day.Year == DateTime.Now.Year).ToList();
             var sehir = _db.Cities.Select(x => new SelectListItem
             {
                 Value = x.CityName,
                 Text = x.CityName,
-                Selected = x.CityName == Şehir 
+                Selected = x.CityName == Şehir
             }).ToList();
             ViewBag.Sehir = sehir;
             return View(yemeklistesi);
         }
         [HttpGet]
-        public IActionResult YemekListesiDüzenle(int id) 
+        public IActionResult YemekListesiDüzenle(int id)
         {
             var sehir = _db.Cities.Select(x => new SelectListItem
             {
                 Value = x.CityName,
                 Text = x.CityName,
-               
-                
+
+
             }).ToList();
             ViewBag.Sehir = sehir;
-            
-            var yemek = _db.YemekListesi.Where(x=>x.Id==id).SingleOrDefault();
+
+            var yemek = _db.YemekListesi.Where(x => x.Id == id).SingleOrDefault();
             return View(yemek);
         }
         [HttpPost]
@@ -95,7 +95,7 @@ namespace Kykyemeklistesi.Controllers
             if (dbyemek != null)
             {
                 dbyemek.City = yemek.City; // 
-                dbyemek.SabahYemekListesi = yemek.SabahYemekListesi; 
+                dbyemek.SabahYemekListesi = yemek.SabahYemekListesi;
                 dbyemek.AksamYemekListesi = yemek.AksamYemekListesi;
                 dbyemek.SabahCalorie = yemek.SabahCalorie;
                 dbyemek.AksamCaloriee = yemek.AksamCaloriee;
@@ -104,21 +104,21 @@ namespace Kykyemeklistesi.Controllers
             return RedirectToAction("YemekListesi");
         }
 
-        public IActionResult  YemekListesiSil(int id) 
-        
+        public IActionResult YemekListesiSil(int id)
+
         {
-           var silinecekyemeklistesi= _db.YemekListesi.Find(id);
+            var silinecekyemeklistesi = _db.YemekListesi.Find(id);
             _db.Remove(silinecekyemeklistesi);
             _db.SaveChanges();
-            return RedirectToAction("Index");   
+            return RedirectToAction("Index");
         }
 
         [Authorize(Roles = "SuperAdmin")]
         [HttpGet]
-        public IActionResult ManageAdmins() 
+        public IActionResult ManageAdmins()
         {
-            var admins=_db.Admins.ToList();
-            return View(admins);  
+            var admins = _db.Admins.ToList();
+            return View(admins);
         }
 
         [Authorize(Roles = "SuperAdmin")]
@@ -141,11 +141,11 @@ namespace Kykyemeklistesi.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles= "SuperAdmin")]
-        public IActionResult EditAdmin(int id) 
+        [Authorize(Roles = "SuperAdmin")]
+        public IActionResult EditAdmin(int id)
         {
-            var editadmin= _db.Admins.Find(id);
-            if (editadmin==null)
+            var editadmin = _db.Admins.Find(id);
+            if (editadmin == null)
             {
                 return RedirectToAction("ManageAdmins");
             }
@@ -153,11 +153,11 @@ namespace Kykyemeklistesi.Controllers
         }
         [HttpPost]
         [Authorize(Roles = "SuperAdmin")]
-        public IActionResult EditAdmin(Admin admin) 
+        public IActionResult EditAdmin(Admin admin)
         {
 
             var editadmin = _db.Admins.SingleOrDefault(x => x.Id == admin.Id);
-            if (editadmin!=null)
+            if (editadmin != null)
             {
                 editadmin.AdminName = admin.AdminName;
                 editadmin.AdminRole = admin.AdminRole;
@@ -168,21 +168,21 @@ namespace Kykyemeklistesi.Controllers
             return View(admin);
         }
         [Authorize(Roles = "SuperAdmin")]
-        public IActionResult DeleteAdmin(int id) 
+        public IActionResult DeleteAdmin(int id)
         {
-            var deleteadmin= _db.Admins.Find(id);
-            if (deleteadmin != null) 
+            var deleteadmin = _db.Admins.Find(id);
+            if (deleteadmin != null)
             {
                 _db.Remove(deleteadmin);
                 _db.SaveChanges();
                 TempData["SuccesDeleteMessage"] = "Silme İşlemi Başarılı Admin Silindi!";
-                return RedirectToAction("Index"); 
+                return RedirectToAction("Index");
             }
             else
             {
                 TempData["ErrorMessage"] = "Silme İşlemi Başarısız";
                 return RedirectToAction("ManageAdmins");
-               
+
             }
         }
 
@@ -219,20 +219,20 @@ namespace Kykyemeklistesi.Controllers
                 ViewBag.ErrorMessage = "Kullanıcı Adı Şifre";
                 return View();
             }
-        
+
 
 
 
         }
 
-        public  async Task<IActionResult> Logut() 
+        public async Task<IActionResult> Logut()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login", "Admin");
         }
 
         [AllowAnonymous]
-        public IActionResult AccessDenied() 
+        public IActionResult AccessDenied()
         {
             return View();
         }
