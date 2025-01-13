@@ -52,6 +52,25 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "Login",
+    pattern: "Login",
+    defaults: new { controller = "User", action = "Login" }
+
+
+);
+
+
+app.MapControllerRoute(
+    name: "Register",
+    pattern: "Register",
+    defaults: new { controller = "User", action = "Register" }
+
+
+);
+
+
 app.MapControllerRoute(
     name: "404Error",
     pattern: "404Error.html",

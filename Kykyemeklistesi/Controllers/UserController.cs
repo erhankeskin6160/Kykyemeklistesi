@@ -71,6 +71,19 @@ namespace Kykyemeklistesi.Controllers
 
         }
 
+        [HttpGet]
+        public IActionResult Register() 
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Register(User user) 
+        {
+            _db.Users.Add(user);
+            _db.SaveChanges();
+            return View();
+        }
 
         public async Task<IActionResult> Logut()
         {
