@@ -82,6 +82,27 @@ namespace Kykyemeklistesi.Migrations
                     b.ToTable("Cities");
                 });
 
+            modelBuilder.Entity("Kykyemeklistesi.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("Kykyemeklistesi.Models.Yemek", b =>
                 {
                     b.Property<int>("Id")

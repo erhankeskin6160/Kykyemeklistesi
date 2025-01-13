@@ -15,10 +15,11 @@ namespace Kykyemeklistesi.Controllers
         {
             _dbContext = appContext;
         }
+         static string deger;
 
 
 
-        [HttpGet]
+     [HttpGet]
         public IActionResult Index(string? selectedCity = "Sivas")
         {
             DateTime currentDate = DateTime.Now;
@@ -47,6 +48,7 @@ namespace Kykyemeklistesi.Controllers
             ViewBag.City = selectList;
             ViewBag.SelectedCity = selectedCity;
 
+            deger = selectedCity;
             return View(yemekListesi);
         }
 
@@ -178,8 +180,13 @@ namespace Kykyemeklistesi.Controllers
             return View();
         }
 
-
-
+     
+        public static string SecilenSehir() 
+        
+        {
+            var secilensehir = deger;
+            return secilensehir;
+        }
 
 
 

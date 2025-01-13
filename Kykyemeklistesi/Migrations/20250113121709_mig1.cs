@@ -12,6 +12,35 @@ namespace Kykyemeklistesi.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Admins",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AdminRole = table.Column<int>(type: "int", nullable: false),
+                    AdminName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AdminPassword = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Admins", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Ankets",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    YemekId = table.Column<int>(type: "int", nullable: false),
+                    ısBegenme = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ankets", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Cities",
                 columns: table => new
                 {
@@ -25,6 +54,20 @@ namespace Kykyemeklistesi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "YemekListesi",
                 columns: table => new
                 {
@@ -34,7 +77,8 @@ namespace Kykyemeklistesi.Migrations
                     Day = table.Column<DateTime>(type: "datetime2", nullable: false),
                     SabahYemekListesi = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AksamYemekListesi = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Calorie = table.Column<double>(type: "float", nullable: false)
+                    SabahCalorie = table.Column<int>(type: "int", nullable: true),
+                    AksamCaloriee = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -56,6 +100,15 @@ namespace Kykyemeklistesi.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Admins");
+
+            migrationBuilder.DropTable(
+                name: "Ankets");
+
+            migrationBuilder.DropTable(
+                name: "Users");
+
             migrationBuilder.DropTable(
                 name: "YemekListesi");
 
