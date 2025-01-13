@@ -9,6 +9,7 @@ using NuGet.Protocol;
 using System.IO;
 using DocumentFormat.OpenXml.Vml.Wordprocessing;
 using iText.Kernel.Font;
+using iText.IO.Font;
 
 namespace Kykyemeklistesi.Controllers
 {
@@ -17,9 +18,11 @@ namespace Kykyemeklistesi.Controllers
     public class UserController : Controller
     {
         AppDbContext _db;
+        static bool giris = false;
         public UserController(AppDbContext appDbContext)
         {
             _db = appDbContext;
+            
         }
 
         public IActionResult Index()
@@ -45,12 +48,14 @@ namespace Kykyemeklistesi.Controllers
                 var claims = new List<Claim>
                 {
                     new  Claim(ClaimTypes.Email,info.Email),
+                    
                  };
 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+              
 
                 return RedirectToAction("Index", "User");
             }
@@ -119,24 +124,22 @@ namespace Kykyemeklistesi.Controllers
                 .OrderBy(x => x.Day)
                 .ToList();
 
-            var fontPath = "wwwroot/font/DejaVuSans.ttf"; // Arial font dosyasının yolu
-            var font = PdfFontFactory.CreateFont(fontPath, PdfFontFactory.EmbeddingStrategy.PREFER_EMBEDDED);
-
+            // Türkçe karakterleri destekleyen font yolu
+            var fontPath = "wwwroot/font/DejaVuSans.ttf"; // DejaVuSans veya Türkçe karakterleri destekleyen bir font
+            var font = PdfFontFactory.CreateFont(fontPath, PdfEncodings.IDENTITY_H, PdfFontFactory.EmbeddingStrategy.PREFER_EMBEDDED);
 
             using (var pdf = new System.IO.MemoryStream())
             {
-
-                
                 // PDF Writer ve Document oluştur
                 var writer = new iText.Kernel.Pdf.PdfWriter(pdf);
                 var pdfDocument = new iText.Kernel.Pdf.PdfDocument(writer);
                 var document = new iText.Layout.Document(pdfDocument);
 
                 // Başlık ekle
-                var baslik = new iText.Layout.Element.Paragraph(HomeController.SecilenSehir()+"Yemek Listesi")
+                var baslik = new iText.Layout.Element.Paragraph(HomeController.SecilenSehir() + " Yemek Listesi")
                     .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)
-                    .SetFontSize(18);
-                  
+                    .SetFontSize(18)
+                    .SetFont(font); // Başlık için font ayarlandı
                 document.Add(baslik);
 
                 // Boşluk eklemek için paragraf
@@ -144,25 +147,19 @@ namespace Kykyemeklistesi.Controllers
 
                 // Tablo oluştur ve başlıklar ekle
                 var table = new iText.Layout.Element.Table(3).UseAllAvailableWidth();
-                table.AddHeaderCell("Tarih");
-                table.AddHeaderCell("Sabah Yemek Listesi");
-                table.AddHeaderCell("Aksam Yemek Listesi");
-
-
-
-
+                table.AddHeaderCell(new iText.Layout.Element.Cell().Add(new iText.Layout.Element.Paragraph("Tarih").SetFont(font)));
+                table.AddHeaderCell(new iText.Layout.Element.Cell().Add(new iText.Layout.Element.Paragraph("Sabah Yemek Listesi").SetFont(font)));
+                table.AddHeaderCell(new iText.Layout.Element.Cell().Add(new iText.Layout.Element.Paragraph("Akşam Yemek Listesi").SetFont(font)));
 
                 // Verileri tabloya ekle
                 foreach (var item in info)
                 {
-                    table.AddCell(item.Day.ToString("dd.MM.yyyy")); // Tarih formatı
-                    table.AddCell(item.SabahYemekListesi ?? "-");    // Sabah yemeği
-                    table.AddCell(item.AksamYemekListesi ?? "-");    // Akşam yemeği
-                                                                     // Örnek Türkçe karakterler
-                    table.AddCell("Ç, Ş, Ğ, Ü, Ö, İ, ı, ş, ü, ö, ğ");
-
+                    table.AddCell(new iText.Layout.Element.Cell().Add(new iText.Layout.Element.Paragraph(item.Day.ToString("dd.MM.yyyy")).SetFont(font))); // Tarih
+                    table.AddCell(new iText.Layout.Element.Cell().Add(new iText.Layout.Element.Paragraph(item.SabahYemekListesi ?? "-").SetFont(font)));    // Sabah yemeği
+                    table.AddCell(new iText.Layout.Element.Cell().Add(new iText.Layout.Element.Paragraph(item.AksamYemekListesi ?? "-").SetFont(font)));    // Akşam yemeği
                 }
-
+ 
+             
                 // Tabloyu döküman içine ekle
                 document.Add(table);
 
@@ -175,10 +172,12 @@ namespace Kykyemeklistesi.Controllers
             }
         }
 
-
     }
 
 
-
-
 }
+
+
+
+
+
