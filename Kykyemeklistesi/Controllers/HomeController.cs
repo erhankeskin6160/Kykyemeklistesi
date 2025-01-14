@@ -181,6 +181,7 @@ namespace Kykyemeklistesi.Controllers
         }
 
      
+        public IActionResult SSS() {  return View(); }  
         public static string SecilenSehir() 
         
         {
