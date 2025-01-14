@@ -33,19 +33,6 @@
 </head>
 
 
-
-@if(User.Identity.IsAuthenticated)
-{
-    <a href="@Url.Action("ExportToExcel", "User", new { selectedCity = ViewBag.SelectedCity })" class="btn btn-success">
-        <i class="fa-regular fa-file-excel"></i>
-    </a>
-
-
-    <a href="@Url.Action("ExportToPdf", "User", new { selectedCity = ViewBag.SelectedCity })" class="btn btn-danger">
-        <i class="fa-regular fa-file-pdf"></i> 
-
-    </a>
-}
  
 
 
@@ -78,8 +65,28 @@
 
     </div>
 
+<div class="row p-2">
+<div class="col-2 ">
+     @if(User.Identity.IsAuthenticated)
+{
+   
+    <a  href="@Url.Action("ExportToExcel", "User", new { selectedCity = ViewBag.SelectedCity })" class="btn btn-success pdfexcel">
+        <i class="fa-regular fa-file-excel pdfexcel-text"></i> <p class="fw-bolder pdfexceltext">Excel İle İndir</p>
+    </a>
 
+
+    <a href="@Url.Action("ExportToPdf", "User", new { selectedCity = ViewBag.SelectedCity })" class="btn btn-danger pdfexcel">
+        <i class="fa-regular fa-file-pdf pdfexcel-text"></i> <p class="fw-bolder pdfexceltext">PDF İle İndir</p>
+
+    </a>
+}
+  
+</div>
+<div class="col-10">
 <h1 class="my-3 mb-5 text-lg-center">Sivas KYK Yemek Menüsü</h1>
+
+ </div>
+</div>
 
  <section class="d-flex justify-content-center align-items-center h-100 min-vh-100">
     <div class="container-xl">
