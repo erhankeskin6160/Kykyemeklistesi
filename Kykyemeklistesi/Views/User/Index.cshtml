@@ -1,20 +1,122 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Veri İndirme</title>
-    
-</head>
-<body>
-    <h2>Ürün Listesi</h2>
-    <a href="@Url.Action("ExportToExcel", "User", new { selectedCity = ViewBag.SelectedCity })" class="btn btn-primary">
-        Excel Olarak İndir
-    </a>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/fontawesome.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/styles.css">
 
-    <h2>Ürün Listesi</h2>
-    <a href="@Url.Action("ExportToPdf", "User", new { selectedCity = ViewBag.SelectedCity })" class="btn btn-danger">
-        PDf Olarak İndir
-    </a>
+    <title>Kullanıcılar Paneli</title>
+
+</head>
+
+<body>
+
+    <div class="row">
+        <div class="col-md-4">
+
+            <div class="user-img m-4" style="; width: 400px; height: 400px; ">
+                <img src="/images/erkek.png" alt=" avatar resmi" class="rounded-circle img-fluid">
+                <!--Erhan sen sonra bunu üyelik sisteminde kadın ise kadın yapacaksın.-->
+            </div>
+            <div class="btn btn-group mt-5 mb-3">
+
+                <a href="@Url.Action("ExportToExcel", "User", new { selectedCity = ViewBag.SelectedCity })"
+                    class="btn btn btn-success"> <span class="excellogo pe-2 me-1"><i
+                            class="fa-regular fa-file-excel"></i></span> Excel Olarak İndir
+                </a>
+
+
+                <a href="@Url.Action("ExportToPdf", "User", new { selectedCity = ViewBag.SelectedCity })"
+                    class="btn btn-danger">
+                    <span class="pdflogo pe-2 me-1"><i class="fa-regular fa-file-pdf"></i></span> PDF Olarak İndir
+                </a>
+            </div>
+
+        </div>
+        <div class="col-md-8">
+
+            <div class="kullanıcıpanel mb-4 py-2 px-3">
+
+                <label for="ad" class="from-label">Ad</label>
+                <div class="input-group mb-1">
+                    <span class="input-group-text">
+                        <i class="fa-regular fa-user text-secondary"></i>
+                    </span>
+                    <input type="text" id="ad" placeholder="Adınız" style="width: 95%; border: solid 0.5px gray;">
+                </div>
+
+                <label for="soyad" class="from-label">soyad</label>
+
+                <div class="input-group mb-2 mt-2">
+                    <span class="input-group-text">
+                        <i class="fa-regular fa-user text-secondary"></i>
+                    </span>
+                    <input type="text" id="soyad" placeholder="Soyadınız"
+                        style="width: 95%; border: solid 0.5px black;">
+                </div>
+
+                <div class="form-group mb-2">
+                    <label for="text2" class="from-label">Üniversite</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-building-columns text-secondary"></i> </span>
+                        <input type="text" id="text2" class="form-control" placeholder="Üniversiteyi Giriniz">
+                    </div>
+                </div>
+                <div class="form-group mb-2">
+                    <label for="text3" class="from-label">Bölüm</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-book text-secondary"></i> </span>
+                        <input type="text" id="text3" class="form-control" placeholder="Bölümü Giriniz">
+                    </div>
+                </div>
+
+                <div class="form-group mb-2">
+                    <label for="text3" class="from-label">Fakülte</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-graduation-cap text-secondary"></i>
+                        </span>
+                        <input type="text" id="text3" class="form-control" placeholder="Fakülteyi Giriniz">
+                    </div>
+                </div>
+
+                <div class="form-group mb-2">
+                    <label for="text1" class="from-label">İl</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-building-columns text-secondary"></i> </span>
+                        <input type="text" id="text1" class="form-control" placeholder="Şehri Giriniz">
+                    </div>
+                </div>
+
+                <div class="form-group mb-2">
+                    <label for="text" class="from-label">Cinsiyet</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-building-columns text-secondary"></i> </span>
+                        <select class="form-select">
+                            <option value="erkek">Erkek</option>
+                            <option value="kadın">Kadın</option>
+
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-info w-100  py-1 mt-4  text-light">Kaydet</button>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
 </body>
+
 </html>
