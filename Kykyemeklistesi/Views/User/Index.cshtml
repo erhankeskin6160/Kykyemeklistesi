@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿ @model User
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -14,13 +15,21 @@
 </head>
 
 <body>
-
-    <div class="row">
+ <form asp-action="Index" asp-controller="User" method="POST" >
+        <input type="hidden" asp-for="Id" />
+        <div class="row">
         <div class="col-md-4">
 
             <div class="user-img m-4" style="; width: 400px; height: 400px; ">
-                <img src="/images/erkek.png" alt=" avatar resmi" class="rounded-circle img-fluid">
-                <!--Erhan sen sonra bunu üyelik sisteminde kadın ise kadın yapacaksın.-->
+
+
+
+                    <img src="@Url.Content("~/images/" + Model.Resim)" alt="avatar resmi" class="rounded-circle img-fluid">
+
+
+
+
+                    <!--Erhan sen sonra bunu üyelik sisteminde kadın ise kadın yapacaksın.-->
             </div>
             <div class="btn btn-group mt-5 mb-3">
 
@@ -46,7 +55,7 @@
                     <span class="input-group-text">
                         <i class="fa-regular fa-user text-secondary"></i>
                     </span>
-                    <input type="text" id="ad" placeholder="Adınız" style="width: 95%; border: solid 0.5px gray;">
+                    <input type="text" id="ad" asp-for="Name"  placeholder="Adınız" style="width: 95%; border: solid 0.5px gray;">
                 </div>
 
                 <label for="soyad" class="from-label">soyad</label>
@@ -55,7 +64,7 @@
                     <span class="input-group-text">
                         <i class="fa-regular fa-user text-secondary"></i>
                     </span>
-                    <input type="text" id="soyad" placeholder="Soyadınız"
+                    <input type="text" id="soyad" placeholder="Soyadınız" asp-for="Soyad"
                         style="width: 95%; border: solid 0.5px black;">
                 </div>
 
@@ -64,7 +73,7 @@
                     <div class="input-group">
                         <span class="input-group-text">
                             <i class="fa-solid fa-building-columns text-secondary"></i> </span>
-                        <input type="text" id="text2" class="form-control" placeholder="Üniversiteyi Giriniz">
+                        <input type="text" id="text2" class="form-control" asp-for="University" placeholder="Üniversiteyi Giriniz">
                     </div>
                 </div>
                 <div class="form-group mb-2">
@@ -72,7 +81,7 @@
                     <div class="input-group">
                         <span class="input-group-text">
                             <i class="fa-solid fa-book text-secondary"></i> </span>
-                        <input type="text" id="text3" class="form-control" placeholder="Bölümü Giriniz">
+                        <input type="text" id="text3" class="form-control" placeholder="Bölümü Giriniz" asp-for="Department">
                     </div>
                 </div>
 
@@ -82,7 +91,7 @@
                         <span class="input-group-text">
                             <i class="fa-solid fa-graduation-cap text-secondary"></i>
                         </span>
-                        <input type="text" id="text3" class="form-control" placeholder="Fakülteyi Giriniz">
+                        <input type="text" id="text3" class="form-control" placeholder="Fakülteyi Giriniz" asp-for="Faculty" >
                     </div>
                 </div>
 
@@ -91,7 +100,7 @@
                     <div class="input-group">
                         <span class="input-group-text">
                             <i class="fa-solid fa-building-columns text-secondary"></i> </span>
-                        <input type="text" id="text1" class="form-control" placeholder="Şehri Giriniz">
+                        <input type="text" id="text1" class="form-control" placeholder="Şehri Giriniz" asp-for="City">
                     </div>
                 </div>
 
@@ -100,12 +109,12 @@
                     <div class="input-group">
                         <span class="input-group-text">
                             <i class="fa-solid fa-building-columns text-secondary"></i> </span>
-                        <select class="form-select">
-                            <option value="erkek">Erkek</option>
-                            <option value="kadın">Kadın</option>
+                            <select asp-for="Gender" class="form-select">
+                                <option value=""selected >Cinsiyet Seçiniz</option>
+                                <option value="Erkek" selected="@Model.Gender == Gender.Erkek">Erkek</option>
+                                <option value="Kadın" selected="@Model.Gender == Gender.Kadın">Kadın</option>
+                            </select>
 
-                        </select>
-                    </div>
                 </div>
                 <button type="submit" class="btn btn-info w-100  py-1 mt-4  text-light">Kaydet</button>
             </div>
@@ -115,7 +124,7 @@
 
 
     </div>
-
+    </form>
 
 
 
