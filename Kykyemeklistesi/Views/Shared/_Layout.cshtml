@@ -57,10 +57,24 @@
                     </ul>
 
                     <div class="class=" d-flex justify-content-end>
-                        <button class="btn userbutton btn-dark fw-light text-light me-2">Giriş
-                            Yap</button>
-                        <button class="btn btn-dark fw-light text-light me-4">Kayıt Ol
-                        </button>
+
+                        @{
+                            if (User.Identity.IsAuthenticated == false)
+                            {
+                                <a href="@Url.Action("Login","User")" class="btn userbutton btn-dark fw-light text-light me-2">Giriş Yap</a>
+                                 <a href="@Url.Action("Register","User")" class="btn btn-dark fw-light text-light me-4">Kayıt Ol</a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Logout","User")" class="btn userbutton btn-dark fw-light text-light me-2">Çıkış Yap</a>
+                            }
+                        }
+
+                       
+                
+
+                        
+ 
                     </div>
                 </div>
             </div>

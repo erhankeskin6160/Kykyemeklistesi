@@ -113,7 +113,7 @@
 <body>
     <div class="container">
         <h1 class="text-dark text-center mb-4">Kayıt Ol</h1>
-        <form asp-action="Login" asp-controller="User" method="POST">
+        <form asp-action="Register" asp-controller="User" method="POST">
             <!-- E-posta alanı -->
             <div class="form-group">
                 <label for="email" class="form-label">E-posta Adresi</label>
@@ -150,11 +150,17 @@
             <button type="submit" class="btn btn-secondary w-100">Kayıt Ol</button>
 
         </form>
-        <p>Hesabın var ise hesabına giriş yap <a href="login.html">Giriş Yap</a></p>
-        <div class="btn btn-info px-2 my-3 d-flex justify-content-center">Ana Sayfaya Dön</div>
+        <p>Hesabın var ise hesabına giriş yap <a href="/Login">Giriş Yap</a></p>
+        <div class="d-flex justify-content-center my-3">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-info text-light text-decoration-none btn-lg px-4 py-2">
+                Ana Sayfa
+            </a>
+        </div>
+
+
     </div>
 
-    <script src="./assets/js/bootstrap.bundle.min.js"></script>
+   @*  <script src="./assets/js/bootstrap.bundle.min.js"></script>
     <script>
         const form = document.querySelector(".need-validation")
         form.addEventListener("submit", (e) => {
@@ -167,7 +173,7 @@
             }
             form.classList.add("was-validated");
         })
-    </script>
+    </script> *@
 </body>
 
 </html>

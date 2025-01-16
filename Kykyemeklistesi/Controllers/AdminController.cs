@@ -25,6 +25,7 @@ namespace Kykyemeklistesi.Controllers
 
         public IActionResult Index()
         {
+           
             return View();
         }
         public IActionResult YemekListesiEkle()

@@ -139,8 +139,12 @@
             <button type="submit" class="btn btn-primary w-100">Giriş Yap</button>
 
         </form>
-        <p>Hesabınız yok mu? <a href="signup.html">Kayıt Ol</a></p>
-        <div class="btn btn-info px-2 my-3 d-flex justify-content-center">Ana Sayfaya Dön</div>
+        <p>Hesabınız yok mu? <a href="/Register">Kayıt Ol</a></p>
+        <div class="d-flex justify-content-center my-3">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-info text-light text-decoration-none btn-lg px-4 py-2">
+                Ana Sayfa
+            </a>
+        </div>
     </div>
 </body>
 

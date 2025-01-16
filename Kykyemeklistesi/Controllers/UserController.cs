@@ -27,7 +27,59 @@ namespace Kykyemeklistesi.Controllers
 
         public IActionResult Index()
         {
-            return View();
+
+            var claimmail = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email);
+            if (claimmail !=null)
+            {
+                var mail = claimmail.Value;
+                var user = _db.Users.FirstOrDefault(x=>x.Email == mail);
+                if (user!= null)
+                {
+                    return View(user);
+                }
+
+               
+            }
+
+            
+            
+
+            
+            return RedirectToAction("Login", "User");
+
+            
+        }
+        [HttpPost]
+        public IActionResult Index(User u) 
+        {
+
+             
+                var user = _db.Users.Find(u.Id);
+           
+                if (user != null)
+                {
+                    user.Faculty = u.Faculty;
+                    user.City = u.City;
+                    user.University = u.University;
+                    user.Department = u.Department;
+                    
+                    user.Gender = u.Gender;
+                if (user.Gender == 0)
+                {
+                    user.Resim = "erkek.png";
+                }
+                else
+                {
+                    user.Resim = "student.png";
+                }
+                user.Name = u.Name;
+                    user.Soyad = u.Soyad;
+
+              
+                _db.SaveChanges();
+                }
+
+            return RedirectToAction("Index", "User");
         }
         [HttpGet]
         public async Task<IActionResult> Login()
@@ -82,10 +134,10 @@ namespace Kykyemeklistesi.Controllers
         {
             _db.Users.Add(user);
             _db.SaveChanges();
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
-        public async Task<IActionResult> Logut()
+        public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login", "User");
