@@ -28,6 +28,9 @@ namespace Kykyemeklistesi.Models
                 .WithMany(c => c.Yemeks) // City -> Yemeks ilişkilendirilmiş
                 .HasForeignKey(y => y.CityId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+
+            
         }
 
 

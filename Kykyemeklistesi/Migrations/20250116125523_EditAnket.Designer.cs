@@ -4,6 +4,7 @@ using Kykyemeklistesi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kykyemeklistesi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250116125523_EditAnket")]
+    partial class EditAnket
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -144,9 +147,6 @@ namespace Kykyemeklistesi.Migrations
                     b.Property<string>("AksamYemekListesi")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("AnketId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CityId")
                         .HasColumnType("int");
 
@@ -161,9 +161,6 @@ namespace Kykyemeklistesi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AnketId")
-                        .IsUnique();
-
                     b.HasIndex("CityId");
 
                     b.ToTable("YemekListesi");
@@ -171,27 +168,13 @@ namespace Kykyemeklistesi.Migrations
 
             modelBuilder.Entity("Kykyemeklistesi.Models.Yemek", b =>
                 {
-                    b.HasOne("Kykyemeklistesi.Models.Anket", "Anket")
-                        .WithOne("Yemek")
-                        .HasForeignKey("Kykyemeklistesi.Models.Yemek", "AnketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Kykyemeklistesi.Models.City", "City")
                         .WithMany("Yemeks")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Anket");
-
                     b.Navigation("City");
-                });
-
-            modelBuilder.Entity("Kykyemeklistesi.Models.Anket", b =>
-                {
-                    b.Navigation("Yemek")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Kykyemeklistesi.Models.City", b =>

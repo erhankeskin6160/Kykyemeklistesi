@@ -114,7 +114,7 @@ namespace Kykyemeklistesi.Controllers
 
             else
             {
-                ViewBag.ErrorMessage = "Kullanıcı Adı Şifre";
+                ViewBag.ErrorMessage = "Kullanıcı Adı Şifre yanlıs";
                 return View();
             }
 
