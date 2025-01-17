@@ -51,6 +51,7 @@ body {
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
   }
+
   .card-container-right {
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
@@ -58,6 +59,7 @@ body {
     border-bottom-right-radius: 20px;
   }
 }
+
 .breadcrumb {
   text-decoration: none;
   left: 50;

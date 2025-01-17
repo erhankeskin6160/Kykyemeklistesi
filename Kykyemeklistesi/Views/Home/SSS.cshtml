@@ -10,10 +10,10 @@
         content="KYK Yemek listesi nasıl bakılır, KYK yemek listesine nereden bakılır. KYK Yemek hakkında sıkça sorulan sorular">
     <title>Sıkça Sorulan Sorular - SSS</title>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="../lib/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/fontawesome.css">
-    <link rel="stylesheet" href="/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/bootstrap.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/fontawesome.css" asp-append-version="true" />
+
 </head>
 
 <body>
@@ -23,7 +23,7 @@
     <div class="container mb-5">
         <h1 class="m-5 text-center">Sıkça Sorulan Sorular</h1>
 
-        <div class="accordion mb-5" id="accordions">
+        <div class="accordion mb-5" id="accor">
             <div class="accordion-item">
                 <h2 class="accordion-header">
                     <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#soru1">Sitenize neden
@@ -31,7 +31,7 @@
                         olmalıyım?</button>
                 </h2>
 
-                <div id="soru1" class="accordion-collapse collapse shadow" data-bs-parent="#accordions">
+                <div id="soru1" class="accordion-collapse collapse shadow" data-bs-parent="#accor">
 
                     <div class="accordion-body">
                         KYK yemek menü listesini PDF ve Excel formatında bir tablo halinde cihazınıza indirmenizi
@@ -47,7 +47,7 @@
                         listesini nereden buluyorsunuz ?</button>
                 </h2>
 
-                <div id="soru2" class="acordion-collapse collapse" data-bs-parent="#accordions">
+                <div id="soru2" class="accordion-collapse collapse" data-bs-parent="#accor">
                     <div class="accordion-body">Farklı üniversitelerdeki öğrencilerle iletişime geçerek KYK yemek menü
                         listesini temin ediyoruz.</div>
                 </div>
@@ -58,7 +58,7 @@
                         il hariç diğer iller yok. Sebebi nedir ?</button>
                 </h2>
 
-                <div id="soru3" class="acordion-collapse collapse" data-bs-parent="#accordions">
+                <div id="soru3" class="accordion-collapse collapse" data-bs-parent="#accor">
                     <div class="accordion-body">Sitemizde şu an birkaç il hariç diğer iller bulunmuyor çünkü KYK yemek
                         menü listelerini temin etmek için farklı üniversitelerdeki öğrencilerle iletişim kuruyoruz.
                         Henüz tüm illerden bilgi alamasak da, listeyi sürekli güncelleyerek eksik illeri eklemek için
@@ -72,7 +72,7 @@
                         iletişime geçebilirim ?</button>
                 </h2>
 
-                <div id="soru4" class="acordion-collapse collapse" data-bs-parent="#accordions">
+                <div id="soru4" class="accordion-collapse collapse" data-bs-parent="#accor">
                     <div class="accordion-body">İletişim adreslerimizi yakında paylaşacağız. Bizi takipte kalın!</div>
                 </div>
             </div>
@@ -83,17 +83,17 @@
                         yurtların yemekleri hepsi benzer mi ?</button>
                 </h2>
 
-                <div id="soru5" class="acordion-collapse collapse" data-bs-parent="#accordions">
+                <div id="soru5" class="accordion-collapse collapse" data-bs-parent="#accor">
                     <div class="accordion-body"> </div>
                 </div>
             </div>
             <div class="accordion-item">
                 <h2 class="accordion-header">
                     <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#soru6"> KYK Yemek
-                        listesi doğruluğunu nasıl kontrol ediyorsunuz? ?</button>
+                        listesi doğruluğunu nasıl kontrol ediyorsunuz?</button>
                 </h2>
 
-                <div id="soru6" class="acordion-collapse collapse" data-bs-parent="#accordions">
+                <div id="soru6" class="accordion-collapse collapse" data-bs-parent="#accor">
                     <div class="accordion-body">Listelerimizi farklı KYK yurtlarında kalan öğrencilerle iletişim kurarak
                         doğruluyoruz. Eksik veya yanlış bilgi tespit edildiğinde, listeyi hızla güncelleyerek
                         kullanıcılarımıza doğru bilgiyi sunuyoruz.
@@ -107,7 +107,7 @@
                         diyet seçenekleri mevcut mu ?</button>
                 </h2>
 
-                <div id="soru7" class="acordion-collapse collapse" data-bs-parent="#accordions">
+                <div id="soru7" class="accordion-collapse collapse" data-bs-parent="#accor">
                     <div class="accordion-body">KYK yurtları genellikle standart menülerin yanı sıra diyet veya
                         vejetaryen seçenekler de sunar. Ancak bu seçenekler yurda göre değişebilir. Yemek listesinde
                         diyet menü varsa, sitemizde bu bilgiyi ayrıca belirtiyoruz. </div>
@@ -119,7 +119,7 @@
                         miktarı doğru mu ?</button>
                 </h2>
 
-                <div id="soru8" class="acordion-collapse collapse" data-bs-parent="#accordions">
+                <div id="soru8" class="accordion-collapse collapse" data-bs-parent="#accor">
                     <div class="accordion-body">Sitemizde yer alan kalori bilgileri KYK tarafından sağlanan verilere ve
                         uzman kaynaklardan yapılan araştırmalara dayanmaktadır. Ancak bireysel porsiyonlama veya yemek
                         hazırlama farklılıkları nedeniyle küçük sapmalar olabilir. En doğru bilgi için yurt yönetimi
@@ -130,11 +130,7 @@
     </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
 
-    @* <script src="../lib/dist/js/bootstrap.bundle.min.js"></script> *@
 </body>
 
 </html>
