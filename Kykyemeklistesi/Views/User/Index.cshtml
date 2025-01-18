@@ -1,4 +1,4 @@
-﻿ @model User
+﻿@model User
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,115 +15,121 @@
 </head>
 
 <body>
- <form asp-action="Index" asp-controller="User" method="POST" >
+    <form asp-action="Index" asp-controller="User" method="POST">
         <input type="hidden" asp-for="Id" />
         <div class="row">
-        <div class="col-md-4">
+            <div class="col-md-4">
 
-            <div class="user-img m-4" style="; width: 400px; height: 400px; ">
+                <div class="user-img m-4" style="; width: 400px; height: 400px; ">
 
 
 
-                    <img src="@Url.Content("~/images/" + Model.Resim)" alt="avatar resmi" class="rounded-circle img-fluid">
+                    <img src="@Url.Content("~/images/" + Model.Resim)" alt="avatar resmi"
+                        class="rounded-circle img-fluid">
 
 
 
 
                     <!--Erhan sen sonra bunu üyelik sisteminde kadın ise kadın yapacaksın.-->
+                </div>
+                <div class="btn btn-group mt-5 mb-3">
+
+                    <a href="@Url.Action("ExportToExcel", "User", new { selectedCity = ViewBag.SelectedCity })"
+                        class="btn btn btn-success"> <span class="excellogo pe-2 me-1"><i
+                                class="fa-regular fa-file-excel"></i></span> Excel Olarak İndir
+                    </a>
+
+
+                    <a href="@Url.Action("ExportToPdf", "User", new { selectedCity = ViewBag.SelectedCity })"
+                        class="btn btn-danger">
+                        <span class="pdflogo pe-2 me-1"><i class="fa-regular fa-file-pdf"></i></span> PDF Olarak İndir
+                    </a>
+                </div>
+
             </div>
-            <div class="btn btn-group mt-5 mb-3">
+            <div class="col-md-8">
 
-                <a href="@Url.Action("ExportToExcel", "User", new { selectedCity = ViewBag.SelectedCity })"
-                    class="btn btn btn-success"> <span class="excellogo pe-2 me-1"><i
-                            class="fa-regular fa-file-excel"></i></span> Excel Olarak İndir
-                </a>
+                <div class="kullanıcıpanel mb-4 py-2 px-3">
 
-
-                <a href="@Url.Action("ExportToPdf", "User", new { selectedCity = ViewBag.SelectedCity })"
-                    class="btn btn-danger">
-                    <span class="pdflogo pe-2 me-1"><i class="fa-regular fa-file-pdf"></i></span> PDF Olarak İndir
-                </a>
-            </div>
-
-        </div>
-        <div class="col-md-8">
-
-            <div class="kullanıcıpanel mb-4 py-2 px-3">
-
-                <label for="ad" class="from-label">Ad</label>
-                <div class="input-group mb-1">
-                    <span class="input-group-text">
-                        <i class="fa-regular fa-user text-secondary"></i>
-                    </span>
-                    <input type="text" id="ad" asp-for="Name"  placeholder="Adınız" style="width: 95%; border: solid 0.5px gray;">
-                </div>
-
-                <label for="soyad" class="from-label">soyad</label>
-
-                <div class="input-group mb-2 mt-2">
-                    <span class="input-group-text">
-                        <i class="fa-regular fa-user text-secondary"></i>
-                    </span>
-                    <input type="text" id="soyad" placeholder="Soyadınız" asp-for="Soyad"
-                        style="width: 95%; border: solid 0.5px black;">
-                </div>
-
-                <div class="form-group mb-2">
-                    <label for="text2" class="from-label">Üniversite</label>
-                    <div class="input-group">
+                    <label for="ad" class="from-label">Ad</label>
+                    <div class="input-group mb-1">
                         <span class="input-group-text">
-                            <i class="fa-solid fa-building-columns text-secondary"></i> </span>
-                        <input type="text" id="text2" class="form-control" asp-for="University" placeholder="Üniversiteyi Giriniz">
-                    </div>
-                </div>
-                <div class="form-group mb-2">
-                    <label for="text3" class="from-label">Bölüm</label>
-                    <div class="input-group">
-                        <span class="input-group-text">
-                            <i class="fa-solid fa-book text-secondary"></i> </span>
-                        <input type="text" id="text3" class="form-control" placeholder="Bölümü Giriniz" asp-for="Department">
-                    </div>
-                </div>
-
-                <div class="form-group mb-2">
-                    <label for="text3" class="from-label">Fakülte</label>
-                    <div class="input-group">
-                        <span class="input-group-text">
-                            <i class="fa-solid fa-graduation-cap text-secondary"></i>
+                            <i class="fa-regular fa-user text-secondary"></i>
                         </span>
-                        <input type="text" id="text3" class="form-control" placeholder="Fakülteyi Giriniz" asp-for="Faculty" >
+                        <input type="text" id="ad" asp-for="Name" placeholder="Adınız"
+                            style="width: 95%; border: solid 0.5px gray;">
                     </div>
-                </div>
 
-                <div class="form-group mb-2">
-                    <label for="text1" class="from-label">İl</label>
-                    <div class="input-group">
+                    <label for="soyad" class="from-label">soyad</label>
+
+                    <div class="input-group mb-2 mt-2">
                         <span class="input-group-text">
-                            <i class="fa-solid fa-building-columns text-secondary"></i> </span>
-                        <input type="text" id="text1" class="form-control" placeholder="Şehri Giriniz" asp-for="City">
+                            <i class="fa-regular fa-user text-secondary"></i>
+                        </span>
+                        <input type="text" id="soyad" placeholder="Soyadınız" asp-for="Soyad"
+                            style="width: 95%; border: solid 0.5px black;">
                     </div>
-                </div>
 
-                <div class="form-group mb-2">
-                    <label for="text" class="from-label">Cinsiyet</label>
-                    <div class="input-group">
-                        <span class="input-group-text">
-                            <i class="fa-solid fa-building-columns text-secondary"></i> </span>
+                    <div class="form-group mb-2">
+                        <label for="text2" class="from-label">Üniversite</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="fa-solid fa-building-columns text-secondary"></i> </span>
+                            <input type="text" id="text2" class="form-control" asp-for="University"
+                                placeholder="Üniversiteyi Giriniz">
+                        </div>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="text3" class="from-label">Bölüm</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="fa-solid fa-book text-secondary"></i> </span>
+                            <input type="text" id="text3" class="form-control" placeholder="Bölümü Giriniz"
+                                asp-for="Department">
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <label for="text3" class="from-label">Fakülte</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="fa-solid fa-graduation-cap text-secondary"></i>
+                            </span>
+                            <input type="text" id="text3" class="form-control" placeholder="Fakülteyi Giriniz"
+                                asp-for="Faculty">
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <label for="text1" class="from-label">İl</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="fa-solid fa-building-columns text-secondary"></i> </span>
+                            <input type="text" id="text1" class="form-control" placeholder="Şehri Giriniz"
+                                asp-for="City">
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <label for="text" class="from-label">Cinsiyet</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="fa-solid fa-building-columns text-secondary"></i> </span>
                             <select asp-for="Gender" class="form-select">
-                                <option value=""selected >Cinsiyet Seçiniz</option>
+                                <option value="" selected>Cinsiyet Seçiniz</option>
                                 <option value="Erkek" selected="@Model.Gender == Gender.Erkek">Erkek</option>
-                                <option value="Kadın" selected="@Model.Gender == Gender.Kadın">Kadın</option>
+                                <option value="Kadın" selected !important="@Model.Gender == Gender.Kadın">Kadın</option>
                             </select>
 
+                        </div>
+                        <button type="submit" class="btn btn-info w-100  py-1 mt-4  text-light">Kaydet</button>
+                    </div>
+
                 </div>
-                <button type="submit" class="btn btn-info w-100  py-1 mt-4  text-light">Kaydet</button>
+
+
+
             </div>
-
-        </div>
-
-
-
-    </div>
     </form>
 
 
