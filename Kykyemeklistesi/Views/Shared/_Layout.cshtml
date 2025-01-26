@@ -55,11 +55,12 @@
 
                     </ul>
 
-                    <div class=""class=" d-flex justify-content-end>
+                    <div class=" d-flex justify-content-end">
 
                         @{
                             if (User.Identity.IsAuthenticated == false)
                             {
+
                                 <a href="@Url.Action("Login","User")" class="btn userbutton btn-dark fw-light text-light me-2">Giriş Yap</a>
                                  <a href="@Url.Action("Register","User")" class="btn btn-dark fw-light text-light me-4">Kayıt Ol</a>
                             }
