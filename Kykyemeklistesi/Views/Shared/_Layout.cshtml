@@ -61,12 +61,12 @@
                             if (User.Identity.IsAuthenticated == false)
                             {
 
-                                <a href="@Url.Action("Login","User")" class="btn userbutton btn-dark fw-light text-light me-2">Giriş Yap</a>
+                                <a href="@Url.Action("Login","User")" class="btn   btn-dark fw-light text-light me-2">Giriş Yap</a>
                                  <a href="@Url.Action("Register","User")" class="btn btn-dark fw-light text-light me-4">Kayıt Ol</a>
                             }
                             else
                             {
-                                <a href="@Url.Action("Logout","User")"><i class="fa-solid fa-user-gear user-panel text-dark fa-2x  m-2"></i></a>
+                                                <a href="@Url.Action("Index","User")" class="btn   btn-dark fw-light text-light me-2">Giriş Yap</a>
 
                                 <a href="@Url.Action("Logout","User")"><i class="fa-solid fa-right-from-bracket text-dark fa-2x me-2"></i></a>
                             }
