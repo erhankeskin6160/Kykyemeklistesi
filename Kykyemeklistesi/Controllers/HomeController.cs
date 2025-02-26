@@ -87,6 +87,8 @@ namespace Kykyemeklistesi.Controllers
                }).ToList();
 
             ViewBag.City = selectList;
+            ViewBag.SelectedCity = selectedCity;
+
 
             var bugunyemeklistesi = _dbContext.YemekListesi.Include(x => x.City).OrderBy(x => x.Day)
                 .Where(x => x.City.CityName == selectedCity && x.Day == DateTime.Now.Date)

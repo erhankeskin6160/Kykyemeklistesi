@@ -81,8 +81,22 @@ app.MapControllerRoute(
     name: "sitemap",
     pattern: "sitemap.xml",
     defaults: new { controller = "Home", action = "GenerateSitemap" });
+
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    name: "cityFoodMenu",
+    pattern: "{selectedCity}-bugunyemeklistesi",
+    defaults: new { controller = "Home", action = "Bugunyemeklistesi" });
+
+app.MapControllerRoute(
+    name: "cityFoodMenuIndex",
+    pattern: "{selectedCity}-yemeklistesi", // farklý pattern, örn. "-yemeklistesi" ekledik
+    defaults: new { controller = "Home", action = "Index" });
+
+
+app.MapControllerRoute(
+     name: "default",
+     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
 
 app.Run();
