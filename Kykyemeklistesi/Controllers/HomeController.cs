@@ -15,11 +15,11 @@ namespace Kykyemeklistesi.Controllers
         {
             _dbContext = appContext;
         }
-         static string deger;
+        static string deger;
 
 
 
-     [HttpGet]
+        [HttpGet]
         public IActionResult Index(string? selectedCity = "Sivas")
         {
             DateTime currentDate = DateTime.Now;
@@ -67,7 +67,6 @@ namespace Kykyemeklistesi.Controllers
         //    var yemekListesi = _dbContext.YemekListesi
         //            .Where(x => x.City == selectedCity)
         //            .ToList();
-
         //    ViewBag.City = selectList;
         //    return View(yemekListesi);
         //}
@@ -182,10 +181,10 @@ namespace Kykyemeklistesi.Controllers
             return View();
         }
 
-     
-        public IActionResult SSS() {  return View(); }  
-        public static string SecilenSehir() 
-        
+
+        public IActionResult SSS() { return View(); }
+        public static string SecilenSehir()
+
         {
             var secilensehir = deger;
             return secilensehir;
