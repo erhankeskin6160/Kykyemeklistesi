@@ -2,19 +2,18 @@
 <html lang="tr">
 
 <head>
-     @RenderSection("MetaTags", required: false)
-  
+    @RenderSection("MetaTags", required: false)
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description"
         content="KYK yemek listesi ile yurtlardaki öğrenciler için günlük yemek menülerini görüntüleyin. Sabah ve akşam yemeklerini takip edin, duyuruları kaçırmayın.">
 
-    <meta name="keywords" content="KYK yemek listesi, KYK yemek menüsü, KYK sabah menüsü, KYK akşam menüsü, KYK İstanbul menüsü, 81 il KYK menüsü, 81 il içinde KYK yemek listesi, KYK yurt yemekleri, bugünkü yemek menüsü, öğrenci yemek listesi, güncel KYK menüsü, KYK beslenme, KYK kahvaltı menüsü, KYK akşam yemeği, KYK öğle yemeği, yurt yemek servisi, KYK menü, KYK yemek seçenekleri KYK yemek listesi, KYK sabah menüsü, KYK akşam menüsü, KYK Adana menüsü, KYK Adıyaman menüsü, KYK Afyonkarahisar menüsü, KYK Ağrı menüsü, KYK Aksaray menüsü, KYK Amasya menüsü, KYK Ankara menüsü, KYK Antalya menüsü, KYK Ardahan menüsü, KYK Artvin menüsü, KYK Aydın menüsü, KYK Balıkesir menüsü, KYK Bartın menüsü, KYK Batman menüsü, KYK Bayburt menüsü, KYK Bilecik menüsü, KYK Bingöl menüsü, KYK Bitlis menüsü, KYK Bolu menüsü, KYK Burdur menüsü, KYK Bursa menüsü, KYK Çanakkale menüsü, KYK Çankırı menüsü, KYK Çorum menüsü, KYK Denizli menüsü, KYK Diyarbakır menüsü, KYK Düzce menüsü, KYK Edirne menüsü, KYK Elazığ menüsü, KYK Erzincan menüsü, KYK Erzurum menüsü, KYK Eskişehir menüsü, KYK Gaziantep menüsü, KYK Giresun menüsü, KYK Gümüşhane menüsü, KYK Hakkari menüsü, KYK Hatay menüsü, KYK Iğdır menüsü, KYK Isparta menüsü, KYK İstanbul menüsü, KYK İzmir menüsü, KYK Kahramanmaraş menüsü, KYK Karabük menüsü, KYK Karaman menüsü, KYK Kars yemek menüsü, KYK Kastamonu menüsü, KYK Kayseri menüsü, KYK Kırıkkale yemek menüsü, KYK Kırklareli menüsü, KYK Kırşehir menüsü, KYK Kilis menüsü, KYK Kocaeli menüsü, KYK Konya menüsü, KYK Kütahya menüsü, KYK Malatya menüsü, KYK Manisa menüsü, KYK Mardin menüsü, KYK Mersin menüsü, KYK Muğla menüsü, KYK Muş menüsü, KYK Nevşehir menüsü, KYK Niğde menüsü, KYK Ordu menüsü, KYK Osmaniye menüsü, KYK Rize menüsü, KYK Sakarya menüsü, KYK Samsun menüsü, KYK Siirt menüsü, KYK Sinop menüsü, KYK Sivas menüsü, KYK Şanlıurfa menüsü, KYK Şırnak menüsü, KYK Tekirdağ menüsü, KYK Tokat menüsü, KYK Trabzon menüsü, KYK Tunceli menüsü, KYK Uşak menüsü, KYK Van menüsü, KYK Yalova menüsü, KYK Yozgat menüsü, KYK Zonguldak menüsü,Kyk bügün yemek listesi,kyk sabah menüsü,kyk akşam menüsü,kyk yemek,Kyk yemek Listesi Nereden Bakılır
-,KYK Yemek Listesi,Konya KYK yemek Listesi,Gsb Yemek Listesi,Gsb KYK yemek listesi,Samsun KYK Yemek Listesi,Ankara KYK yemek Listesi,Samsun KYK Yemek Listesi,KYK Yemek Listesi,KYK aylık Yemek Listesi">
+    <meta name="keywords" content="KYK yemek listesi, KYK yemek menüsü, KYK sabah menüsü, KYK akşam menüsü, KYK İstanbul menüsü, 81 il KYK menüsü, 81 il içinde KYK yemek listesi, KYK yurt yemekleri, bugünkü yemek menüsü, öğrenci yemek listesi, güncel KYK menüsü, KYK beslenme, KYK kahvaltı menüsü, KYK akşam yemeği, KYK öğle yemeği, yurt yemek servisi, KYK menü, KYK yemek seçenekleri KYK yemek listesi, KYK sabah menüsü, KYK akşam menüsü, KYK Adana menüsü, KYK Adıyaman menüsü, KYK Afyonkarahisar menüsü, KYK Ağrı menüsü, KYK Aksaray menüsü, KYK Amasya menüsü, KYK Ankara menüsü, KYK Antalya menüsü, KYK Ardahan menüsü, KYK Artvin menüsü, KYK Aydın menüsü, KYK Balıkesir menüsü, KYK Bartın menüsü, KYK Batman menüsü, KYK Bayburt menüsü, KYK Bilecik menüsü, KYK Bingöl menüsü, KYK Bitlis menüsü, KYK Bolu menüsü, KYK Burdur menüsü, KYK Bursa menüsü, KYK Çanakkale menüsü, KYK Çankırı menüsü, KYK Çorum menüsü, KYK Denizli menüsü, KYK Diyarbakır menüsü, KYK Düzce menüsü, KYK Edirne menüsü, KYK Elazığ menüsü, KYK Erzincan menüsü, KYK Erzurum menüsü, KYK Eskişehir menüsü, KYK Gaziantep menüsü, KYK Giresun menüsü, KYK Gümüşhane menüsü, KYK Hakkari menüsü, KYK Hatay menüsü, KYK Iğdır menüsü, KYK Isparta menüsü, KYK İstanbul menüsü, KYK İzmir menüsü, KYK Kahramanmaraş menüsü, KYK Karabük menüsü, KYK Karaman menüsü, KYK Kars yemek menüsü, KYK Kastamonu menüsü, KYK Kayseri menüsü, KYK Kırıkkale yemek menüsü, KYK Kırklareli menüsü, KYK Kırşehir menüsü, KYK Kilis menüsü, KYK Kocaeli menüsü, KYK Konya menüsü, KYK Kütahya menüsü, KYK Malatya menüsü, KYK Manisa menüsü, KYK Mardin menüsü, KYK Mersin menüsü, KYK Muğla menüsü, KYK Muş menüsü, KYK Nevşehir menüsü, KYK Niğde menüsü, KYK Ordu menüsü, KYK Osmaniye menüsü, KYK Rize menüsü, KYK Sakarya menüsü, KYK Samsun menüsü, KYK Siirt menüsü, KYK Sinop menüsü, KYK Sivas menüsü, KYK Şanlıurfa menüsü, KYK Şırnak menüsü, KYK Tekirdağ menüsü, KYK Tokat menüsü, KYK Trabzon menüsü, KYK Tunceli menüsü, KYK Uşak menüsü, KYK Van menüsü, KYK Yalova menüsü, KYK Yozgat menüsü, KYK Zonguldak menüsü,Kyk bügün yemek listesi,kyk sabah menüsü,kyk akşam menüsü,kyk yemek">
 
-        <meta name="google-adsense-account" content="ca-pub-5290089711270021">
+    <meta name="google-adsense-account" content="ca-pub-5290089711270021">
     <title>@ViewData["Title"]KYK Yemek Menüsü - kykyemeklistesi.com.tr</title>
-   <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/bootstrap.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/fontawesome.css" asp-append-version="true" />
     <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
@@ -30,7 +29,7 @@
     <script src="https://yandex.ru/ads/system/context.js" async></script>
 
 
- </head>
+</head>
 
 <body>
     <header>
@@ -71,22 +70,26 @@
                             if (User.Identity.IsAuthenticated == false)
                             {
 
-                                <a href="@Url.Action("Login","User")" class="btn   btn-dark fw-light text-light me-2">Giriş Yap</a>
-                                 <a href="@Url.Action("Register","User")" class="btn btn-dark fw-light text-light me-4">Kayıt Ol</a>
+                                <a href="@Url.Action("Login", "User")"
+                                    class="btn userbutton btn-dark fw-light text-light me-2">Giriş Yap</a>
+
+                                <a href="@Url.Action("Register", "User")" class="btn btn-dark fw-light text-light me-4">Kayıt
+                                    Ol</a>
                             }
                             else
                             {
-                                <a href="@Url.Action("Index","User")"> <i class="fa-solid fa-user-gear user-panel text-dark fa-2x me-3"></i> </a>
+                               <a href="@Url.Action("Index","User")" class="btn   btn-dark fw-light text-light me-2">Profilim </a>
 
-                                <a href="@Url.Action("Logout","User")"><i class="fa-solid fa-right-from-bracket text-dark fa-2x me-2"></i></a>
+                                <a href="@Url.Action("Logout", "User")"><i
+                                        class="fa-solid fa-right-from-bracket text-dark fa-2x me-2"></i></a>
                             }
                         }
 
-                       
-                
 
-                        
- 
+
+
+
+
                     </div>
                 </div>
             </div>
@@ -107,8 +110,8 @@
             </a>
         </div>
     </footer>
-<script src="~/lib/jquery/dist/jquery.min.js" defer></script>
- <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js" defer></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
 
     @* <script src="~/js/site.js" asp-append-version="true"></script> *@
