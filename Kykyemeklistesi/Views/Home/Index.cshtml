@@ -46,18 +46,6 @@
             <div class="mb-4 sehirsec d-flex justify-content-center">
                 <span class="mx-2 fw-bolder"> Şehrini Seç </span>
 
-<div class="me-2"> <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5290089711270021"
-     crossorigin="anonymous"></script>
-<!-- tasarım2 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-5290089711270021"
-     data-ad-slot="1279353303"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script></div>
                
                 <select class="form-select-sm px-3" name="selectedCity" onchange="this.form.submit()">
                     @foreach (var item in ViewBag.City as List<SelectListItem>)
@@ -110,6 +98,7 @@
     <div class="container-xl">
         <div class="row mb-5 gy-4">
 
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5290089711270021"
      crossorigin="anonymous"></script>
 <!-- Reklam -->
@@ -119,6 +108,8 @@
                 @{
                     int sayac = 0;
                 }
+
+
             @foreach (var item in Model)
             {
 
@@ -126,6 +117,8 @@
                
                 bool istoday = item.Day.ToLongDateString() == DateTime.Now.Date.ToLongDateString();
                 <div class="col-xl-4 col-lg-12  col-sm-12">
+
+                    
                     <div class="card-container me-4 ">
                         <div class="row @(istoday ? "today-meal " : "") ">
 
@@ -237,8 +230,8 @@
 
                     if (sayac % 3 == 0)
                     {
-
-                        <div style="margin:5px 5px; text-align: center;   border-radius: 15px; height:662px; width:403px;">
+           <div  class="col-xl-4 col-lg-12  col-sm-12">
+            <div>
                             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5290089711270021"
                                     crossorigin="anonymous"></script>
                             <!-- dikey reklam -->
@@ -249,7 +242,8 @@
                             <script>
                                 (adsbygoogle = window.adsbygoogle || []).push({});
                             </script>
-                        </div>
+                        </div> </div>
+                        
 
                     }
                
