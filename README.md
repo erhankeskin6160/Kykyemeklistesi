@@ -25,8 +25,8 @@ Proje, kullanıcıların yemek listelerini seçtikleri şehirlere göre filtrele
 4. Uygulamayı çalıştırarak yemek listelerini görüntülemeye başlayın.
 
 **Proje Ekibi:**
-- Backend: Erdal Keskin
-- Frontend: Erhan Keskin
+- Backend: Erhan Keskin
+- Frontend: Erdal Keskin
 
  
  
