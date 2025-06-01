@@ -1,96 +1,628 @@
-/* Add styles here */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-  background-color: #FFF8E7;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2d3748;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-link {
+    color: #4a5568;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+    .nav-link:hover, .nav-link.active {
+        background: #4facfe;
+        color: white;
+    }
+
+.main-layout {
+    display: grid;
+    grid-template-columns: 250px 1fr 250px;
+    gap: 2rem;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.sidebar {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+}
+
+.ad-card {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+    border-radius: 15px;
+    padding: 1.5rem;
+    color: white;
+    text-align: center;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+    .ad-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .ad-card h3 {
+        font-size: 18px;
+        margin-bottom: 0.5rem;
+    }
+
+    .ad-card p {
+        font-size: 14px;
+        opacity: 0.9;
+    }
+
+.content-area {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    min-height: 600px;
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+    .page-title h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #2d3748;
+        margin-bottom: 1rem;
+    }
+
+.controls-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.city-selector {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+    .city-selector label {
+        font-weight: 600;
+        color: #2d3748;
+    }
+
+.city-dropdown {
+    padding: 10px 15px;
+    border: 2px solid #4facfe;
+    border-radius: 10px;
+    background: white;
+    color: #2d3748;
+    font-weight: 500;
+    cursor: pointer;
+    min-width: 200px;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    border: 2px solid #4facfe;
+    background: transparent;
+    color: #4facfe;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+    .filter-btn.active,
+    .filter-btn:hover {
+        background: #4facfe;
+        color: white;
+    }
+
+.menu-grid {
+    display: grid;
+    gap: 2rem;
+}
+
+.day-section {
+    background: #f8fafc;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+    .day-section:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    }
+
+.day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.day-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.day-number {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.day-date {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2d3748;
+}
+
+.day-name {
+    font-size: 14px;
+    color: #718096;
+    font-weight: 500;
+}
+
+.meals-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.meal-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.meals-container.single-meal {
+    grid-template-columns: 1fr;
+}
+.meal-card.expanded {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+    
+
+.meal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.meal-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.meal-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.breakfast-icon {
+    background: linear-gradient(45deg, #ff9a56 0%, #ffad56 100%);
+}
+
+.dinner-icon {
+    background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+}
+
+.meal-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.calorie-badge {
+    background: linear-gradient(45deg, #48bb78 0%, #38a169 100%);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.menu-items {
+    list-style: none;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+    color: #4a5568;
+    font-size: 14px;
+}
+
+.item-icon {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #4facfe;
+}
+
+/* Ad Cards için farklý renkler */
+.ad-card.blue {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.ad-card.green {
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+}
+
+.ad-card.purple {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.ad-card.orange {
+    background: linear-gradient(135deg, #ff9a56 0%, #ffad56 100%);
+}
+
+@media (max-width: 1024px) {
+    .main-layout {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .sidebar {
+        position: relative;
+        top: 0;
+    }
+
+    .controls-section {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .meals-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-layout {
+        padding: 1rem;
+    }
+
+    .page-title h1 {
+        font-size: 2rem;
+    }
+
+    .filter-buttons, .city-selector {
+        justify-content: center;
+    }
+}
+
+.hidden {
+    display: none;
 }
 
 
-
-
-.tarih {
-  text-align: center;
-  border: 2px solid none;
-  background-color: #64B5F6;
-  font-size: 25px;
-  color: white;
-  border-top-left-radius: 40%;
-  border-top-right-radius: 40%;
+.ad-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 3rem 0;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    background-clip: padding-box;
 }
 
-.card-container-left {
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 0px;
+    .ad-section:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        border-color: #4facfe;
+    }
+
+    .ad-section hr {
+        border: none;
+        height: 2px;
+        background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+        margin: 1rem 0 2rem 0;
+        border-radius: 2px;
+    }
+
+.ad-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
 }
 
-.card-container-right {
-  border-top-right-radius: 0px;
-  border-top-left-radius: 0px;
-  border-bottom-right-radius: 20px;
-  border-bottom-left-radius: 0px;
+.ad-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.sehirsec {
-  display: flex;
-  justify-content: center;
+.ad-subtitle {
+    font-size: 1.1rem;
+    color: #4a5568;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    max-width: 600px;
 }
 
-.navbar .nav-link:hover {
-  color: #333 !important;
-  text-decoration: none;
+.ad-btn {
+    background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.today-meal {
-  box-shadow: 0px 0px 49px #d34e0b;
-  border-bottom-right-radius: 20px;
-  border-bottom-left-radius: 20px;
-  border-top-left-radius: 40%;
-  border-top-right-radius: 40%;
+    .ad-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+        background: linear-gradient(45deg, #00f2fe 0%, #4facfe 100%);
+    }
+
+    .ad-btn:active {
+        transform: translateY(0);
+    }
+.ad-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
 }
 
-@media (max-width: 577px) {
-  .card-container-left {
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
-  }
-
-  .card-container-right {
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-  }
+/* AdSense reklam konteyneri */
+.adsense-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 280px; /* Rectangle reklam için */
+    background: #f8fafc;
+    border-radius: 15px;
+    border: 2px dashed #e2e8f0;
+    transition: all 0.3s ease;
 }
 
-.breadcrumb {
-  text-decoration: none;
-  left: 50;
+    .adsense-wrapper:hover {
+        border-color: #4facfe;
+        background: #f1f8ff;
+    }
+
+/* AdSense reklam etiketi */
+.ad-label {
+    font-size: 10px;
+    color: #718096;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    opacity: 0.7;
 }
 
-.userbutton:hover {
-  background-color: #d47f41;
+/* Farklý AdSense boyutlarý için wrapper'lar */
+.adsense-leaderboard {
+    min-height: 90px;
+    max-width: 728px;
 }
 
-.pdfexcel {
-  width: 45px;
-  height: 45px;
-  padding: 2px !important;
-  margin-bottom: 5px;
+.adsense-banner {
+    min-height: 90px;
+    max-width: 468px;
 }
 
-.pdfexceltext {
-  margin-bottom: 1px !important;
-  font-size: 8.1px;
-  line-height: 1.1;
-  --bs-btn-font-size: 1rem;
+.adsense-rectangle {
+    min-height: 250px;
+    max-width: 300px;
 }
 
-.fa-user-gear:hover {
-  color: #d47f41 !important;
+.adsense-large-rectangle {
+    min-height: 280px;
+    max-width: 336px;
 }
 
-.fa-right-from-bracket:hover {
-  color: #d47f41 !important;
+.adsense-mobile-banner {
+    min-height: 50px;
+    max-width: 320px;
+}
+
+.adsense-square {
+    min-height: 250px;
+    max-width: 250px;
+}
+
+/* Responsive AdSense için */
+.adsense-responsive {
+    width: 100%;
+    min-height: 200px;
+}
+
+/* AdSense placeholder görseli */
+.ad-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #a0aec0;
+    font-size: 14px;
+}
+
+.ad-placeholder-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.5;
+}
+
+/* Sidebar için kompakt AdSense */
+.sidebar-ad {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+    .sidebar-ad:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    }
+
+/* Mobil uyumluluk */
+@media (max-width: 768px) {
+    .ad-section {
+        padding: 1rem;
+        margin: 2rem 0;
+    }
+
+    .adsense-wrapper {
+        min-height: 150px;
+    }
+
+    .adsense-leaderboard,
+    .adsense-banner {
+        max-width: 100%;
+        min-height: 100px;
+    }
+}
+
+/* Demo içeriði */
+.demo-content {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+h1 {
+    color: #2d3748;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.code-block {
+    background: #1a202c;
+    color: #e2e8f0;
+    padding: 1rem;
+    border-radius: 10px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    margin: 1rem 0;
+    overflow-x: auto;
 }

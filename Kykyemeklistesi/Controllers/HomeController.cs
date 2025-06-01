@@ -20,7 +20,7 @@ namespace Kykyemeklistesi.Controllers
 
 
         [HttpGet]
-        public IActionResult Index(string? selectedCity = "Sivas")
+        public IActionResult Index(string? selectedCity = "Ankara")
         {
             DateTime currentDate = DateTime.Now;
 

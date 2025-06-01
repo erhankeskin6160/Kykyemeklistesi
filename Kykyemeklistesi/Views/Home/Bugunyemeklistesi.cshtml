@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="/css/fontawesome.css">
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/styles.css">
-    <link href="/css/styles.css" rel="stylesheet" />
+    <link href="/css/bügününyemeklistesi.css" rel="stylesheet" />
 
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5290089711270021"
@@ -39,191 +39,253 @@
 
 
 <body>
-    <div class="container mt-5">
-        <form method="get" action="/Home/Bugunyemeklistesi">
+    
 
-            <div class="mb-4 sehirsec">
-                <span class="mx-2 fw-bolder"> Şehrini Seç </span>
-                <script async
-                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5290089711270021"
-                    crossorigin="anonymous"></script>
-                <!-- tasarım2 -->
-                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5290089711270021"
-                    data-ad-slot="1279353303" data-ad-format="auto" data-full-width-responsive="true"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-
-
-
-                <select class="form-select-sm px-3" name="selectedCity" onchange="this.form.submit()">
-                    @foreach (var item in ViewBag.City as List<SelectListItem>)
-                    {
-                        if (item.Selected)
-                        {
-                            <option value="@item.Value" selected>@item.Text</option>
-
-                        }
-                        else
-                        {
-                            <option value="@item.Value">@item.Text</option>
-
-                        }
-                    }
-                </select>
-
-            </div>
-
-        </form>
-    </div>
-    <div class="col-12">
-        <h2 class="my-3 mb-5 text-lg-center"> @ViewBag.SelectedCity KYK Yemek Menüsü</h2>
-
-    </div>
-
-    <div class="container-xl ">
-@{
-    int sayac = 0;
-}
-        <div class="row mb-5">
-
-@foreach (var item in Model)
-{
-                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-3">
-                    <div
-                         class="m-1 text-center p-5 rounded-2 me-3 w-75 h-100">
-                        <script async
+    <!-- Main Layout -->
+    <div class="main-layout">
+        <!-- Left Sidebar -->
+        <div class="sidebar">
+            <div class="ad-card blue">
+                <div class="adsense-wrapper adsense-rectangle">
+                    <script async
                             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5290089711270021"
                             crossorigin="anonymous"></script>
-                        <!-- dikey reklam -->
-                        <ins class="adsbygoogle"
-                            data-ad-client="ca-pub-5290089711270021" data-ad-slot="1779227351"></ins>
-                        <script>
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
-                    </div>
+                    <ins class="adsbygoogle"
+                         data-ad-client="ca-pub-5290089711270021"
+                         data-ad-slot="1779227351"
+                         style="display:block; width:100%; height:250px;"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
                 </div>
+            </div>
+        </div>
 
-                        bool istoday = item.Day.ToLongDateString() == DateTime.Now.Date.ToLongDateString();
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                            <div class="card-container me-4 align-c">
-                                <div class="row @(istoday ? "today-meal " : "") ">
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Page Title -->
+            <div class="page-title">
+                <h1>@ViewBag.SelectedCity KYK Yemek Menüsü</h1>
+            </div>
 
+            <!-- Controls Section -->
+            <div class="controls-section">
+                <form method="get" action="/Home/Bugunyemeklistesi" class="city-selector">
+                    <label for="citySelect">Şehrini Seç:</label>
+                    <select class="city-dropdown" name="selectedCity" id="citySelect" onchange="this.form.submit()">
+                        @foreach (var item in ViewBag.City as List<SelectListItem>)
+                        {
+                            if (item.Selected)
+                            {
+                                <option value="@item.Value" selected>@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        }
+                    </select>
+                </form>
 
+                
+            </div>
 
-                                    <div class="tarih">@item.Day.ToString("d MMMM dddd yyyy")</div>
+            <!-- Top Ad Section -->
+            <div class="ad-section">
+                <div class="ad-label">Reklam</div>
+                <div class="adsense-wrapper adsense-responsive">
+                    <script async
+                            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5290089711270021"
+                            crossorigin="anonymous"></script>
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-5290089711270021"
+                         data-ad-slot="1279353303"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </div>
 
-                                    <div class="col-md-6 p-0">
+            <!-- Menu Grid -->
+            <div class="menu-grid">
+                @foreach (var item in Model)
+                {
+                    bool istoday = item.Day.ToLongDateString() == DateTime.Now.Date.ToLongDateString();
 
-
-
-                                        <div class="card card-container-left shadow-sm border-0 bg-primary h-100">
-
-
-
-
-                                            <div class="card-body">
-
-                                                <h2 class=" fw-bold text-dark">Sabah</h2>
-                                                <hr>
-                                                <ul class="list-group list-group-flush fs-5 mb-3 gap-2">
-                                                    @if (!string.IsNullOrEmpty(item.SabahYemekListesi))
-                                                    {
-
-
-                                                        @foreach (var sabahyemek in item.SabahYemekListesi.Split('\n'))
-                                                        {
-
-
-                                                            <li
-                                                                class="list-group-item border-0 text-bg-primary text-dark fw-bolder">
-                                                                @sabahyemek.Trim().ToString()</li>
-
-
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        <li
-                                                            class="list-group-item border-0 text-bg-primary text-dark fw-bolder">
-                                                            <span>Ürün Daha Eklenmedi</span>
-                                                        </li>
-
-                                                    }
-
-                                                </ul>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-md-6 p-0">
-                                        <div class="card card-container-right  text-bg-secondary shadow-sm border-0 h-100">
-
-                                            <div class="card-body">
-                                                <h2 class="fw-bold"> Akşam</h2>
-                                                <hr>
-                                                <ul class="list-group list-group-flush fs-5 mb-3 gap-2">
-                                                    @if (!string.IsNullOrEmpty(item.SabahYemekListesi))
-                                                    {
-                                                        @foreach (var Aksamyemek in item.AksamYemekListesi.Split('\n'))
-                                                        {
-
-                                                            <li class="list-group-item border-0 text-bg-secondary fw-bold">
-                                                                @Aksamyemek.Trim().ToString()</li>
-                                                        }
-                                                    }
-
-
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                    <div class="day-section @(istoday ? "today-meal" : "")" data-date="@item.Day.ToString("yyyy-MM-dd")">
+                        <!-- Day Header -->
+                        <div class="day-header">
+                            <div class="day-info">
+                                <div class="day-number">@item.Day.Day</div>
+                                <div>
+                                    <div class="day-date">@item.Day.ToString("d MMMM yyyy", new CultureInfo("tr-TR"))</div>
+                                    <div class="day-name">@item.Day.ToString("dddd", new CultureInfo("tr-TR"))</div>
                                 </div>
-
                             </div>
-
-
-
+                            @if (istoday)
+                            {
+                                <div class="calorie-badge">Bugün</div>
+                            }
                         </div>
 
-         }
+                        <!-- Meals Container -->
+                        <div class="meals-container @(string.IsNullOrEmpty(item.AksamYemekListesi) ? "single-meal" : "")">
+                            <!-- Breakfast Card -->
+                            @if (!string.IsNullOrEmpty(item.SabahYemekListesi))
+                            {
+                                <div class="meal-card @(string.IsNullOrEmpty(item.AksamYemekListesi) ? "expanded" : "")">
+                                    <div class="meal-header">
+                                        <div class="meal-title">
+                                            <div class="meal-icon breakfast-icon">🌅</div>
+                                            <span class="meal-name">Sabah</span>
+                                        </div>
+                                    </div>
+                                    <ul class="menu-items">
+                                        @foreach (var sabahYemek in item.SabahYemekListesi.Split('\n'))
+                                        {
+                                            if (!string.IsNullOrWhiteSpace(sabahYemek))
+                                            {
+                                                <li class="menu-item">
+                                                    <div class="item-icon"></div>
+                                                    @sabahYemek.Trim()
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+                                </div>
+                            }
 
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-3">
-                <div  class="m-1 text-center p-5 rounded-2 me-3 w-75 h-100">
+                            <!-- Dinner Card -->
+                            @if (!string.IsNullOrEmpty(item.AksamYemekListesi))
+                            {
+                                <div class="meal-card">
+                                    <div class="meal-header">
+                                        <div class="meal-title">
+                                            <div class="meal-icon dinner-icon">🌙</div>
+                                            <span class="meal-name">Akşam</span>
+                                        </div>
+                                    </div>
+                                    <ul class="menu-items">
+                                        @foreach (var aksamYemek in item.AksamYemekListesi.Split('\n'))
+                                        {
+                                            if (!string.IsNullOrWhiteSpace(aksamYemek))
+                                            {
+                                                <li class="menu-item">
+                                                    <div class="item-icon"></div>
+                                                    @aksamYemek.Trim()
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <!-- Bottom Ad Section -->
+            <div class="ad-section">
+                <div class="ad-label">Reklam</div>
+                <div class="adsense-wrapper adsense-responsive">
                     <script async
                             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5290089711270021"
                             crossorigin="anonymous"></script>
-                    <!-- dikey reklam -->
                     <ins class="adsbygoogle"
-                         data-ad-client="ca-pub-5290089711270021" data-ad-slot="1779227351"></ins>
+                         style="display:block"
+                         data-ad-client="ca-pub-5290089711270021"
+                         data-ad-slot="1279353303"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
                     <script>
                         (adsbygoogle = window.adsbygoogle || []).push({});
                     </script>
                 </div>
             </div>
 
-                    </div>
+            <!-- Yandex RTB -->
+            <div class="ad-section">
+                <div class="ad-label">Reklam</div>
+                <div id="yandex_rtb_R-A-13651345-1"></div>
+                <script>
+                    window.yaContextCb = window.yaContextCb || [];
+                    window.yaContextCb.push(() => {
+                        Ya.Context.AdvManager.render({
+                            "blockId": "R-A-13651345-1",
+                            "renderTo": "yandex_rtb_R-A-13651345-1"
+                        })
+                    })
+                </script>
+            </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="sidebar">
+            <div class="ad-card green">
+                <div class="adsense-wrapper adsense-rectangle">
                     <script async
-                        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5290089711270021"
-                        crossorigin="anonymous"></script>
-                    <!-- tasarım2 -->
-                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5290089711270021"
-                        data-ad-slot="1279353303" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5290089711270021"
+                            crossorigin="anonymous"></script>
+                    <ins class="adsbygoogle"
+                         data-ad-client="ca-pub-5290089711270021"
+                         data-ad-slot="1779227351"
+                         style="display:block; width:100%; height:250px;"></ins>
                     <script>
                         (adsbygoogle = window.adsbygoogle || []).push({});
                     </script>
-                    <!-- Yandex.RTB R-A-13651345-1 -->
-                    <div id="yandex_rtb_R-A-13651345-1"></div>
-                    <script>
-                        window.yaContextCb.push(() => {
-                            Ya.Context.AdvManager.render({
-                                "blockId": "R-A-13651345-1",
-                                "renderTo": "yandex_rtb_R-A-13651345-1"
-                            })
-                        })
-                    </script>
-    </body>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Filtering -->
+    <script>
+        function showAll() {
+            document.querySelectorAll('.day-section').forEach(section => {
+                section.style.display = 'block';
+            });
+            updateActiveFilter(0);
+        }
+
+        function showToday() {
+            const today = new Date().toISOString().split('T')[0];
+            document.querySelectorAll('.day-section').forEach(section => {
+                const sectionDate = section.getAttribute('data-date');
+                section.style.display = sectionDate === today ? 'block' : 'none';
+            });
+            updateActiveFilter(1);
+        }
+
+        function showWeek() {
+            const today = new Date();
+            const weekStart = new Date(today.setDate(today.getDate() - today.getDay()));
+            const weekEnd = new Date(today.setDate(today.getDate() - today.getDay() + 6));
+
+            document.querySelectorAll('.day-section').forEach(section => {
+                const sectionDate = new Date(section.getAttribute('data-date'));
+                section.style.display = (sectionDate >= weekStart && sectionDate <= weekEnd) ? 'block' : 'none';
+            });
+            updateActiveFilter(2);
+        }
+
+        function updateActiveFilter(index) {
+            document.querySelectorAll('.filter-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', i === index);
+            });
+        }
+
+        // Auto-highlight today's meal
+        document.addEventListener('DOMContentLoaded', function() {
+            const todaySection = document.querySelector('.day-section.today-meal');
+            if (todaySection) {
+                todaySection.style.background = 'linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%)';
+                todaySection.style.border = '2px solid #fc8181';
+            }
+        });
+    </script>
+</body>
 
     </html>
