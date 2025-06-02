@@ -15,6 +15,8 @@
     <meta name="description" content="KYK yemek listesi ile yurtlardaki öğrenciler için günlük yemek menülerini görüntüleyin. Sabah ve akşam yemeklerini takip edin, duyuruları kaçırmayın.">
     <meta name="keywords" content="KYK yemek listesi, KYK yemek menüsü, öğrenci yemek listesi, günlük yemek menüsü, KYK duyuruları, KYK yurt yemekleri">
     <title>@($"{sehir} - KYK Yemek Menüsü - kykyemeklistesi.com.tr")</title>
+    <link rel="canonical" href="https://kykyemeklistesi.com.tr/@ViewBag.SelectedCity.ToLower()-yemek-listesi">
+
 
     <link rel="stylesheet" href="/css/fontawesome.css">
     <link rel="stylesheet" href="/css/bootstrap.css">
@@ -528,6 +530,7 @@
 
             @foreach (var item in Model)
             {
+                 sayac++;
                 <div class="menu-grid mt-4" id="menuGrid">
                     <div class="day-section"    >
                         <div class="day-header">
@@ -555,7 +558,7 @@
                                         foreach (var sabahyemek in item.SabahYemekListesi.Split('\n'))
                                         {
                                             <li class="menu-item">@sabahyemek.Trim()</li>
-                                            sayac++;
+                                           
                                         }
                                     }
                                     else
