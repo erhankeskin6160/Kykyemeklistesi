@@ -449,7 +449,7 @@
 }</div>
 
  
-< 
+ 
              <!--AdFox START-->
 <!--yandex_erdalkeskin6106-->
 <!--Placement: kykyemeklistesi / * / *-->
@@ -494,7 +494,7 @@
         <div id="monthly-page">
             <div class="page-title">
                 <h1>@ViewBag.SelectedCity  Günlük Yemek Menüsü</h1>
-                <p>Mayıs 2025 - Seçili şehir için menüler</p>
+                <p>@ViewBag.SelectedCity  @DateTime.Now.ToString("MMMM") ayı yemek listesi</p>
             </div>
 
             <form method="get" action="/Home/Index">
@@ -535,7 +535,7 @@
                                 <div class="day-number">@item.Day.ToString("dd")</div>
                                 <div>
                                     <div class="day-date">@item.Day.ToString("MMMM yyyy")</div>
-                                    <div class="day-name">Perşembe</div>
+                                    <div class="day-name">@item.Day.ToString("dddd")</div>
                                 </div>
                             </div>
                         </div>
@@ -547,7 +547,7 @@
                                         <div class="meal-icon breakfast-icon">☀️</div>
                                         <div class="meal-name">Kahvaltı</div>
                                     </div>
-                                    <div class="calorie-badge">@item.SabahCalorie kalori</div>
+                                    <div class="calorie-badge">@item.SabahCalorie.ToString() kalori</div>
                                 </div>
                                 <ul class="menu-items">
                                     @if (!string.IsNullOrEmpty(item.SabahYemekListesi))
@@ -571,19 +571,16 @@
                                         <div class="meal-icon dinner-icon">🌙</div>
                                         <div class="meal-name">Akşam</div>
                                     </div>
-                                    <div class="calorie-badge">@item.AksamCaloriee kalori</div>
+                                    <div class="calorie-badge">@item.AksamCaloriee.ToString() kalori</div>
                                 </div>
                                 <ul class="menu-items">
-                                    @if (!string.IsNullOrEmpty(item.SabahYemekListesi))
+                                    @if (!string.IsNullOrEmpty(item.AksamYemekListesi))
                                     {
-                                        foreach (var sabahyemek in item.SabahYemekListesi.Split('\n'))
+                                        foreach (var aksamyemek in item.AksamYemekListesi.Split('\n'))
                                         {
-                                                                                         <li class="menu-item">@item.AksamYemekListesi  </li>
+                                             <li class="menu-item">@aksamyemek  </li>
 
-                                             <li class="menu-item">Mercimek Çorbası</li>
-                                    <li class="menu-item">Izgara Köfte</li>
-                                    <li class="menu-item">Pirinç Pilavı</li>
-                                    <li class="menu-item">Ayran</li>
+                                         
                                             sayac++;
                                         }
                                     }
