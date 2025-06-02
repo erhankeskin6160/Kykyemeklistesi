@@ -30,7 +30,7 @@ body {
     max-height: calc(100vh - 120px); /* Header için boşluk bırak */
     position: sticky;
     top: 20px;
-    overflow-y: auto; /* Gerekirse scroll */
+   /* overflow-y: auto;*/ /* Gerekirse scroll */
 }
 
 /* Reklam kartlarını daha uzun yap */
