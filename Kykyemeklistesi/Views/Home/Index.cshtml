@@ -498,8 +498,8 @@
             </div>
 
             <form method="get" action="/Home/Index">
-                <div class="controls-section">
-                    <div class="city-selector">
+                <div class="controls-section justify-content-around">
+                    <div class="city-selector text-center">
                         <label for="selectedCity">Şehir Seçin:</label>
                         <select name="selectedCity" id="selectedCity" class="city-dropdown" onchange="this.form.submit()">
                             @foreach (var item in ViewBag.City as List<SelectListItem>)
