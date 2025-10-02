@@ -31,7 +31,8 @@ namespace Kykyemeklistesi.Controllers
             }
             DateTime currentDate = DateTime.Now;
 
-            var selectList = _dbContext.YemekListesi
+            var selectList = _dbContext.YemekListesi.Where(x => x.Day.Month == DateTime.Now.Month &&
+                x.Day.Year == DateTime.Now.Year &&x.SabahYemekListesi!=null)
                 .GroupBy(x => x.City.CityName)
                 .Select(x => new SelectListItem
                 {
@@ -82,13 +83,105 @@ namespace Kykyemeklistesi.Controllers
             return View(bugunyemeklistesi);
         }
 
+        //[HttpPost]
+        //public IActionResult YorumEkle(YorumDto yorumDto)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return Json(new { success = false, message = "Lütfen tüm alanları doldurun." });
+        //    }
+
+        //    // Rate limiting - Aynı IP'den 10 dakikada bir yorum
+        //    var clientIp = GetClientIpAddress();
+        //    var sonYorum = _dbContext.YemekYorumlari
+        //        .Where(y => y.IpAdresi == clientIp)
+        //        .OrderByDescending(y => y.YorumTarihi)
+        //        .FirstOrDefault();
+
+        //    if (sonYorum != null && (DateTime.Now - sonYorum.YorumTarihi).TotalMinutes < 10)
+        //    {
+        //        return Json(new { success = false, message = "Çok sık yorum yapıyorsunuz. Lütfen bekleyin." });
+        //    }
+
+        //    // Küfür filtresi
+        //    if (KufurKontrolu(yorumDto.YorumMetni))
+        //    {
+        //        return Json(new { success = false, message = "Yorumunuz uygunsuz içerik barındırıyor." });
+        //    }
+
+        //    var yorum = new YemekYorum
+        //    {
+        //        YemekId = yorumDto.YemekId,
+        //        OgrenciAdi = yorumDto.OgrenciAdi.Trim(),
+        //         YorumMetni = yorumDto.YorumMetni.Trim(),
+        //        Puan = yorumDto.Puan,
+        //        YorumTarihi = DateTime.Now,
+        //        IpAdresi = clientIp,
+        //        OnayDurumu = true // Otomatik onay, isterseniz false yapıp manuel onay sistemi kurabilirsiniz
+        //    };
+
+        //    _dbContext.YemekYorumlari.Add(yorum);
+        //    _dbContext.SaveChanges();
+
+        //    return Json(new { success = true, message = "Yorumunuz başarıyla eklendi!" });
+        //}
+
+
+        //public IActionResult YorumlariGetir(int yemekId, int sayfa = 1)
+        //{
+        //    const int sayfaBasinaYorum = 5;
+
+        //    var yorumlar = _dbContext.YemekYorumlari
+        //        .Where(y => y.YemekId == yemekId && y.OnayDurumu)
+        //        .OrderByDescending(y => y.YorumTarihi)
+        //        .Skip((sayfa - 1) * sayfaBasinaYorum)
+        //        .Take(sayfaBasinaYorum)
+        //        .Select(y => new {
+        //            y.OgrenciAdi,
+        //            y.YorumMetni,
+        //            y.Puan,
+        //            YorumTarihi = y.YorumTarihi.ToString("dd.MM.yyyy HH:mm")
+        //        })
+        //        .ToList();
+
+        //    var toplamYorum = _dbContext.YemekYorumlari
+        //        .Count(y => y.YemekId == yemekId && y.OnayDurumu);
+
+        //    return Json(new
+        //    {
+        //        yorumlar,
+        //        toplamYorum,
+        //        toplamSayfa = (int)Math.Ceiling((double)toplamYorum / sayfaBasinaYorum),
+        //        mevcutSayfa = sayfa
+        //    });
+        //}
+
+
+
+        private string GetClientIpAddress()
+        {
+            var ipAddress = HttpContext.Connection.RemoteIpAddress;
+            if (ipAddress != null)
+            {
+                return ipAddress.ToString();
+            }
+            return "Unknown";
+        }
+
+        private bool KufurKontrolu(string metin)
+        {
+            var kufurListesi = new[] { "küfür1", "küfür2", "uygunsuz1" }; // Gerçek listesini ekleyin
+            return kufurListesi.Any(kufur =>
+                metin.ToLowerInvariant().Contains(kufur.ToLowerInvariant()));
+        }
+
         // Şehir adını normalize eden helper metot
         private string NormalizeCityName(string cityName)
         {
             if (string.IsNullOrEmpty(cityName))
                 return "Ankara";
 
-            // İlk harfi büyük yap, gerisini küçük yap
+            
             return char.ToUpper(cityName[0]) + cityName.Substring(1).ToLower();
         }
 
@@ -170,7 +263,21 @@ namespace Kykyemeklistesi.Controllers
             return View();
         }
 
-        public IActionResult SSS() { return View(); }
+        public IActionResult SSS() 
+        {
+            return View(); 
+        }
+
+        public IActionResult Deneme() 
+        {
+            return View();
+        }
+
+        public   IActionResult Static() 
+        {
+
+            return View();
+        }
 
         public static string SecilenSehir()
         {

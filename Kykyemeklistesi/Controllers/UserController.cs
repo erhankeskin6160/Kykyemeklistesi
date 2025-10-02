@@ -17,7 +17,7 @@ namespace Kykyemeklistesi.Controllers
 
     public class UserController : Controller
     {
-        AppDbContext _db;
+        private readonly AppDbContext _db;
         static bool giris = false;
         public UserController(AppDbContext appDbContext)
         {
@@ -223,8 +223,8 @@ namespace Kykyemeklistesi.Controllers
                     table.AddCell(new iText.Layout.Element.Cell().Add(new iText.Layout.Element.Paragraph(item.SabahYemekListesi ?? "-").SetFont(font)));    // Sabah yemeği
                     table.AddCell(new iText.Layout.Element.Cell().Add(new iText.Layout.Element.Paragraph(item.AksamYemekListesi ?? "-").SetFont(font)));    // Akşam yemeği
                 }
- 
-             
+
+
                 // Tabloyu döküman içine ekle
                 document.Add(table);
 

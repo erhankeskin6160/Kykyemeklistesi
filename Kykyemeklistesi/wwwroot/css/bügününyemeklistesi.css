@@ -1,393 +1,568 @@
-﻿* {
+﻿/* ===========================================
+   MOBILE-FIRST RESPONSIVE CSS FOR KYK MENU
+   =========================================== */
+
+/* Base Styles */
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
     color: #333;
+    background-color: #f8f9fa;
 }
 
-.main-layout {
-    display: grid;
-    grid-template-columns: 250px 1fr 250px;
-    gap: 2rem;
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 2rem;
+/* Skip Link for Accessibility */
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
 }
 
-/* Sidebar'ları daha uzun yapmak için */
-.sidebar {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 2rem;
-    height: 100vh; /* Tam ekran yüksekliği */
-    max-height: calc(100vh - 120px); /* Header için boşluk bırak */
-    position: sticky;
-    top: 20px;
-   /* overflow-y: auto;*/ /* Gerekirse scroll */
-}
-
-/* Reklam kartlarını daha uzun yap */
-.ad-card {
-    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
-    border-radius: 15px;
-    padding: 2rem;
+.sr-only-focusable:focus {
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 0.25rem 0.5rem !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    clip: auto !important;
+    white-space: normal !important;
+    background-color: #007bff;
     color: white;
-    text-align: center;
-    margin-bottom: 2rem;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    min-height: 400px; /* Minimum yükseklik */
+    text-decoration: none;
+    border-radius: 0.25rem;
+}
+
+/* ===========================================
+   MOBILE-FIRST LAYOUT (Base: Mobile)
+   =========================================== */
+
+/* Main Layout - Mobile First */
+.main-layout {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    min-height: 100vh;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
-    .ad-card:hover {
-        transform: translateY(-5px);
-    }
-
-    .ad-card h3 {
-        font-size: 18px;
-        margin-bottom: 1rem;
-    }
-
-    .ad-card p {
-        font-size: 14px;
-        opacity: 0.9;
-        line-height: 1.5;
-    }
-
-    .ad-card.blue {
-        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    }
-
-    .ad-card.green {
-        background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
-    }
-
-/* AdSense wrapper'ını da uzun yap */
-.adsense-wrapper {
-    width: 100%;
-    height: 600px; /* Daha uzun reklam alanı */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #f8fafc;
-    border-radius: 15px;
-    border: 2px dashed #e2e8f0;
-    transition: all 0.3s ease;
+/* Sidebar - Hidden on Mobile */
+.sidebar {
+    display: none;
 }
 
-    .adsense-wrapper:hover {
-        border-color: #4facfe;
-        background: #f1f8ff;
-    }
-
-.ad-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    color: #a0aec0;
-    font-size: 14px;
-}
-
-.ad-placeholder-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    opacity: 0.5;
-}
-
+/* Content Area - Full Width on Mobile */
 .content-area {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 2rem;
-    min-height: 600px;
+    flex: 1;
+    padding: 1rem;
+    width: 100%;
+    max-width: 100%;
 }
 
+/* Page Header */
 .page-title {
     text-align: center;
     margin-bottom: 2rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
     .page-title h1 {
-        font-size: 2.5rem;
+        font-size: 1.5rem;
         font-weight: 700;
-        color: #2d3748;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
     }
 
+.page-subtitle {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin: 0;
+}
+
+/* Navigation Controls */
 .controls-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: 2rem;
-    flex-wrap: wrap;
-    gap: 1rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .city-selector {
     display: flex;
-    align-items: center;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
 }
 
     .city-selector label {
         font-weight: 600;
-        color: #2d3748;
+        color: #495057;
+        font-size: 0.9rem;
     }
 
 .city-dropdown {
-    padding: 10px 15px;
-    border: 2px solid #4facfe;
-    border-radius: 10px;
-    background: white;
-    color: #2d3748;
-    font-weight: 500;
-    cursor: pointer;
-    min-width: 200px;
-}
-
-.menu-grid {
-    display: grid;
-    gap: 2rem;
-}
-
-.day-section {
-    background: #f8fafc;
-    border-radius: 15px;
-    padding: 2rem;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #e9ecef;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    background-color: white;
     transition: all 0.3s ease;
 }
 
+    .city-dropdown:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+/* Ad Sections - Responsive */
+.ad-section {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.ad-label {
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.adsense-wrapper {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.adsense-responsive .adsbygoogle {
+    max-width: 100% !important;
+    width: auto !important;
+    height: auto !important;
+}
+
+/* Menu Grid - Mobile First */
+.menu-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Day Section */
+.day-section {
+    background: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid #e9ecef;
+}
+
     .day-section:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+        transform: translateY(-2px);
     }
 
     .day-section.today-meal {
-        background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
-        border: 2px solid #fc8181;
+        border: 2px solid #28a745;
+        background: linear-gradient(135deg, #f8fff9 0%, #e8f5e8 100%);
     }
 
+/* Day Header */
 .day-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid #e2e8f0;
+    padding: 1rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-bottom: 1px solid #dee2e6;
 }
 
 .day-info {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.75rem;
 }
 
 .day-number {
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
-    border-radius: 12px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #495057;
+    background: white;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    font-size: 20px;
-    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .day-date {
-    font-size: 20px;
-    font-weight: 700;
-    color: #2d3748;
-}
-
-.day-name {
-    font-size: 14px;
-    color: #718096;
+    font-size: 0.9rem;
+    color: #6c757d;
     font-weight: 500;
 }
 
-.calorie-badge {
-    background: linear-gradient(45deg, #48bb78 0%, #38a169 100%);
-    color: white;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 12px;
+.day-name {
+    font-size: 1rem;
+    color: #495057;
     font-weight: 600;
+    text-transform: capitalize;
 }
 
+.calorie-badge {
+    background: #28a745;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Meals Container */
 .meals-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    transition: all 0.3s ease;
+    padding: 0;
 }
 
-    .meals-container.single-meal {
-        grid-template-columns: 1fr;
+    .meals-container.single-meal .meal-card {
+        border-bottom: none;
     }
 
+/* Meal Cards */
 .meal-card {
-    background: white;
-    border-radius: 12px;
-    padding: 1.5rem;
-    transition: all 0.3s ease;
-    border: 1px solid #e2e8f0;
-    width: 100%;
-    box-sizing: border-box;
+    border-bottom: 1px solid #f0f0f0;
 }
 
-    .meal-card.expanded {
-        width: 100% !important;
-        max-width: 100% !important;
+    .meal-card:last-child {
+        border-bottom: none;
     }
 
 .meal-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #fafbfc 0%, #f1f3f4 100%);
 }
 
 .meal-title {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #495057;
+    margin: 0;
 }
 
 .meal-icon {
-    width: 35px;
-    height: 35px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
+    font-size: 1.2rem;
 }
 
-.breakfast-icon {
-    background: linear-gradient(45deg, #ff9a56 0%, #ffad56 100%);
-}
-
-.dinner-icon {
-    background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
-}
-
-.meal-name {
-    font-size: 16px;
-    font-weight: 600;
-    color: #2d3748;
-}
-
+/* Menu Items */
 .menu-items {
     list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .menu-item {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 6px 0;
-    color: #4a5568;
-    font-size: 14px;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #f8f9fa;
+    transition: background-color 0.2s ease;
 }
+
+    .menu-item:hover {
+        background-color: #f8f9fa;
+    }
+
+    .menu-item:last-child {
+        border-bottom: none;
+    }
 
 .item-icon {
-    width: 5px;
-    height: 5px;
+    width: 8px;
+    height: 8px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-radius: 50%;
-    background: #4facfe;
+    flex-shrink: 0;
 }
 
-.ad-section {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 2rem;
-    margin: 3rem 0;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-    background-clip: padding-box;
+.menu-item span {
+    font-size: 0.95rem;
+    color: #495057;
+    line-height: 1.4;
 }
 
-    .ad-section:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-        border-color: #4facfe;
-    }
+/* ===========================================
+   TABLET STYLES (768px and up)
+   =========================================== */
 
-.ad-label {
-    font-size: 10px;
-    color: #718096;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    opacity: 0.7;
-}
-
-/* Mobil uyumluluk */
-@media (max-width: 1024px) {
-    .main-layout {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-
-    .sidebar {
-        height: auto;
-        max-height: none;
-        position: relative;
-        top: 0;
-    }
-
-    .ad-card {
-        min-height: 200px;
-    }
-
-    .adsense-wrapper {
-        height: 300px;
-    }
-
-    .controls-section {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .meals-container {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    .main-layout {
-        padding: 1rem;
+media (min-width: 768px) {
+    .content-area {
+        padding: 2rem;
     }
 
     .page-title h1 {
         font-size: 2rem;
     }
 
-    .ad-card {
-        min-height: 150px;
-        padding: 1.5rem;
+    .page-subtitle {
+        font-size: 1.1rem;
     }
 
-    .adsense-wrapper {
-        height: 250px;
+    .city-selector {
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
     }
+
+        .city-selector label {
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+    .city-dropdown {
+        max-width: 300px;
+    }
+
+    .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .day-number {
+        font-size: 1.8rem;
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .meal-title {
+        font-size: 1.2rem;
+    }
+
+    .menu-item span {
+        font-size: 1rem;
+    }
+}
+
+/* ===========================================
+   DESKTOP STYLES (1024px and up)
+   =========================================== */
+
+media (min-width: 1024px) {
+    .main-layout {
+        flex-direction: row;
+        max-width: 1400px;
+        margin: 0 auto;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .sidebar {
+        display: block;
+        width: 250px;
+        flex-shrink: 0;
+        position: sticky;
+        top: 1rem;
+        height: fit-content;
+    }
+
+    .content-area {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .adsense-wrapper .adsbygoogle {
+        width: 450px !important;
+        height: 609px !important;
+    }
+
+    .sidebar .adsbygoogle {
+        width: 248px !important;
+        height: 520px !important;
+    }
+}
+
+/* ===========================================
+   LARGE DESKTOP STYLES (1200px and up)
+   =========================================== */
+
+media (min-width: 1200px) {
+    .menu-grid {
+        grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+        gap: 2rem;
+    }
+
+    .content-area {
+        padding: 2.5rem;
+    }
+}
+
+/* ===========================================
+   TOUCH DEVICE OPTIMIZATIONS
+   =========================================== */
+
+@media (hover: none) and (pointer: coarse) {
+    /* Touch targets should be at least 44px */
+    .city-dropdown {
+        min-height: 44px;
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+
+    button,
+    select,
+    input[type="submit"] {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    /* Remove hover effects on touch devices */
+    .day-section:hover {
+        transform: none;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    .menu-item:hover {
+        background-color: transparent;
+    }
+}
+
+/* ===========================================
+   HIGH DPI DISPLAY OPTIMIZATIONS
+   =========================================== */
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .day-section {
+        box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+    }
+
+    .page-title {
+        box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+    }
+}
+
+/* ===========================================
+   ACCESSIBILITY IMPROVEMENTS
+   =========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+media (prefers-color-scheme: dark) {
+    /* Dark mode support - optional */
+    body {
+        background-color: #1a1a1a;
+        color: #e9ecef;
+    }
+
+    .day-section {
+        background: #2d3748;
+        border-color: #4a5568;
+    }
+
+    .controls-section {
+        background: #2d3748;
+        border-color: #4a5568;
+    }
+
+    .city-dropdown {
+        background-color: #2d3748;
+        border-color: #4a5568;
+        color: #e9ecef;
+    }
+}
+
+/* ===========================================
+   PRINT STYLES
+   =========================================== */
+
+@media print {
+    .sidebar,
+    .ad-section,
+    .adsense-wrapper,
+    script {
+        display: none !important;
+    }
+
+    .main-layout {
+        flex-direction: column;
+    }
+
+    .content-area {
+        width: 100% !important;
+        padding: 0 !important;
+    }
+
+    .day-section {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        margin-bottom: 1rem;
+        box-shadow: none;
+        border: 1px solid #333;
+    }
+}
+
+/* ===========================================
+   LOADING AND PERFORMANCE OPTIMIZATIONS
+   =========================================== */
+
+/* Skeleton loading animation for better perceived performance */
+.loading-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Focus management */
+:focus-visible {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
+/* Improve text readability */
+.menu-item span {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }

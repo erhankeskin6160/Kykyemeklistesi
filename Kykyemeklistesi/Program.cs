@@ -13,18 +13,23 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
-});
-
 builder.Services.AddAuthentication("Cookies")
     .AddCookie("Cookies", options =>
     {
         options.LoginPath = "/Admin/Login";
         options.AccessDeniedPath = "/Admin/AccessDenied";
     });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
+});
+
+
+
+builder.Services.AddControllersWithViews(options =>
+{
+ });
 
 var app = builder.Build();
 
@@ -66,11 +71,10 @@ app.MapControllerRoute(
     pattern: "sitemap.xml",
     defaults: new { controller = "Home", action = "GenerateSitemap" });
 
-// Þehir bazlý bugünkü yemek listesi için SEO dostu URL
 app.MapControllerRoute(
-    name: "cityTodayMenu",
-    pattern: "{selectedCity}-bugun-yemek-listesi",
-    defaults: new { controller = "Home", action = "Bugunyemeklistesi" });
+   name: "cityTodayMenu",
+   pattern: "{selectedCity}-bugun-yemek-listesi",
+   defaults: new { controller = "Home", action = "Bugunyemeklistesi" });
 
 // Þehir bazlý genel yemek listesi için SEO dostu URL  
 app.MapControllerRoute(

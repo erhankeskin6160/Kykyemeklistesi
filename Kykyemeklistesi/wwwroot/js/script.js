@@ -1,4 +1,22 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿$(document).ready(function () {
+    console.log("deneme");
 
-// Write your JavaScript code.
+
+    $("#excel").on("click", function () {
+        $(this).append('<span class="loading-text ms-2">İndiriliyor...</span>');
+        setTimeout(() => {
+            $(".loading-text").fadeOut(500, function () { $(this).remove(); });
+        }, 3000);
+    });
+
+    $("#excel").on("click", function () {
+        $(this).addClass("shake");
+
+        setTimeout(() => {
+            $(this).removeClass("shake");
+        }, 500);
+    });
+
+
+
+});
