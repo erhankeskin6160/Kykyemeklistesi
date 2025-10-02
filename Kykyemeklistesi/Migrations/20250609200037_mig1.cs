@@ -25,33 +25,7 @@ namespace Kykyemeklistesi.Migrations
                 {
                     table.PrimaryKey("PK_Admins", x => x.Id);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "Ankets",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    YemekId = table.Column<int>(type: "int", nullable: false),
-                    ısBegenme = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Ankets", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Cities",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CityName = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cities", x => x.Id);
-                });
+ 
 
             migrationBuilder.CreateTable(
                 name: "Users",
@@ -59,8 +33,16 @@ namespace Kykyemeklistesi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Soyad = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    University = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Department = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Faculty = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Resim = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -91,10 +73,40 @@ namespace Kykyemeklistesi.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "YemekYorumlar",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    YemekId = table.Column<int>(type: "int", nullable: false),
+                    OgrenciAdi = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    YorumMetni = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    Puan = table.Column<int>(type: "int", nullable: false),
+                    YorumTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    OnayDurumu = table.Column<bool>(type: "bit", nullable: false),
+                    IpAdresi = table.Column<string>(type: "nvarchar(45)", maxLength: 45, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_YemekYorumlar", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_YemekYorumlar_YemekListesi_YemekId",
+                        column: x => x.YemekId,
+                        principalTable: "YemekListesi",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_YemekListesi_CityId",
                 table: "YemekListesi",
                 column: "CityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_YemekYorumlar_YemekId",
+                table: "YemekYorumlar",
+                column: "YemekId");
         }
 
         /// <inheritdoc />
@@ -104,10 +116,10 @@ namespace Kykyemeklistesi.Migrations
                 name: "Admins");
 
             migrationBuilder.DropTable(
-                name: "Ankets");
+                name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "YemekYorumlar");
 
             migrationBuilder.DropTable(
                 name: "YemekListesi");

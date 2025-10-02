@@ -1,5 +1,46 @@
 body {
-  background-color: #FFF8E7;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: #333;
+}
+
+.header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.logo-text {
+  font-size: 24px;
+  font-weight: 700;
+  color: #2d3748;
 }
 
 .tarih {
@@ -36,31 +77,237 @@ body {
   text-decoration: none;
 }
 
-.today-meal {
-  box-shadow: 0px 0px 49px #d34e0b;
-  border-bottom-right-radius: 20px;
-  border-bottom-left-radius: 20px;
-  border-top-left-radius: 40%;
-  border-top-right-radius: 40%;
+.meals-container.single-meal {
+  grid-template-columns: 1fr;
 }
 
-@media (max-width: 577px) {
-  .card-container-left {
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
+.meal-card.expanded {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+
+
+.meal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.meal-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.meal-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.breakfast-icon {
+  background: linear-gradient(45deg, #ff9a56 0%, #ffad56 100%);
+}
+
+.dinner-icon {
+  background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+}
+
+.meal-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.calorie-badge {
+  background: linear-gradient(45deg, #48bb78 0%, #38a169 100%);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.menu-items {
+  list-style: none;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  color: #4a5568;
+  font-size: 14px;
+}
+
+.item-icon {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #4facfe;
+}
+
+/* Ad Cards i�in farkl� renkler */
+.ad-card.blue {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.ad-card.green {
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+}
+
+.ad-card.purple {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.ad-card.orange {
+  background: linear-gradient(135deg, #ff9a56 0%, #ffad56 100%);
+}
+
+@media (max-width: 1024px) {
+  .main-layout {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
-  .card-container-right {
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+
+  .sidebar {
+    position: relative;
+    top: 0;
+  }
+
+  .controls-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .meals-container {
+    grid-template-columns: 1fr;
   }
 }
-.breadcrumb {
-  text-decoration: none;
-  left: 50;
+
+@media (max-width: 768px) {
+  .main-layout {
+    padding: 1rem;
+  }
+
+  .page-title h1 {
+    font-size: 2rem;
+  }
+
+  .filter-buttons,
+  .city-selector {
+    justify-content: center;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+
+.ad-section {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  margin: 3rem 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.ad-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  border-color: #4facfe;
+}
+
+.ad-section hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  margin: 1rem 0 2rem 0;
+  border-radius: 2px;
+}
+
+.ad-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.ad-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ad-subtitle {
+  font-size: 1.1rem;
+  color: #4a5568;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+.ad-btn {
+  background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ad-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+  background: linear-gradient(45deg, #00f2fe 0%, #4facfe 100%);
+}
+
+.ad-btn:active {
+  transform: translateY(0);
+}
+
+.ad-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+/* AdSense reklam konteyneri */
+.adsense-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 280px;
+  /* Rectangle reklam i�in */
+  background: #f8fafc;
+  border-radius: 15px;
+  border: 2px dashed #e2e8f0;
+  transition: all 0.3s ease;
 }
 
 .userbutton:hover {

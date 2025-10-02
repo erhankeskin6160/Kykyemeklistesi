@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kykyemeklistesi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250113121709_mig1")]
+    [Migration("20250609200037_mig1")]
     partial class mig1
     {
         /// <inheritdoc />
@@ -49,25 +49,6 @@ namespace Kykyemeklistesi.Migrations
                     b.ToTable("Admins");
                 });
 
-            modelBuilder.Entity("Kykyemeklistesi.Models.Anket", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("YemekId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("ısBegenme")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Ankets");
-                });
-
             modelBuilder.Entity("Kykyemeklistesi.Models.City", b =>
                 {
                     b.Property<int>("Id")
@@ -93,12 +74,36 @@ namespace Kykyemeklistesi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Department")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Faculty")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Password")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Resim")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Soyad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("University")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -139,6 +144,48 @@ namespace Kykyemeklistesi.Migrations
                     b.ToTable("YemekListesi");
                 });
 
+            modelBuilder.Entity("Kykyemeklistesi.Models.YemekYorum", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("IpAdresi")
+                        .IsRequired()
+                        .HasMaxLength(45)
+                        .HasColumnType("nvarchar(45)");
+
+                    b.Property<string>("OgrenciAdi")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("OnayDurumu")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Puan")
+                        .HasColumnType("int");
+
+                    b.Property<int>("YemekId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("YorumMetni")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<DateTime>("YorumTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("YemekId");
+
+                    b.ToTable("YemekYorumlar");
+                });
+
             modelBuilder.Entity("Kykyemeklistesi.Models.Yemek", b =>
                 {
                     b.HasOne("Kykyemeklistesi.Models.City", "City")
@@ -148,6 +195,17 @@ namespace Kykyemeklistesi.Migrations
                         .IsRequired();
 
                     b.Navigation("City");
+                });
+
+            modelBuilder.Entity("Kykyemeklistesi.Models.YemekYorum", b =>
+                {
+                    b.HasOne("Kykyemeklistesi.Models.Yemek", "Yemek")
+                        .WithMany()
+                        .HasForeignKey("YemekId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Yemek");
                 });
 
             modelBuilder.Entity("Kykyemeklistesi.Models.City", b =>
