@@ -493,13 +493,13 @@
     <div class="content-area">
         <div id="monthly-page">
             <div class="page-title">
-                <h1>@ViewBag.SelectedCity Kyk 30 Günlük Yemek Menüsü</h1>
-                <p>@ViewBag.SelectedCity  @DateTime.Now.ToString("MMMM") ayı kyk yemek listesi</p>
+                <h1>@ViewBag.SelectedCity  Günlük Yemek Menüsü</h1>
+                <p>@ViewBag.SelectedCity  @DateTime.Now.ToString("MMMM") ayı yemek listesi</p>
             </div>
 
             <form method="get" action="/Home/Index">
-                    <div class="controls-section justify-content-around">
-                    <div class="city-selector text-center">
+                <div class="controls-section">
+                    <div class="city-selector">
                         <label for="selectedCity">Şehir Seçin:</label>
                         <select name="selectedCity" id="selectedCity" class="city-dropdown" onchange="this.form.submit()">
                             @foreach (var item in ViewBag.City as List<SelectListItem>)
