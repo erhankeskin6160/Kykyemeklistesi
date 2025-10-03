@@ -22,8 +22,7 @@
 
     <link rel="stylesheet" href="/css/fontawesome.css">
     <link rel="stylesheet" href="/css/bootstrap.css">
-    <link href="/css/styles.css" rel="stylesheet" />
-     
+     <link rel="stylesheet" href="/css/styles.css">     
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-20V1RRPVZ1"></script>
     <script>
@@ -40,8 +39,9 @@
 </head>
 
 <body>
-    
-    <div class="col-2 d-flex justify-content-center align-items-center">
+ <div class="container-xl  ms-lg-5">
+
+    <div class="d-flex justify-content-center align-items-center">
         <div>
             @if (User.Identity.IsAuthenticated)
             {
@@ -74,7 +74,8 @@
         </script>
     </div>
 
-    <div class="main-layout">
+
+    <div class="main-layout d-grid justify-content-lg-center">
         <!-- Sol Reklam Alanı -->
         <aside class="sidebar p-0" aria-label="Sol reklam alanı">
             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5290089711270021" crossorigin="anonymous"></script>
@@ -86,12 +87,11 @@
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
         </aside>
-
         <!-- Ana İçerik -->
-        <main class="content-area">
+        <main class="content-area d-flex flex-column" aria-label="Ana içerik alanı">
             <div id="monthly-page">
                 <header class="page-title">
-                    <h1>@ViewBag.SelectedCity Kyk 30 Günlük Yemek Menüsü</h1>
+                    <h1>@ViewBag.SelectedCity  Kyk 30 Günlük Yemek Menüsü</h1>
                     <p>@ViewBag.SelectedCity @DateTime.Now.ToString("MMMM") ayı kyk yemek listesi</p>
                 </header>
 
@@ -102,7 +102,16 @@
                             <select name="selectedCity" id="selectedCity" class="city-dropdown" onchange="this.form.submit()">
                                 @foreach (var item in ViewBag.City as List<SelectListItem>)
                                 {
-                                    <option value="@item.Value" (item.Selected ? "selected" : "")>@item.Text</option>
+                                    if (item.Selected)
+                                    {
+                                        <option value="@item.Value" selected>@item.Text</option>
+
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+
+                                    }
                                 }
                             </select>
                         </div>
@@ -262,9 +271,12 @@
 
         </div>
 
+    
+</div>
 
          
-    </div>
+   
+</div>
 
     <!-- JavaScript -->
     <script>
