@@ -1,3 +1,9 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -37,6 +43,11 @@ body {
   font-size: 18px;
 }
 
+.day-section.today-meal {
+    border: 2px solid #28a745;
+    background: linear-gradient(135deg, #f8fff9 0%, #e8f5e8 100%);
+}
+
 .logo-text {
   font-size: 24px;
   font-weight: 700;
@@ -60,11 +71,19 @@ body {
   border-bottom-right-radius: 0px;
 }
 
-.card-container-right {
-  border-top-right-radius: 0px;
-  border-top-left-radius: 0px;
-  border-bottom-right-radius: 20px;
-  border-bottom-left-radius: 0px;
+.nav-link:hover,
+.nav-link.active {
+    background: #4facfe;
+    color: white;
+}
+
+.main-layout {
+    display: grid;
+    grid-template-columns: 250px 1fr 250px;
+    gap: 2rem;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 2rem;
 }
 
 .sehirsec {
@@ -72,9 +91,179 @@ body {
   justify-content: center;
 }
 
-.navbar .nav-link:hover {
-  color: #333 !important;
-  text-decoration: none;
+.ad-card {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+    border-radius: 15px;
+    padding: 1.5rem;
+    color: white;
+    text-align: center;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.ad-card:hover {
+    transform: translateY(-5px);
+}
+
+.ad-card h3 {
+    font-size: 18px;
+    margin-bottom: 0.5rem;
+}
+
+.ad-card p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.content-area {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    min-height: 600px;
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.page-title h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 1rem;
+}
+
+.controls-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.city-selector {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.city-selector label {
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.city-dropdown {
+    padding: 10px 15px;
+    border: 2px solid #4facfe;
+    border-radius: 10px;
+    background: white;
+    color: #2d3748;
+    font-weight: 500;
+    cursor: pointer;
+    min-width: 200px;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    border: 2px solid #4facfe;
+    background: transparent;
+    color: #4facfe;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background: #4facfe;
+    color: white;
+}
+
+.menu-grid {
+    display: grid;
+    gap: 2rem;
+}
+
+.day-section {
+    background: #f8fafc;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.day-section:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.day-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.day-number {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.day-date {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2d3748;
+}
+
+.day-name {
+    font-size: 14px;
+    color: #718096;
+    font-weight: 500;
+}
+
+.meals-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.meal-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .meals-container.single-meal {
@@ -171,16 +360,22 @@ body {
   background: linear-gradient(135deg, #ff9a56 0%, #ffad56 100%);
 }
 
+
+@media (max-width: 1396px) {
+    .content-area {}
+}
+
+
 @media (max-width: 1024px) {
   .main-layout {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
 
-  .sidebar {
-    position: relative;
-    top: 0;
-  }
+    /* .sidebar {
+        position: relative;
+        top: 0;
+    } */
 
   .controls-section {
     flex-direction: column;
@@ -201,10 +396,10 @@ body {
     font-size: 2rem;
   }
 
-  .filter-buttons,
-  .city-selector {
-    justify-content: center;
-  }
+    .filter-buttons,
+    .city-selector {
+        justify-content: center;
+    }
 }
 
 .hidden {
@@ -226,17 +421,17 @@ body {
 }
 
 .ad-section:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-  border-color: #4facfe;
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    border-color: #4facfe;
 }
 
 .ad-section hr {
-  border: none;
-  height: 2px;
-  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-  margin: 1rem 0 2rem 0;
-  border-radius: 2px;
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+    margin: 1rem 0 2rem 0;
+    border-radius: 2px;
 }
 
 .ad-content {
@@ -279,13 +474,13 @@ body {
 }
 
 .ad-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
-  background: linear-gradient(45deg, #00f2fe 0%, #4facfe 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+    background: linear-gradient(45deg, #00f2fe 0%, #4facfe 100%);
 }
 
 .ad-btn:active {
-  transform: translateY(0);
+    transform: translateY(0);
 }
 
 .ad-content {
@@ -298,20 +493,32 @@ body {
 
 /* AdSense reklam konteyneri */
 .adsense-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 280px;
-  /* Rectangle reklam i�in */
-  background: #f8fafc;
-  border-radius: 15px;
-  border: 2px dashed #e2e8f0;
-  transition: all 0.3s ease;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 280px;
+    /* Rectangle reklam i�in */
+    background: #f8fafc;
+    border-radius: 15px;
+    border: 2px dashed #e2e8f0;
+    transition: all 0.3s ease;
 }
 
-.userbutton:hover {
-  background-color: #d47f41;
+.adsense-wrapper:hover {
+    border-color: #4facfe;
+    background: #f1f8ff;
+}
+
+/* AdSense reklam etiketi */
+.ad-label {
+    font-size: 10px;
+    color: #718096;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    opacity: 0.7;
 }
 
 .pdfexcel {
@@ -332,6 +539,527 @@ body {
   color: #d47f41 !important;
 }
 
-.fa-right-from-bracket:hover {
-  color: #d47f41 !important;
+.adsense-large-rectangle {
+    min-height: 280px;
+    max-width: 336px;
+}
+
+.adsense-mobile-banner {
+    min-height: 50px;
+    max-width: 320px;
+}
+
+.adsense-square {
+    min-height: 250px;
+    max-width: 250px;
+}
+
+/* Responsive AdSense i�in */
+.adsense-responsive {
+    width: 100%;
+    min-height: 200px;
+}
+
+/* AdSense placeholder g�rseli */
+.ad-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #a0aec0;
+    font-size: 14px;
+}
+
+.ad-placeholder-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.5;
+}
+
+/* Sidebar i�in kompakt AdSense */
+.sidebar-ad {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.sidebar-ad:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Mobil uyumluluk */
+@media (max-width: 768px) {
+    .ad-section {
+        padding: 1rem;
+        margin: 2rem 0;
+    }
+
+    .adsense-wrapper {
+        min-height: 150px;
+    }
+
+    .adsense-leaderboard,
+    .adsense-banner {
+        max-width: 100%;
+        min-height: 100px;
+    }
+
+
+    .sidebar {
+        height: 75px;
+    }
+
+}
+
+/* Demo i�eri�i */
+.demo-content {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+h1 {
+    color: #2d3748;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.code-block {
+    background: #1a202c;
+    color: #e2e8f0;
+    padding: 1rem;
+    border-radius: 10px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    margin: 1rem 0;
+    overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .logo {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .nav-links {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .nav-link {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .main-layout {
+        padding: 1rem;
+    }
+
+    .page-title h1 {
+        font-size: 2rem;
+    }
+
+    .filter-buttons,
+    .city-selector {
+        justify-content: center;
+    }
+
+    .controls-section {
+        gap: 0.5rem;
+    }
+
+    .city-dropdown {
+        min-width: 150px;
+        font-size: 14px;
+    }
+
+    .filter-btn {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+
+    .day-section {
+        padding: 1rem;
+    }
+
+    .meals-container {
+        gap: 1rem;
+    }
+
+    .meal-card {
+        padding: 1rem;
+    }
+}
+
+@media (min-width:370px) and (max-width: 480px) {
+    .header {
+        padding: 0.75rem;
+    }
+
+    .logo-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .logo-text {
+        font-size: 20px;
+    }
+
+    .nav-links {
+        gap: 0.25rem;
+    }
+
+    .nav-link {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+
+    .main-layout {
+        padding: 0.75rem;
+        gap: 0.75rem;
+    }
+
+    .sidebar {
+        height: 100px;
+        width: 100px;
+        ;
+    }
+
+    .content-area,
+    .sidebar {
+        padding: 1rem;
+        border-radius: 15px;
+        width: 50%;
+    }
+
+    .page-title h1 {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .controls-section {
+        gap: 0.75rem;
+    }
+
+    .city-selector {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    .city-dropdown {
+        width: 100%;
+        min-width: unset;
+        font-size: 13px;
+        padding: 8px 12px;
+    }
+
+    .filter-buttons {
+        width: 100%;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .filter-btn {
+        padding: 6px 12px;
+        font-size: 13px;
+        flex: 1;
+        min-width: 70px;
+    }
+
+    .day-section {
+        padding: 0.75rem;
+    }
+
+    .day-header {
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: flex-start;
+    }
+
+    .day-number {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    .day-date {
+        font-size: 18px;
+    }
+
+    .day-name {
+        font-size: 13px;
+    }
+
+    .meals-container {
+        gap: 0.75rem;
+    }
+
+    .meal-card {
+        padding: 0.75rem;
+    }
+
+    .meal-icon {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+    }
+
+    .meal-name {
+        font-size: 15px;
+    }
+
+    .calorie-badge {
+        font-size: 10px;
+        padding: 3px 6px;
+    }
+
+    .menu-item {
+        font-size: 13px;
+    }
+
+    .ad-section {
+        padding: 1rem;
+        margin: 1.5rem 0;
+    }
+
+    .ad-title {
+        font-size: 1.5rem;
+    }
+
+    .ad-subtitle {
+        font-size: 1rem;
+    }
+
+    .ad-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+
+    .sidebar-ad {
+        padding: 0.75rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .header {
+        padding: 0.5rem;
+    }
+
+    .logo-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+        border-radius: 8px;
+    }
+
+    .logo-text {
+        font-size: 18px;
+    }
+
+    .nav-links {
+        width: 100%;
+        gap: 0.25rem;
+    }
+
+    .nav-link {
+        padding: 5px 8px;
+        font-size: 12px;
+        border-radius: 6px;
+    }
+
+    .main-layout {
+        padding: 0.5rem;
+        gap: 0.5rem;
+    }
+
+    .content-area,
+    .sidebar {
+        padding: 0.75rem;
+        border-radius: 12px;
+
+    }
+
+    .page-title h1 {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .controls-section {
+        gap: 0.5rem;
+    }
+
+    .city-selector label {
+        font-size: 14px;
+    }
+
+    .city-dropdown {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    .filter-btn {
+        padding: 5px 10px;
+        font-size: 12px;
+        min-width: 60px;
+    }
+
+    .day-section {
+        padding: 0.5rem;
+        border-radius: 12px;
+    }
+
+    .day-header {
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+    }
+
+    .day-number {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+        border-radius: 8px;
+    }
+
+    .day-date {
+        font-size: 16px;
+    }
+
+    .day-name {
+        font-size: 12px;
+    }
+
+    .meals-container {
+        gap: 0.5rem;
+    }
+
+    .meal-card {
+        padding: 0.5rem;
+        border-radius: 10px;
+    }
+
+    .meal-header {
+        margin-bottom: 0.75rem;
+    }
+
+    .meal-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 13px;
+        border-radius: 6px;
+    }
+
+    .meal-name {
+        font-size: 14px;
+    }
+
+    .calorie-badge {
+        font-size: 9px;
+        padding: 3px 5px;
+        border-radius: 8px;
+    }
+
+    .menu-item {
+        font-size: 12px;
+        padding: 3px 0;
+    }
+
+    .item-icon {
+        width: 4px;
+        height: 4px;
+    }
+
+    .ad-section {
+        padding: 0.75rem;
+        margin: 1rem 0;
+        border-radius: 15px;
+    }
+
+    .ad-title {
+        font-size: 1.25rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .ad-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    .ad-btn {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+        border-radius: 20px;
+    }
+
+    .ad-card {
+        padding: 1rem;
+        border-radius: 12px;
+        margin-bottom: 1rem;
+    }
+
+    .ad-card h3 {
+        font-size: 16px;
+        margin-bottom: 0.25rem;
+    }
+
+    .ad-card p {
+        font-size: 13px;
+    }
+
+    .sidebar-ad {
+        padding: 0.5rem;
+        margin: 1rem 0;
+    }
+
+    .adsense-wrapper {
+        min-height: 100px;
+        border-radius: 12px;
+    }
+
+    .ad-placeholder {
+        font-size: 12px;
+    }
+
+    .ad-placeholder-icon {
+        font-size: 1.5rem;
+    }
+
+    .content-area {
+        max-width: 296px;
+    }
+
+    .container-fluid {
+
+        /* Genişliği 320 piksel olarak zorla ayarlar */
+        max-width: 100%;
+        /* Ekran 320px'den küçükse taşmasını engeller */
+        margin-left: auto;
+        /* Konteyneri yatayda ortalamak için */
+        margin-right: auto;
+        /* Konteyneri yatayda ortalamak için */
+        padding-left: 15px;
+        /* Bootstrap'in varsayılan iç boşlukları */
+        padding-right: 15px;
+        /* Bootstrap'in varsayılan iç boşlukları */
+    }
 }
