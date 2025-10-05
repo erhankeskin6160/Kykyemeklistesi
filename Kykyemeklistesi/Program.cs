@@ -1,8 +1,12 @@
+using AutoMapper;
 using Kykyemeklistesi.Models;
+using Kykyemeklistesi.Models.UserViewModel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Globalization;
+using Kykyemeklistesi.Models.UserViewModel;
 
 var cultureInfo = new CultureInfo("tr-TR");
 CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
@@ -33,6 +37,9 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddControllersWithViews(options =>
 {
  });
+
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+
 
 var app = builder.Build();
 

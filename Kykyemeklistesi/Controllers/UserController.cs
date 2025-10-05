@@ -10,6 +10,8 @@ using System.IO;
 using DocumentFormat.OpenXml.Vml.Wordprocessing;
 using iText.Kernel.Font;
 using iText.IO.Font;
+using Kykyemeklistesi.Models.UserViewModel;
+using AutoMapper;
 
 namespace Kykyemeklistesi.Controllers
 {
@@ -20,13 +22,15 @@ namespace Kykyemeklistesi.Controllers
         private readonly AppDbContext _db;
         private readonly GoogleReCaptchaService _googleReCaptchaService;
         private readonly IConfiguration _config;
+        private readonly IMapper _mapper;
 
         static bool giris = false;
-        public UserController(AppDbContext appDbContext, GoogleReCaptchaService googleReCaptchaService, IConfiguration config)
+        public UserController(AppDbContext appDbContext, GoogleReCaptchaService googleReCaptchaService, IConfiguration config, IMapper mapper)
         {
             _db = appDbContext;
             _googleReCaptchaService = googleReCaptchaService;
             _config = config;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
@@ -136,22 +140,28 @@ namespace Kykyemeklistesi.Controllers
 
         
         [HttpPost]
-        public async Task<IActionResult> Register(User user, string recaptchaToken)
+        public async Task<IActionResult> Register(RegisterModel user)
         {
-           
+            var isValid = await _googleReCaptchaService.VerifyToken(user.RecaptchaToken);
+
+            if (!isValid)
+            {
+                ModelState.AddModelError(string.Empty, "Lütfen reCAPTCHA doğrulamasını tamamlayın.");
+                return View(user);
+            }
+
+
             if (!ModelState.IsValid)
             {
                 return View(user);
             }
-            if (!await _googleReCaptchaService.VerifyToken(recaptchaToken))
-            {
-                ModelState.AddModelError("", "Lütfen reCAPTCHA doğrulamasını tamamlayın.");
-                return View(user);
-            }
+            var users = _mapper.Map<User>(user);
+
 
             try
             {
-                _db.Users.Add(user);
+                
+                _db.Users.Add(users);
                 _db.SaveChanges();
                 return RedirectToAction("Index", "Home");
             }
