@@ -115,6 +115,9 @@
         <h1 class="text-dark text-center mb-4">Kayıt Ol</h1>
         <form asp-action="Register" asp-controller="User" method="POST">
             <!-- E-posta alanı -->
+
+             <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
             <div class="form-group">
                 <label for="email" class="form-label">E-posta Adresi</label>
                 <div class="input-group">
@@ -123,9 +126,11 @@
                     </span>
                     <input type="email" id="email" asp-for="Email" class="form-control" required
                         placeholder="E-posta adresinizi girin">
-
-
+                   
+                    
                 </div>
+                <span asp-validation-for="Email" class="text-danger"></span>
+
             </div>
 
             <div class="form-group">
@@ -148,6 +153,9 @@
                 </div>
             </div>
             <button type="submit" class="btn btn-secondary w-100">Kayıt Ol</button>
+            <input type="hidden" id="recaptchaToken" name="recaptchaToken" />
+            <div class="g-recaptcha" data-sitekey="6LexHxsrAAAAAJD_HJPitZEXawdcGb-PZAhWFV9E"></div>
+             
 
         </form>
         <p>Hesabın var ise hesabına giriş yap <a href="/Login">Giriş Yap</a></p>
@@ -159,6 +167,16 @@
 
 
     </div>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <script>
+grecaptcha.ready(function() {
+    grecaptcha.execute('Configuration["GoogleReCaptcha:SiteKey"]', {action: 'register'}).then(function(token) {
+        document.getElementById('recaptchaToken').value = token;
+    });
+});
+</script>
+
 
    @*  <script src="./assets/js/bootstrap.bundle.min.js"></script>
     <script>

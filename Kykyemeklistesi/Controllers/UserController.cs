@@ -18,11 +18,15 @@ namespace Kykyemeklistesi.Controllers
     public class UserController : Controller
     {
         private readonly AppDbContext _db;
+        private readonly GoogleReCaptchaService _googleReCaptchaService;
+        private readonly IConfiguration _config;
+
         static bool giris = false;
-        public UserController(AppDbContext appDbContext)
+        public UserController(AppDbContext appDbContext, GoogleReCaptchaService googleReCaptchaService, IConfiguration config)
         {
             _db = appDbContext;
-            
+            _googleReCaptchaService = googleReCaptchaService;
+            _config = config;
         }
 
         public IActionResult Index()
@@ -126,16 +130,44 @@ namespace Kykyemeklistesi.Controllers
         [HttpGet]
         public IActionResult Register() 
         {
+            ViewBag.RecaptchaSiteKey = _config["GoogleReCaptcha:SiteKey"];
             return View();
         }
 
+        
         [HttpPost]
-        public IActionResult Register(User user) 
+        public async Task<IActionResult> Register(User user, string recaptchaToken)
         {
-            _db.Users.Add(user);
-            _db.SaveChanges();
-            return RedirectToAction("Index", "Home");
+           
+            if (!ModelState.IsValid)
+            {
+                return View(user);
+            }
+            if (!await _googleReCaptchaService.VerifyToken(recaptchaToken))
+            {
+                ModelState.AddModelError("", "Lütfen reCAPTCHA doğrulamasını tamamlayın.");
+                return View(user);
+            }
+
+            try
+            {
+                _db.Users.Add(user);
+                _db.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+            catch (DbUpdateException ex) when (ex.InnerException?.Message.Contains("IX_Users_Email") == true)
+            {
+                // ModelState’e hata ekliyoruz, view bunu gösterebilir
+                ModelState.AddModelError("Email", "Bu e-posta adresi zaten kayıtlı.");
+                return View(user);
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Beklenmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyin.");
+                return View(user);
+            }
         }
+
 
         public async Task<IActionResult> Logout()
         {

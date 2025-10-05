@@ -10,6 +10,7 @@ CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -19,6 +20,8 @@ builder.Services.AddAuthentication("Cookies")
         options.LoginPath = "/Admin/Login";
         options.AccessDeniedPath = "/Admin/AccessDenied";
     });
+builder.Services.AddHttpClient();  
+builder.Services.AddScoped<GoogleReCaptchaService>();
 
 builder.Services.AddAuthorization(options =>
 {
@@ -44,6 +47,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+ 
 app.UseAuthentication();
 app.UseAuthorization();
 

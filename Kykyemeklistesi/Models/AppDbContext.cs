@@ -12,6 +12,7 @@ namespace Kykyemeklistesi.Models
         {
                 
         }
+         
         public DbSet<Yemek> YemekListesi { get; set; }
         public DbSet<City> Cities { get; set; }
 
@@ -47,6 +48,10 @@ namespace Kykyemeklistesi.Models
                       .HasForeignKey(d => d.YemekId)
                       .OnDelete(DeleteBehavior.Cascade);
             });
+
+            modelBuilder.Entity<User>()
+              .HasIndex(u => u.Email)
+              .IsUnique();
         }
     }
 }
