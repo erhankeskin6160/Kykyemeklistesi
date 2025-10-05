@@ -39,7 +39,7 @@
     </head>
 
     <body>
-    <div class="container-xl  ms-lg-5 ps-sm-0 ">
+    <div class="container-xl  ms-lg-5 ps-sm-0  ">
 
         <div class="d-flex justify-content-center align-items-center">
             <div>
@@ -88,7 +88,7 @@
                 </script>
             </aside>
             <!-- Ana İçerik -->
-            <main class="content-area  d-flex flex-column px-sm-3" aria-label="Ana içerik alanı">
+            <main class="content-area  d-flex flex-column px-sm-2" aria-label="Ana içerik alanı">
                 <div id="monthly-page">
                     <header class="page-title">
                         <h1>@ViewBag.SelectedCity  Kyk 30 Günlük Yemek Menüsü</h1>
@@ -96,7 +96,7 @@
                     </header>
 
                     <form method="get" action="/Home/Index">
-                        <div class="controls-section justify-content-around">
+                        <div class="controls-section d-flex flex-column  justify-content-center align-items-center gap-3 text-center my-3">
                             <div class="city-selector text-center">
                                 <label for="selectedCity">Şehir Seçin:</label>
                                 <select name="selectedCity" id="selectedCity" class="city-dropdown" onchange="this.form.submit()">
@@ -129,7 +129,7 @@
                         sayac++;
                         var istoday = item.Day.ToLongDateString() == DateTime.Now.Date.ToLongDateString();
                     
-                        <div class="menu-grid mt-4">
+                        <div class="menu-grid mt-4  flex-md-row flex-column mx-auto">
                             <article class="day-section @(istoday ? "today-meal":"")">
                                 <div class="day-header">
                                     <div class="day-info">
@@ -141,7 +141,7 @@
                                     </div>
                                 </div>
 
-                                <div class="meals-container mt-3">
+                                <div class="meals-container mt-3 d-flex flex-md-row flex-column mx-auto">
                                     <!-- Kahvaltı Kartı -->
                                     <div class="meal-card breakfast">
                                         <div class="meal-header">
