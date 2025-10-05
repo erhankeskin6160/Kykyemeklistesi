@@ -1,0 +1,515 @@
+﻿@{
+    ViewData["Title"] = "Grafikler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var sehirler = ViewBag.SelectedCity as List<SelectListItem>;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px 0;
+            min-height: 100vh;
+        }
+
+        .main-layout {
+            display: flex;
+            max-width: 1600px;
+            margin: 0 auto;
+            gap: 20px;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        /* Sol Reklam Alanı */
+        .ad-left {
+            width: 160px;
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Sağ Reklam Alanı */
+        .ad-right {
+            width: 160px;
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .ad-banner {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            text-align: center;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 2px dashed #e0e0e0;
+        }
+
+        .ad-banner:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .ad-banner.small {
+            min-height: 250px;
+        }
+
+        .ad-placeholder {
+            color: #95a5a6;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .ad-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+            opacity: 0.3;
+        }
+
+        /* Ana İçerik Alanı */
+        .content-wrapper {
+            flex: 1;
+            max-width: 1200px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        .page-header h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .page-header p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+
+        .city-selector-container {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .city-selector-container label {
+            display: block;
+            font-size: 1.1rem;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .city-dropdown {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            padding-right: 45px;
+        }
+
+        .city-dropdown:hover {
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .city-dropdown:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.15);
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .chart-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #e74c3c, #f39c12, #3498db);
+        }
+
+        .chart-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+            margin-top: 15px;
+        }
+
+        .chart-wrapper canvas {
+            max-height: 100%;
+        }
+
+        keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: #3498db;
+        }
+
+        /* Responsive Design */
+        media (max-width: 1400px) {
+            .ad-left, .ad-right {
+                width: 120px;
+            }
+            
+            .ad-banner {
+                min-height: 500px;
+            }
+            
+            .ad-banner.small {
+                min-height: 200px;
+            }
+        }
+
+        media (max-width: 1200px) {
+            .main-layout {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .ad-left, .ad-right {
+                display: none;
+            }
+
+            .content-wrapper {
+                width: 100%;
+            }
+
+            .charts-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        media (max-width: 768px) {
+            body {
+                padding: 15px 0;
+            }
+
+            .main-layout {
+                padding: 0 15px;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .page-header p {
+                font-size: 1rem;
+            }
+
+            .city-selector-container {
+                padding: 20px;
+            }
+
+            .chart-card {
+                padding: 20px;
+            }
+
+            .chart-wrapper {
+                height: 350px;
+            }
+
+            .charts-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        media (max-width: 480px) {
+            body {
+                padding: 10px 0;
+            }
+
+            .main-layout {
+                padding: 0 10px;
+            }
+
+            .page-header h1 {
+                font-size: 1.6rem;
+            }
+
+            .page-header p {
+                font-size: 0.9rem;
+            }
+
+            .city-selector-container {
+                padding: 15px;
+            }
+
+            .city-dropdown {
+                padding: 12px 15px;
+                font-size: 0.95rem;
+            }
+
+            .chart-card {
+                padding: 15px;
+            }
+
+            .chart-wrapper {
+                height: 300px;
+            }
+        }
+
+        /* Reklam İçerik Stilleri */
+        .ad-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .ad-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .ad-description {
+            font-size: 13px;
+            color: #7f8c8d;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .ad-button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .ad-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="main-layout">
+        <!-- Sol Reklam Alanı -->
+        <aside class="ad-left">
+            <div class="ad-banner">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5290089711270021"
+                        crossorigin="anonymous"></script>
+                <!-- Static  Sayfası Ana Reklam -->
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:159px;height:600px"
+                     data-ad-client="ca-pub-5290089711270021"
+                     data-ad-slot="4527260997"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            
+            <div class="ad-banner small">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5290089711270021"
+                        crossorigin="anonymous"></script>
+                <!-- Static Sayfası küçük reklam -->
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:160px;height:250px"
+                     data-ad-client="ca-pub-5290089711270021"
+                     data-ad-slot="6239782008"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </aside>
+
+        <!-- Ana İçerik -->
+        <div class="content-wrapper">
+            <div class="page-header">
+                <h1>📊 @ViewBag.secilen Kyk Yemek İstatistikleri</h1>
+                <p>Kyk yurtlarında en çok çıkan kyk yemekleri</p>
+            </div>
+
+            <form method="get">
+    <div class="city-selector-container">
+        <label for="selectedCity">🏙️ Şehir Seçin:</label>
+        <select id="selectedCity" name="selectedCity" class="city-dropdown" onchange="redirectToCity(this)">
+            @foreach (var item in ViewBag.SelectedCity as List<SelectListItem>)
+            {
+                <option value="@item.Value" (item.Selected ? "selected" : "")>@item.Text</option>
+                
+            }
+        </select>
+    </div>
+</form>
+
+
+            <script>
+                function redirectToCity(select) {
+                    const city = select.value;
+                    const url = `/kyk-yemek-listesi-istatistik/${encodeURIComponent(city)}`;
+                    window.location.href = url;
+                }
+            </script>
+
+
+
+            <div class="loading-spinner" id="loadingSpinner">
+                <p>Yükleniyor...</p>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <div class="chart-wrapper">
+                        @Html.Partial("_CorbaStaticPartial.cshtml", (IEnumerable<dynamic>)ViewBag.enCokCikanCorbalar)
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-wrapper">
+                        @Html.Partial("_KahvaltıStaticPartial.cshtml", (IEnumerable<dynamic>)ViewBag.sabahyemeği)
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-wrapper">
+                        @Html.Partial("_AnaYemekStaticPartial.cshtml", (IEnumerable<dynamic>)ViewBag.Anayemek)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sağ Reklam Alanı -->
+        <aside class="ad-right">
+            <div class="ad-banner">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5290089711270021"
+                        crossorigin="anonymous"></script>
+                <!-- Static  Sayfası Ana Reklam -->
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:159px;height:600px"
+                     data-ad-client="ca-pub-5290089711270021"
+                     data-ad-slot="4527260997"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            
+            <div class="ad-banner small">
+                <div class="ad-content">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5290089711270021"
+                            crossorigin="anonymous"></script>
+                    <!-- Static Sayfası küçük reklam -->
+                    <ins class="adsbygoogle"
+                         style="display:inline-block;width:160px;height:250px"
+                         data-ad-client="ca-pub-5290089711270021"
+                         data-ad-slot="6239782008"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        // Loading spinner gösterimi
+        document.getElementById('selectedCity').addEventListener('change', function() {
+            document.getElementById('loadingSpinner').style.display = 'block';
+            document.querySelector('.charts-grid').style.opacity = '0.5';
+        });
+    </script>
+</body>
+</html>
