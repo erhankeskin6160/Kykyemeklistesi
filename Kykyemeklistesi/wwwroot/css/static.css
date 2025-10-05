@@ -1,0 +1,391 @@
+ * {
+     box-sizing: border-box;
+     margin: 0;
+     padding: 0;
+ }
+
+ body {
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+     padding: 0 0;
+     min-height: 100vh;
+ }
+
+ .main-layout {
+     display: flex;
+     max-width: 1600px;
+     margin: 0 auto;
+     gap: 20px;
+     padding: 0 20px;
+     position: relative;
+ }
+
+ /* Sol Reklam Alanı */
+ /* .ad-left {
+     width: 160px;
+     position: sticky;
+     top: 20px;
+     height: fit-content;
+     display: flex;
+     flex-direction: column;
+     gap: 20px;
+ } */
+
+ /* Sağ Reklam Alanı */
+ .ad-right {
+     width: 160px;
+     position: sticky;
+     top: 20px;
+     height: fit-content;
+     display: flex;
+     flex-direction: column;
+     gap: 20px;
+ }
+
+ .ad-banner {
+     background: white;
+     border-radius: 12px;
+     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+     padding: 15px;
+     text-align: center;
+     min-height: 600px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     transition: all 0.3s ease;
+     border: 2px dashed #e0e0e0;
+ }
+
+ .ad-banner:hover {
+     transform: translateY(-3px);
+     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+ }
+
+ .ad-banner.small {
+     min-height: 250px;
+ }
+
+ .ad-placeholder {
+     color: #95a5a6;
+     font-size: 14px;
+     font-weight: 500;
+ }
+
+ .ad-icon {
+     font-size: 48px;
+     margin-bottom: 10px;
+     opacity: 0.3;
+ }
+
+ /* Ana İçerik Alanı */
+ .content-wrapper {
+     flex: 1;
+     max-width: 1200px;
+ }
+
+ .page-header {
+     text-align: center;
+     margin-bottom: 30px;
+     animation: fadeInDown 0.6s ease-out;
+ }
+
+ .page-header h1 {
+     color: #2c3e50;
+     font-size: 2.5rem;
+     margin-bottom: 10px;
+     font-weight: 700;
+ }
+
+ .page-header p {
+     color: #7f8c8d;
+     font-size: 1.1rem;
+ }
+
+ .city-selector-container {
+     background: white;
+     padding: 25px;
+     border-radius: 15px;
+     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+     margin-bottom: 30px;
+     animation: fadeIn 0.8s ease-out;
+ }
+
+ .city-selector-container label {
+     display: block;
+     font-size: 1.1rem;
+     color: #2c3e50;
+     margin-bottom: 12px;
+     font-weight: 600;
+ }
+
+ .city-dropdown {
+     width: 100%;
+     padding: 15px 20px;
+     font-size: 1rem;
+     border: 2px solid #e0e0e0;
+     border-radius: 10px;
+     background: white;
+     cursor: pointer;
+     transition: all 0.3s ease;
+     appearance: none;
+     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+     background-repeat: no-repeat;
+     background-position: right 15px center;
+     padding-right: 45px;
+ }
+
+ .city-dropdown:hover {
+     border-color: #3498db;
+     box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+ }
+
+ .city-dropdown:focus {
+     outline: none;
+     border-color: #3498db;
+     box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.15);
+ }
+
+ .charts-grid {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+     gap: 25px;
+     animation: fadeInUp 1s ease-out;
+ }
+
+ .chart-card {
+     background: white;
+     padding: 25px;
+     border-radius: 15px;
+     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+     transition: all 0.3s ease;
+     position: relative;
+     overflow: hidden;
+ }
+
+ .chart-card::before {
+     content: '';
+     position: absolute;
+     top: 0;
+     left: 0;
+     right: 0;
+     height: 4px;
+     background: linear-gradient(90deg, #e74c3c, #f39c12, #3498db);
+ }
+
+ .chart-card:hover {
+     transform: translateY(-5px);
+     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+ }
+
+ .chart-wrapper {
+     position: relative;
+     height: 400px;
+     margin-top: 15px;
+ }
+
+ .chart-wrapper canvas {
+     max-height: 100%;
+ }
+
+
+ @keyframes fadeIn {
+     from {
+         opacity: 0;
+     }
+
+     to {
+         opacity: 1;
+     }
+ }
+
+ @keyframes fadeInDown {
+     from {
+         opacity: 0;
+         transform: translateY(-20px);
+     }
+
+     to {
+         opacity: 1;
+         transform: translateY(0);
+     }
+ }
+
+ @keyframes fadeInUp {
+     from {
+         opacity: 0;
+         transform: translateY(20px);
+     }
+
+     to {
+         opacity: 1;
+         transform: translateY(0);
+     }
+ }
+
+ .loading-spinner {
+     display: none;
+     text-align: center;
+     padding: 20px;
+     color: #3498db;
+ }
+
+ /* Responsive Design */
+ @media (max-width: 1400px) {
+
+     .ad-left,
+     .ad-right {
+         width: 120px;
+     }
+
+     .ad-banner {
+         min-height: 500px;
+     }
+
+     .ad-banner.small {
+         min-height: 200px;
+     }
+ }
+
+ @media (max-width: 1200px) {
+     .main-layout {
+         flex-direction: column;
+         align-items: center;
+     }
+
+     .ad-left,
+     .ad-right {
+         display: none;
+     }
+
+     .content-wrapper {
+         width: 100%;
+     }
+
+     .charts-grid {
+         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+     }
+ }
+
+ @media (max-width: 992px) {
+     .ad-banner {
+         max-height: 200px;
+     }
+
+     .ad-left,
+     .ad-right {
+         display: flex;
+         flex-direction: column;
+         gap: 20px;
+         width: 100%;
+         min-height: 50%;
+         position: relative;
+         top: auto;
+         height: fit-content;
+
+     }
+
+     .main-layout {
+         padding: 0 15px;
+     }
+
+     .page-header h1 {
+         font-size: 2rem;
+     }
+
+     .page-header p {
+         font-size: 1rem;
+     }
+
+     .city-selector-container {
+         padding: 20px;
+     }
+
+     .chart-card {
+         padding: 20px;
+     }
+
+     .chart-wrapper {
+         height: 350px;
+     }
+
+     .charts-grid {
+         grid-template-columns: 1fr;
+         gap: 20px;
+     }
+ }
+
+ @media (max-width: 480px) {
+
+
+     .main-layout {
+         padding: 0 10px;
+     }
+
+     .page-header h1 {
+         font-size: 1.6rem;
+     }
+
+     .page-header p {
+         font-size: 0.9rem;
+     }
+
+     .city-selector-container {
+         padding: 15px;
+     }
+
+     .city-dropdown {
+         padding: 12px 15px;
+         font-size: 0.95rem;
+     }
+
+     .chart-card {
+         padding: 15px;
+     }
+
+     .chart-wrapper {
+         height: 300px;
+     }
+ }
+
+ /* Reklam İçerik Stilleri */
+ .ad-content {
+     width: 100%;
+     height: 100%;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     gap: 10px;
+ }
+
+ .ad-title {
+     font-size: 16px;
+     font-weight: 700;
+     color: #2c3e50;
+     margin-bottom: 5px;
+ }
+
+ .ad-description {
+     font-size: 13px;
+     color: #7f8c8d;
+     text-align: center;
+     line-height: 1.5;
+ }
+
+ .ad-button {
+     margin-top: 15px;
+     padding: 10px 20px;
+     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+     color: white;
+     border: none;
+     border-radius: 25px;
+     cursor: pointer;
+     font-weight: 600;
+     transition: all 0.3s ease;
+ }
+
+ .ad-button:hover {
+     transform: scale(1.05);
+     box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+ }
