@@ -40,102 +40,10 @@
 </head>
 
 <body>
-     
-
-   <div class="col-2 d-flex justify-content-center align-items-center">
-    <div> @if(User.Identity.IsAuthenticated)
-{
-   
-    <a  href="@Url.Action("ExportToExcel", "User", new { selectedCity = ViewBag.SelectedCity })" class="btn btn-success pdfexcel">
-        <i class="fa-regular fa-file-excel pdfexcel-text"></i> <p class="fw-bolder pdfexceltext">Excel İle İndir</p>
-    </a>
-
-
-    <a href="@Url.Action("ExportToPdf", "User", new { selectedCity = ViewBag.SelectedCity })" class="btn btn-danger pdfexcel">
-        <i class="fa-regular fa-file-pdf pdfexcel-text"></i> <p class="fw-bolder pdfexceltext">PDF İle İndir</p>
-
-    </a>
-}</div>
-
- 
- 
-             <!--AdFox START-->
-<!--yandex_erdalkeskin6106-->
-<!--Placement: kykyemeklistesi / * / *-->
-<!--Banner type: 100%x100% Turbo-->
-<!--Position: top of the page-->
-<div id="adfox_173663303180681358"></div>
-<script>
-    window.yaContextCb.push(()=>{
-        Ya.adfoxCode.create({
-            ownerId: 11654074,
-            containerId: 'adfox_173663303180681358',
-            params: {
-                pp: 'g',
-                ps: 'irvl',
-                p2: 'hukd'
-            }
-        })
-    })
-</script>
-
-   </div>
-    <div class="main-layout">
-
-    <!-- Sol Reklam Alanı -->
-        <div class="sidebar p-0">
-         
-     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5290089711270021"
-     crossorigin="anonymous"></script>
-<!-- bügünreklam sayfası -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:248px;height:520px"
-     data-ad-client="ca-pub-5290089711270021"
-     data-ad-slot="4756814293"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
- 
-    </div>
-
-    <!-- Ana İçerik -->
-    <div class="content-area">
-        <div id="monthly-page">
-            <div class="page-title">
-                <h1>@ViewBag.SelectedCity  Günlük Yemek Menüsü</h1>
-                <p>@ViewBag.SelectedCity  @DateTime.Now.ToString("MMMM") ayı yemek listesi</p>
-            </div>
-
-            <form method="get" action="/Home/Index">
-                <div class="controls-section">
-                    <div class="city-selector">
-                        <label for="selectedCity">Şehir Seçin:</label>
-                        <select name="selectedCity" id="selectedCity" class="city-dropdown" onchange="this.form.submit()">
-                            @foreach (var item in ViewBag.City as List<SelectListItem>)
-                            {
-  if (item.Selected)
-                        {
-                            <option value="@item.Value" selected>@item.Text</option>
-
-                        }
-                        else
-                        {
-                            <option value="@item.Value">@item.Text</option>
-
-                        }                            }
-                        </select>
-                    </div>
-
-                    <div class="filter-buttons">
-                        <button type="button" class="filter-btn active"  onclick="filterMeals('all')">Tümü</button>
-                        <button type="button" class="filter-btn" onclick="filterMeals('breakfast')" id="btn-breakfast">
-                            Kahvaltı  
-                         </button>                        <button type="button" class="filter-btn" onclick="filterMeals('dinner')">Sadece Akşam</button>
-                     </div>
-                </div>
-            </form>
-
-            @foreach (var item in Model)
+    
+    <div class="col-2 d-flex justify-content-center align-items-center">
+        <div>
+            @if (User.Identity.IsAuthenticated)
             {
               @*   <a href="@Url.Action("ExportToExcel", "User", new { selectedCity = ViewBag.SelectedCity })" class="btn btn-success pdfexcel" id="excel">
                     <i class="fa-regular fa-file-excel pdfexcel-text"></i>

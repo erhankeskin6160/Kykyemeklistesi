@@ -82,6 +82,12 @@ app.MapControllerRoute(
     pattern: "{selectedCity}-yemek-listesi",
     defaults: new { controller = "Home", action = "Index" });
 
+
+app.MapControllerRoute(
+    name: "istatistik",
+    pattern: "kyk-yemek-listesi-istatistik/{selectedCity}",
+    defaults: new { controller = "Home", action = "Static", selectedCity="Ankara"});
+
 // Default route
 app.MapControllerRoute(
     name: "default",

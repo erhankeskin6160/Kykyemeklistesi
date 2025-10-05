@@ -1,4 +1,3 @@
-// HomeController.cs - Minimal değişikliklerle
 using Kykyemeklistesi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -21,10 +20,10 @@ namespace Kykyemeklistesi.Controllers
         [HttpGet]
         public IActionResult Index(string? selectedCity = "Ankara")
         {
-            
+
             selectedCity = NormalizeCityName(selectedCity);
 
-            if (!Request.Path.Value.Contains($"{selectedCity}-yemek-listesi") && 
+            if (!Request.Path.Value.Contains($"{selectedCity}-yemek-listesi") &&
         !Request.Path.Value.Contains("/Home/Bugunyemeklistesi"))
             {
                 return RedirectToAction("Index", new { selectedCity });
@@ -32,7 +31,7 @@ namespace Kykyemeklistesi.Controllers
             DateTime currentDate = DateTime.Now;
 
             var selectList = _dbContext.YemekListesi.Where(x => x.Day.Month == DateTime.Now.Month &&
-                x.Day.Year == DateTime.Now.Year &&x.SabahYemekListesi!=null)
+                x.Day.Year == DateTime.Now.Year && x.SabahYemekListesi != null)
                 .GroupBy(x => x.City.CityName)
                 .Select(x => new SelectListItem
                 {
@@ -54,12 +53,12 @@ namespace Kykyemeklistesi.Controllers
             return View(yemekListesi);
         }
 
-        public IActionResult Bugunyemeklistesi(string? selectedCity = "Ankara" )
+        public IActionResult Bugunyemeklistesi(string? selectedCity = "Ankara")
         {
-           
+
             selectedCity = NormalizeCityName(selectedCity);
-            if (!Request.Path.Value.Contains($"{selectedCity}-bugun-yemek-listesi") &&   
-        !Request.Path.Value.Contains("/Home/Index")) 
+            if (!Request.Path.Value.Contains($"{selectedCity}-bugun-yemek-listesi") &&
+        !Request.Path.Value.Contains("/Home/Index"))
             {
                 return RedirectToAction("Bugunyemeklistesi", new { selectedCity });
             }
@@ -181,7 +180,7 @@ namespace Kykyemeklistesi.Controllers
             if (string.IsNullOrEmpty(cityName))
                 return "Ankara";
 
-            
+
             return char.ToUpper(cityName[0]) + cityName.Substring(1).ToLower();
         }
 
@@ -263,22 +262,122 @@ namespace Kykyemeklistesi.Controllers
             return View();
         }
 
-        public IActionResult SSS() 
-        {
-            return View(); 
-        }
-
-        public IActionResult Deneme() 
+        public IActionResult SSS()
         {
             return View();
         }
 
-        public   IActionResult Static() 
+
+
+        public IActionResult Static(string? selectedCity = "Ankara")
         {
+
+            var selectList = _dbContext.YemekListesi.Where(x => x.Day.Month == DateTime.Now.Month &&
+               x.Day.Year == DateTime.Now.Year && x.SabahYemekListesi != null)
+               .GroupBy(x => x.City.CityName)
+               .Select(x => new SelectListItem
+               {
+                   Value = x.Key,
+                   Text = x.Key,
+                   Selected = x.Key == selectedCity
+               }).ToList();
+            ViewBag.SelectedCity = selectList;
+            ViewBag.secilen = selectedCity;
+
+
+            // 1. Veritabanından tüm sabah listelerini string olarak çektiniz (Bu satır doğru).
+            // 1. Veritabanından tüm sabah listelerini string olarak çektiniz.
+            var sabahyemeklistesi = _dbContext.YemekListesi.Where(x => x.City.CityName == selectedCity && x.Day.Year == DateTime.Now.Year && x.Day.Month == DateTime.Now.Month).Select(x => x.SabahYemekListesi).ToList();
+
+            // YENİ ADIM: Sayıma dahil edilmeyecek, filtrelenecek ürünlerin listesini tanımla.
+            // Bu listeyi istediğiniz gibi genişletebilirsiniz.
+            var filtrelenecekUrunler = new HashSet<string>
+{
+    "Çeyrek Ekmek",
+    "500 ml Su",
+     "500 mı su",
+     "",
+     "Soslu"
+    // Buraya başka istenmeyen ürünler ekleyebilirsiniz, örneğin: "Tuz", "Peçete"
+};
+
+
+            var Sabahyemeğilist5 = sabahyemeklistesi
+                .Where(metin => !string.IsNullOrEmpty(metin))
+                .SelectMany(metin => metin.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries))
+                .Select(urun => urun.Trim())
+                .Where(urun => !filtrelenecekUrunler.Contains(urun))
+                .GroupBy(urun => urun)
+                .OrderByDescending(grup => grup.Count())
+                .Take(5) // İlk 5'i al
+                .Select(grup => new
+                {
+                    UrunAdi = grup.Key,
+                    TekrarSayisi = grup.Count()
+                })
+                .ToList();
+
+            ViewBag.sabahyemeği = Sabahyemeğilist5;
+            var aksamyemeklistesi = _dbContext.YemekListesi.Where(x => x.City.CityName == selectedCity && x.Day.Year == DateTime.Now.Year && x.Day.Month == DateTime.Now.Month).Select(x => x.AksamYemekListesi).ToList();
+
+
+
+            var enCokCikanCorbalar = aksamyemeklistesi
+                .Where(x => !string.IsNullOrEmpty(x))
+                .SelectMany(yemekMetni => yemekMetni.Split(new[] { '/', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries))
+                .Select(yemek => yemek.Trim())
+                .Where(yemek => yemek.Contains("Çorba", StringComparison.OrdinalIgnoreCase))
+                .Where(corba => !filtrelenecekUrunler.Contains(corba))
+                .GroupBy(corba => corba)
+                .OrderByDescending(grup => grup.Count())
+                .Take(5)
+                .Select(grup => new { CorbaAdi = grup.Key, TekrarSayisi = grup.Count() })
+                .ToList();
+
+            ViewBag.enCokCikanCorbalar = enCokCikanCorbalar;
+
+            // Veritabanından çekilmiş menü listesi
+            // List<string> aksamyemeklistesi = ...;
+
+            var den = aksamyemeklistesi
+    //---------- ADIM 1: Ana Yemekleri Çekme ve Ayrıştırma Bölümü ----------
+    .Where(metin => !string.IsNullOrEmpty(metin))
+    .Select(metin => metin.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries))
+    .Where(satirlar => satirlar.Length > 1)
+    .Select(satirlar => satirlar[1])
+    .SelectMany(anaYemekSatiri => anaYemekSatiri.Split('/'))
+    .Select(anaYemek => anaYemek.Trim()).ToList();
+
+            // İki adımı birleştiren tek ve akıcı LINQ sorgusu
+            var enCokCikanAnaYemekler = aksamyemeklistesi
+    //---------- ADIM 1: Ana Yemekleri Çekme ve Ayrıştırma Bölümü ----------
+    .Where(metin => !string.IsNullOrEmpty(metin))
+    .Select(metin => metin.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries))
+    .Where(satirlar => satirlar.Length > 1)
+    .Select(satirlar => satirlar[1])
+    .SelectMany(anaYemekSatiri => anaYemekSatiri.Split('/'))
+    .Select(anaYemek => anaYemek.Trim())
+
+    //---------- YENİ FİLTRELEME ADIMI ----------
+    // Yukarıda tanımlanan `filtrelenecekUrunler` listesinde OLMAYAN yemeklerle devam et.
+    .Where(yemek => !filtrelenecekUrunler.Contains(yemek))
+
+    //---------- ADIM 2: Gruplama, Sıralama ve Seçme Bölümü ----------
+    .GroupBy(yemek => yemek)
+    .OrderByDescending(grup => grup.Count())
+    .Take(5) // İlk 5'i al
+    .Select(grup => new
+    {
+        AnaYemekAdi = grup.Key,
+        TekrarSayisi = grup.Count()
+    })
+    .ToList();
+            ViewBag.Anayemek = enCokCikanAnaYemekler;
+
+
 
             return View();
         }
-
         public static string SecilenSehir()
         {
             var secilensehir = deger;
