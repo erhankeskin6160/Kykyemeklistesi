@@ -5,42 +5,42 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: #333;
 }
 
 .header {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 1rem 2rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .logo-icon {
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
 }
 
 .day-section.today-meal {
@@ -49,25 +49,26 @@ body {
 }
 
 .logo-text {
-    font-size: 24px;
-    font-weight: 700;
-    color: #2d3748;
+  font-size: 24px;
+  font-weight: 700;
+  color: #2d3748;
 }
 
-.nav-links {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
+.tarih {
+  text-align: center;
+  border: 2px solid none;
+  background-color: #64B5F6;
+  font-size: 25px;
+  color: white;
+  border-top-left-radius: 40%;
+  border-top-right-radius: 40%;
 }
 
-.nav-link {
-    color: #4a5568;
-    text-decoration: none;
-    font-weight: 500;
-    padding: 8px 16px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    cursor: pointer;
+.card-container-left {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 0px;
 }
 
 .nav-link:hover,
@@ -85,14 +86,9 @@ body {
     padding: 2rem;
 }
 
-.sidebar {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 2rem;
-    height: fit-content;
-    position: sticky;
-    top: 100px;
+.sehirsec {
+  display: flex;
+  justify-content: center;
 }
 
 .ad-card {
@@ -271,97 +267,97 @@ body {
 }
 
 .meals-container.single-meal {
-    grid-template-columns: 1fr;
+  grid-template-columns: 1fr;
 }
 
 .meal-card.expanded {
-    width: 100% !important;
-    max-width: 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
 
 
 .meal-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
 }
 
 .meal-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .meal-icon {
-    width: 35px;
-    height: 35px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
 }
 
 .breakfast-icon {
-    background: linear-gradient(45deg, #ff9a56 0%, #ffad56 100%);
+  background: linear-gradient(45deg, #ff9a56 0%, #ffad56 100%);
 }
 
 .dinner-icon {
-    background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
 }
 
 .meal-name {
-    font-size: 16px;
-    font-weight: 600;
-    color: #2d3748;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2d3748;
 }
 
 .calorie-badge {
-    background: linear-gradient(45deg, #48bb78 0%, #38a169 100%);
-    color: white;
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 11px;
-    font-weight: 600;
+  background: linear-gradient(45deg, #48bb78 0%, #38a169 100%);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
 }
 
 .menu-items {
-    list-style: none;
+  list-style: none;
 }
 
 .menu-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 4px 0;
-    color: #4a5568;
-    font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  color: #4a5568;
+  font-size: 14px;
 }
 
 .item-icon {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: #4facfe;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #4facfe;
 }
 
 /* Ad Cards i�in farkl� renkler */
 .ad-card.blue {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
 }
 
 .ad-card.green {
-    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
 }
 
 .ad-card.purple {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .ad-card.orange {
-    background: linear-gradient(135deg, #ff9a56 0%, #ffad56 100%);
+  background: linear-gradient(135deg, #ff9a56 0%, #ffad56 100%);
 }
 
 
@@ -371,34 +367,34 @@ body {
 
 
 @media (max-width: 1024px) {
-    .main-layout {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
+  .main-layout {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 
     /* .sidebar {
         position: relative;
         top: 0;
     } */
 
-    .controls-section {
-        flex-direction: column;
-        align-items: stretch;
-    }
+  .controls-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
 
-    .meals-container {
-        grid-template-columns: 1fr;
-    }
+  .meals-container {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 768px) {
-    .main-layout {
-        padding: 1rem;
-    }
+  .main-layout {
+    padding: 1rem;
+  }
 
-    .page-title h1 {
-        font-size: 2rem;
-    }
+  .page-title h1 {
+    font-size: 2rem;
+  }
 
     .filter-buttons,
     .city-selector {
@@ -407,21 +403,21 @@ body {
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 
 .ad-section {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 2rem;
-    margin: 3rem 0;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-    background-clip: padding-box;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  margin: 3rem 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  background-clip: padding-box;
 }
 
 .ad-section:hover {
@@ -439,42 +435,42 @@ body {
 }
 
 .ad-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
 }
 
 .ad-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #2d3748;
-    margin-bottom: 0.5rem;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .ad-subtitle {
-    font-size: 1.1rem;
-    color: #4a5568;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-    max-width: 600px;
+  font-size: 1.1rem;
+  color: #4a5568;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  max-width: 600px;
 }
 
 .ad-btn {
-    background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
-    color: white;
-    border: none;
-    padding: 12px 30px;
-    border-radius: 25px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+  background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .ad-btn:hover {
@@ -488,11 +484,11 @@ body {
 }
 
 .ad-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
 }
 
 /* AdSense reklam konteyneri */
@@ -525,20 +521,22 @@ body {
     opacity: 0.7;
 }
 
-/* Farkl� AdSense boyutlar� i�in wrapper'lar */
-.adsense-leaderboard {
-    min-height: 90px;
-    max-width: 728px;
+.pdfexcel {
+  width: 45px;
+  height: 45px;
+  padding: 2px !important;
+  margin-bottom: 5px;
 }
 
-.adsense-banner {
-    min-height: 90px;
-    max-width: 468px;
+.pdfexceltext {
+  margin-bottom: 1px !important;
+  font-size: 8.1px;
+  line-height: 1.1;
+  --bs-btn-font-size: 1rem;
 }
 
-.adsense-rectangle {
-    min-height: 250px;
-    max-width: 300px;
+.fa-user-gear:hover {
+  color: #d47f41 !important;
 }
 
 .adsense-large-rectangle {
