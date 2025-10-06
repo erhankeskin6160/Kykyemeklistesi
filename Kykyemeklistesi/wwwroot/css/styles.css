@@ -47,6 +47,7 @@ body {
     border: 2px solid #28a745;
     background: linear-gradient(135deg, #f8fff9 0%, #e8f5e8 100%);
 }
+
 .logo-text {
     font-size: 24px;
     font-weight: 700;
@@ -741,6 +742,7 @@ h1 {
     }
 
     .sidebar {
+        display: none;
         height: 100px;
         width: 100px;
         ;
@@ -1062,5 +1064,11 @@ h1 {
         /* Bootstrap'in varsayılan iç boşlukları */
         padding-right: 15px;
         /* Bootstrap'in varsayılan iç boşlukları */
+    }
+
+    .sidebar {
+        display: none;
+
+        ;
     }
 }
