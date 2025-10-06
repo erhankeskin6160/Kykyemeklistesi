@@ -8,33 +8,31 @@
      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
      padding: 0 0;
-     min-height: 100vh;
+     /* min-height: 100vh; */
  }
 
  .main-layout {
      display: flex;
-     max-width: 1600px;
-     margin: 0 auto;
-     gap: 20px;
-     padding: 0 20px;
-     position: relative;
+     flex-wrap: wrap;
+     justify-content: center;
+     align-items: flex-start;
+     gap: 1rem;
+     padding: 1rem;
  }
 
- /* Sol Reklam Alanı */
- /* .ad-left {
-     width: 160px;
-     position: sticky;
+ /*Sol Reklam Alanı */
+ .ad-left {
+     width: 180px;
      top: 20px;
      height: fit-content;
      display: flex;
      flex-direction: column;
      gap: 20px;
- } */
+ }
 
  /* Sağ Reklam Alanı */
  .ad-right {
      width: 160px;
-     position: sticky;
      top: 20px;
      height: fit-content;
      display: flex;
@@ -43,18 +41,12 @@
  }
 
  .ad-banner {
-     background: white;
-     border-radius: 12px;
-     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-     padding: 15px;
+     background-color: #fff;
+     border-radius: 8px;
+     padding: 0.5rem;
      text-align: center;
-     min-height: 600px;
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     justify-content: center;
-     transition: all 0.3s ease;
-     border: 2px dashed #e0e0e0;
+     width: 100%;
+     max-width: 180px;
  }
 
  .ad-banner:hover {
@@ -62,21 +54,19 @@
      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
  }
 
- .ad-banner.small {
-     min-height: 250px;
+ .adsbygoogle {
+     display: block !important;
+     width: 100% !important;
+     height: auto;
+     max-width: 100% !important;
  }
 
- .ad-placeholder {
-     color: #95a5a6;
-     font-size: 14px;
-     font-weight: 500;
+ .content-wrapper {
+     flex: 1 1 700px;
+     max-width: 900px;
  }
 
- .ad-icon {
-     font-size: 48px;
-     margin-bottom: 10px;
-     opacity: 0.3;
- }
+
 
  /* Ana İçerik Alanı */
  .content-wrapper {
@@ -230,37 +220,9 @@
      color: #3498db;
  }
 
- /* Responsive Design */
- @media (max-width: 1400px) {
 
-     .ad-left,
-     .ad-right {
-         width: 120px;
-     }
-
-     .ad-banner {
-         min-height: 500px;
-     }
-
-     .ad-banner.small {
-         min-height: 200px;
-     }
- }
 
  @media (max-width: 1200px) {
-     .main-layout {
-         flex-direction: column;
-         align-items: center;
-     }
-
-     .ad-left,
-     .ad-right {
-         display: none;
-     }
-
-     .content-wrapper {
-         width: 100%;
-     }
 
      .charts-grid {
          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -269,32 +231,53 @@
 
  @media (max-width: 992px) {
      .ad-banner {
-         max-height: 200px;
+         /* 1. Genişlik çelişkisi düzeltildi. Kapsayıcının %100'ünü kaplasın ama en fazla 320px olsun. */
+         width: 100% !important;
+         max-width: 320px;
+         margin: 0 auto;
+
+         /* 2. Yüksekliği zorla. min-height ve max-height ile esnemesini engelle. */
+         height: 240px !important;
+         min-height: 240px !important;
+         max-height: 240px !important;
+         overflow: hidden;
+         /* Yükseklikten taşan kısmı gizle */
+
+         /* 3. İçeriği ortalamak için (isteğe bağlı ama önerilir) */
+         display: flex;
+         align-items: center;
+         justify-content: center;
      }
 
      .adsbygoogle {
-         width: 656px;
-         height: 200px;
+         /* Bu kural, Google'ın eklediği inline stili ezmeye çalışır. */
+         width: 100% !important;
+         /* Genişliği kapsayıcıya uydur */
+         height: auto !important;
+         /* Yüksekliği otomatik bırak ama max-height ile sınırla */
+         max-height: 240px !important;
+         /* Kapsayıcıdan taşmasını engelle */
      }
 
-
+     .content-wrapper {
+         order: 2;
+         width: 100%;
+         max-width: 100%;
+     }
 
      .ad-left,
      .ad-right {
          display: flex;
          flex-direction: column;
-         gap: 20px;
+         align-items: center;
          width: 100%;
-         min-height: 50%;
-         position: relative;
-         top: auto;
-         height: fit-content;
-
      }
 
      .main-layout {
-         padding: 0 15px;
+         flex-direction: column;
+         align-items: center;
      }
+
 
      .page-header h1 {
          font-size: 2rem;
