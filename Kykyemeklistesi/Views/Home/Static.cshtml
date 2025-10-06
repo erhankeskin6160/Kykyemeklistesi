@@ -19,13 +19,13 @@
 
     <div class="main-layout d-flex flex-lg-row flex-column justify-content-center align-items-center">
         <!-- Sol Reklam Alanı -->
-        <aside class="ad-left d-flex flex-column">
+        <aside class="ad-left ">
             <div class="ad-banner small mb-3">
                 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5290089711270021"
                         crossorigin="anonymous"></script>
                 <!-- Static  Sayfası Ana Reklam -->
-                <ins class="adsbygoogle"
-                     style="display:inline-block;width:159px;height:600px"
+                <ins class="adsbygoogle d-flex  flex-column justify-content-center align-items-center"
+                   
                      data-ad-client="ca-pub-5290089711270021"
                      data-ad-slot="4527260997"></ins>
                 <script>
@@ -37,8 +37,7 @@
                 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5290089711270021"
                         crossorigin="anonymous"></script>
                 <!-- Static Sayfası küçük reklam -->
-                <ins class="adsbygoogle"
-                     style="display:inline-block;width:160px;height:250px"
+                <ins class="adsbygoogle d-flex flex-column justify-content-center align-items-center pb-1"
                      data-ad-client="ca-pub-5290089711270021"
                      data-ad-slot="6239782008"></ins>
                 <script>
@@ -55,7 +54,7 @@
             </div>
 
             <form method="get">
-    <div class="city-selector-container">
+       <div class="city-selector-container">
         <label for="selectedCity">🏙️ Şehir Seçin:</label>
         <select id="selectedCity" name="selectedCity" class="city-dropdown" onchange="redirectToCity(this)">
             @foreach (var item in ViewBag.SelectedCity as List<SelectListItem>)
@@ -64,7 +63,7 @@
             }
         </select>
     </div>
-</form>
+           </form>
 
 
             <script>
