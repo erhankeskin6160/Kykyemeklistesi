@@ -94,8 +94,8 @@
         }
     </style>
 
-    <script src="https://www.google.com/recaptcha/enterprise.js?render=6LfERd8rAAAAABstD0DBkpcm528Ki1UrDbE89o7m"></script>
-
+    <!-- Enterprise yerine standart script -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
@@ -152,12 +152,12 @@
 
             <!-- reCAPTCHA -->
             <div class="form-group">
-                <div class="g-recaptcha" data-sitekey="6LfERd8rAAAAABstD0DBkpcm528Ki1UrDbE89o7m"></div>
+                <div class="g-recaptcha d-flex justify-content-center" data-sitekey="6Lc4vuErAAAAAPzBFil3E76HDyDr1A7wVksrDlN9"></div>
                 <input type="hidden" asp-for="RecaptchaToken" id="recaptchaToken" />
                 <span asp-validation-for="RecaptchaToken" class="text-danger"></span>
             </div>
 
-            <button type="submit" class="btn btn-secondary w-100">Kayıt Ol</button>
+            <button type="submit" class="btn btn-secondary w-100 my-3">Kayıt Ol</button>
         </form>
 
         <p>Hesabın var ise hesabına giriş yap <a href="/Login">Giriş Yap</a></p>
