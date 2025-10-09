@@ -500,7 +500,6 @@ body {
     align-items: center;
     min-height: 280px;
     /* Rectangle reklam i�in */
-    background: #f8fafc;
     border-radius: 15px;
     border: 2px dashed #e2e8f0;
     transition: all 0.3s ease;
