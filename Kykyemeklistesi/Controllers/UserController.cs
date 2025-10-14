@@ -163,7 +163,17 @@ namespace Kykyemeklistesi.Controllers
                 
                 _db.Users.Add(users);
                 _db.SaveChanges();
-                return RedirectToAction("Index", "Home");
+                var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.Email, users.Email)
+        };
+
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+
+                TempData["SuccesLogin"] = "Başarılı kayıt";
+                return RedirectToAction("Index", "User");
+               
             }
             catch (DbUpdateException ex) when (ex.InnerException?.Message.Contains("IX_Users_Email") == true)
             {

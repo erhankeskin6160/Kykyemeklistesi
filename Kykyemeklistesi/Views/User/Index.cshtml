@@ -15,6 +15,11 @@
 </head>
 
 <body>
+    @if (TempData["SuccesLogin"]!=null)
+    {
+        
+    }
+
     <form asp-action="Index" asp-controller="User" method="POST">
         <input type="hidden" asp-for="Id" />
         <div class="row">
