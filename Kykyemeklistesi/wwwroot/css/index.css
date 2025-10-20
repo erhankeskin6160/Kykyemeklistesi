@@ -77,6 +77,12 @@ iframe {
     width: 250px;
 }
 
+.affiliate-banner img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
 /* Tablet - 1024px ve altı */
 @media screen and (max-width: 1024px) {
     .main-layout {

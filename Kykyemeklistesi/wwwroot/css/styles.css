@@ -592,6 +592,12 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
+.affiliate-banner img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
 /* Mobil uyumluluk */
 @media (max-width: 768px) {
     .ad-section {
