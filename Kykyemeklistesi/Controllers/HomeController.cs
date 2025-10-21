@@ -63,7 +63,8 @@ namespace Kykyemeklistesi.Controllers
                 return RedirectToAction("Bugunyemeklistesi", new { selectedCity });
             }
 
-            var selectList = _dbContext.YemekListesi
+            var selectList = _dbContext.YemekListesi.Where(x => x.Day.Month == DateTime.Now.Month &&
+               x.Day.Year == DateTime.Now.Year && x.SabahYemekListesi != null)
                .GroupBy(x => x.City.CityName)
                .Select(x => new SelectListItem
                {
