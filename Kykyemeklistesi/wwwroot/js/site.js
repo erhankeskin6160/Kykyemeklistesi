@@ -94,3 +94,48 @@ function showToast(message, type = "success") {
         setTimeout(() => toast.remove(), 300);
     }, 4000);
 }
+
+// Reklam Lazy Load Sistemi
+function initAdLazyLoad() {
+    if ('IntersectionObserver' in window) {
+        const adObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    loadAds();
+                    observer.disconnect(); // Script yüklendiğinde gözlemlemeyi bırak
+                }
+            });
+        }, { rootMargin: '400px' }); // Kullanıcı reklam alanına 400px yaklaşınca yükle
+
+        // Sayfada reklam alanı varsa gözlemlemeye başla
+        const adElements = document.querySelectorAll('.ad-banner, ins.adsbygoogle');
+        if (adElements.length > 0) {
+            adObserver.observe(adElements[0]);
+        }
+    } else {
+        // Observer desteklenmiyorsa hemen yükle
+        loadAds();
+    }
+}
+
+function loadAds() {
+    if (window.adsLoaded) return;
+    window.adsLoaded = true;
+
+    console.log("Reklamlar yükleniyor...");
+
+    // AdSense Scriptini Yükle
+    const adsenseScript = document.createElement('script');
+    adsenseScript.async = true;
+    adsenseScript.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5290089711270021";
+    adsenseScript.crossOrigin = "anonymous";
+    document.head.appendChild(adsenseScript);
+
+    // Her bir reklam birimini tetikle
+    document.querySelectorAll('ins.adsbygoogle').forEach(ins => {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+    });
+}
+
+// Sayfa yüklendiğinde başlat
+document.addEventListener('DOMContentLoaded', initAdLazyLoad);

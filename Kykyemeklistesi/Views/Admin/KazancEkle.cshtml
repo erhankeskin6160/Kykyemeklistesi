@@ -1,0 +1,68 @@
+@model AdKazanc
+@{
+    ViewData["Title"] = "Yeni Kazanç Ekle";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="bi bi-plus-circle me-2"></i>Yeni Kazanç Ekle</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="KazancEkle" method="post">
+                        <div class="mb-3">
+                            <label asp-for="Tarih" class="form-label fw-bold"></label>
+                            <input asp-for="Tarih" class="form-control" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                            <span asp-validation-for="Tarih" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="ReklamAgi" class="form-label fw-bold"></label>
+                            <select asp-for="ReklamAgi" class="form-select">
+                                <option value="AdSense">Google AdSense</option>
+                                <option value="Yandex">Yandex Adfox</option>
+                                <option value="Other">Diğer</option>
+                            </select>
+                            <span asp-validation-for="ReklamAgi" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Miktar" class="form-label fw-bold"></label>
+                            <div class="input-group">
+                                <span class="input-group-text">₺</span>
+                                <input asp-for="Miktar" class="form-control" placeholder="0.00" step="0.01" />
+                            </div>
+                            <span asp-validation-for="Miktar" class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="TiklamaSayisi" class="form-label fw-bold"></label>
+                                <input asp-for="TiklamaSayisi" class="form-control" type="number" min="0" />
+                                <span asp-validation-for="TiklamaSayisi" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Goruntuleme" class="form-label fw-bold"></label>
+                                <input asp-for="Goruntuleme" class="form-control" type="number" min="0" />
+                                <span asp-validation-for="Goruntuleme" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-save me-1"></i>Kaydet
+                            </button>
+                            <a asp-action="ReklamKazanclari" class="btn btn-outline-secondary">İptal</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

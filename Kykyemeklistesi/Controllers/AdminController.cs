@@ -168,6 +168,48 @@ namespace Kykyemeklistesi.Controllers
             return RedirectToAction("Paylasimlar");
         }
 
+        // --- Reklam Kazanç Takip ---
+
+        public IActionResult ReklamKazanclari()
+        {
+            var kazanclar = _db.AdKazanclari
+                .OrderByDescending(k => k.Tarih)
+                .ToList();
+            return View(kazanclar);
+        }
+
+        [HttpGet]
+        public IActionResult KazancEkle()
+        {
+            return View(new AdKazanc());
+        }
+
+        [HttpPost]
+        public IActionResult KazancEkle(AdKazanc model)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.AdKazanclari.Add(model);
+                _db.SaveChanges();
+                TempData["SuccessMessage"] = "Reklam kazancı başarıyla kaydedildi.";
+                return RedirectToAction("ReklamKazanclari");
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult KazancSil(int id)
+        {
+            var kazanc = _db.AdKazanclari.Find(id);
+            if (kazanc != null)
+            {
+                _db.AdKazanclari.Remove(kazanc);
+                _db.SaveChanges();
+                TempData["SuccessMessage"] = "Kazanç kaydı silindi.";
+            }
+            return RedirectToAction("ReklamKazanclari");
+        }
+
         [Authorize(Roles = "SuperAdmin")]
         [HttpGet]
         public IActionResult ManageAdmins()

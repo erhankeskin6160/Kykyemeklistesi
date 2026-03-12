@@ -1,0 +1,72 @@
+@model List<AdKazanc>
+@{
+    ViewData["Title"] = "Reklam Kazançları";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary"><i class="bi bi-graph-up-arrow me-2"></i>Reklam Kazanç Takibi</h2>
+        <a asp-action="KazancEkle" class="btn btn-success">
+            <i class="bi bi-plus-circle me-1"></i>Yeni Kazanç Ekle
+        </a>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th>Tarih</th>
+                            <th>Reklam Ağı</th>
+                            <th>Miktar (TL)</th>
+                            <th>Tıklama</th>
+                            <th>Görüntüleme</th>
+                            <th class="text-center">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Tarih.ToString("dd.MM.yyyy")</td>
+                                    <td>
+                                        <span class="badge @(item.ReklamAgi == "AdSense" ? "bg-primary" : "bg-warning text-dark")">
+                                            @item.ReklamAgi
+                                        </span>
+                                    </td>
+                                    <td class="fw-bold text-success">@item.Miktar.ToString("C2")</td>
+                                    <td>@item.TiklamaSayisi</td>
+                                    <td>@item.Goruntuleme</td>
+                                    <td class="text-center">
+                                        <form asp-action="KazancSil" asp-route-id="@item.Id" method="post" style="display:inline;" onsubmit="return confirm('Bu kaydı silmek istediğinize emin misiniz?');">
+                                            <button type="submit" class="btn btn-outline-danger btn-sm">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="6" class="text-center py-4 text-muted">Henüz kazanç kaydı bulunmuyor.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
