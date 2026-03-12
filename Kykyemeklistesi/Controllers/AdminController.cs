@@ -1,4 +1,4 @@
-﻿using Kykyemeklistesi.Models;
+using Kykyemeklistesi.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -111,6 +111,61 @@ namespace Kykyemeklistesi.Controllers
             _db.Remove(silinecekyemeklistesi);
             _db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        // --- Menü Paylaşım Yönetimi ---
+
+        [HttpGet]
+        public IActionResult Paylasimlar()
+        {
+            var paylasimlar = _db.MenuPaylasimlar.OrderByDescending(x => x.GonderimTarihi).ToList();
+            return View(paylasimlar);
+        }
+
+        [HttpGet]
+        public IActionResult DosyaIndir(int id)
+        {
+            var paylasim = _db.MenuPaylasimlar.Find(id);
+            if (paylasim == null || paylasim.DosyaVerisi == null)
+            {
+                return NotFound();
+            }
+
+            string contentType = "application/octet-stream";
+            string extenson = paylasim.DosyaUzantisi?.ToLower() ?? "";
+
+            if (extenson == ".jpg" || extenson == ".jpeg") contentType = "image/jpeg";
+            else if (extenson == ".png") contentType = "image/png";
+            else if (extenson == ".pdf") contentType = "application/pdf";
+            else if (extenson == ".xlsx" || extenson == ".xls") contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+            return File(paylasim.DosyaVerisi, contentType, $"menu_{id}{extenson}");
+        }
+
+        [HttpPost]
+        public IActionResult PaylasimOnayla(int id)
+        {
+            var paylasim = _db.MenuPaylasimlar.Find(id);
+            if (paylasim != null)
+            {
+                paylasim.Durum = "Onaylandı";
+                _db.SaveChanges();
+                TempData["SuccessMessage"] = "Paylaşım başarıyla onaylandı.";
+            }
+            return RedirectToAction("Paylasimlar");
+        }
+
+        [HttpPost]
+        public IActionResult PaylasimSil(int id)
+        {
+            var paylasim = _db.MenuPaylasimlar.Find(id);
+            if (paylasim != null)
+            {
+                _db.MenuPaylasimlar.Remove(paylasim);
+                _db.SaveChanges();
+                TempData["SuccessMessage"] = "Paylaşım silindi.";
+            }
+            return RedirectToAction("Paylasimlar");
         }
 
         [Authorize(Roles = "SuperAdmin")]

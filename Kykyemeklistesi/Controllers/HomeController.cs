@@ -477,7 +477,9 @@ namespace Kykyemeklistesi.Controllers
 
             if (existingVote != null)
             {
-                return Json(new { success = false, message = "Bugün bu menü için zaten oy kullandınız." });
+                var likesCurrent = await _dbContext.MenuOylari.CountAsync(o => o.YemekId == yemekId && o.IsLike);
+                var dislikesCurrent = await _dbContext.MenuOylari.CountAsync(o => o.YemekId == yemekId && !o.IsLike);
+                return Json(new { success = false, message = "Bugün bu menü için zaten oy kullandınız.", likes = likesCurrent, dislikes = dislikesCurrent });
             }
 
             var yeniOy = new MenuOy

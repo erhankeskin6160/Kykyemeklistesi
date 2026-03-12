@@ -1,4 +1,4 @@
-﻿@{
+@{
     Layout = null;
 }
 @model Admin
@@ -61,14 +61,16 @@
         </div>
     }
 
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
     <div class="sidebar bg-info">
-        <a href="Admin/AddAdmin">Admin Ekle</a>
-        <a href="Admin/EditAdmin">Admin Düzenle</a>
-        <a href="Admin/ManageAdmins">Admin Yönetim</a>
-        <a href="Admin/YemekListesiEkle">Yemek Listesi Ekle</a>
-        <a href="Admin/YemekListesiDüzenle">Yemek Listesi Düzenle</a>
-        <a href="Admin/YemekListesi">Yemek Listesi</a>
-
+        <a href="/Admin/AddAdmin">Admin Ekle</a>
+        <a href="/Admin/EditAdmin">Admin Düzenle</a>
+        <a href="/Admin/ManageAdmins">Admin Yönetim</a>
+        <hr />
+        <a href="/Admin/YemekListesiEkle">Yemek Listesi Ekle</a>
+        <a href="/Admin/YemekListesi">Yemek Listesi</a>
+        <hr />
+        <a href="/Admin/Paylasimlar" style="font-weight: bold; color: #000; background: #90caf9;">Menü Paylaşımları</a>
     </div>
 
 

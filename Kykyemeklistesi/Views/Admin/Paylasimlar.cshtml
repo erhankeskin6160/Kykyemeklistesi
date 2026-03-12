@@ -1,0 +1,107 @@
+@model List<Kykyemeklistesi.Models.MenuPaylasim>
+@{
+    ViewData["Title"] = "Menü Paylaşımları | Admin Panel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container my-5">
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-dark text-white p-4">
+            <h2 class="mb-0"><i class="bi bi-file-earmark-text me-2"></i> Kullanıcı Menü Paylaşımları</h2>
+        </div>
+        <div class="card-body p-0">
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success m-4 alert-dismissible fade show" role="alert">
+                    <i class="bi bi-check-circle-fill me-2"></i> @TempData["SuccessMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="ps-4">Tarih</th>
+                            <th>Gönderen</th>
+                            <th>Şehir</th>
+                            <th>Yurt Adı</th>
+                            <th>Durum</th>
+                            <th class="text-center">Dosya</th>
+                            <th class="text-end pe-4">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="ps-4">@item.GonderimTarihi.ToString("dd.MM.yyyy HH:mm")</td>
+                                <td class="fw-bold">@item.GonderenAdi</td>
+                                <td><span class="badge bg-info text-dark">@item.Sehir</span></td>
+                                <td>@item.YurtAdi</td>
+                                <td>
+                                    @if (item.Durum == "Onay Bekliyor")
+                                    {
+                                        <span class="badge bg-warning text-dark"><i class="bi bi-clock-history me-1"></i> @item.Durum</span>
+                                    }
+                                    else if (item.Durum == "Onaylandı")
+                                    {
+                                        <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i> @item.Durum</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">@item.Durum</span>
+                                    }
+                                </td>
+                                <td class="text-center">
+                                    <a href="@Url.Action("DosyaIndir", "Admin", new { id = item.Id })" target="_blank" class="btn btn-outline-primary btn-sm">
+                                        <i class="bi bi-eye-fill"></i> Görüntüle / İndir
+                                    </a>
+                                </td>
+                                <td class="text-end pe-4">
+                                    <div class="btn-group shadow-sm">
+                                        @if (item.Durum == "Onay Bekliyor")
+                                        {
+                                            <form asp-action="PaylasimOnayla" asp-route-id="@item.Id" method="post" class="d-inline">
+                                                <button type="submit" class="btn btn-success btn-sm" title="Onayla">
+                                                    <i class="bi bi-check-lg"></i>
+                                                </button>
+                                            </form>
+                                        }
+                                        <form asp-action="PaylasimSil" asp-route-id="@item.Id" method="post" class="d-inline" onsubmit="return confirm('Bu paylaşımı silmek istediğinize emin misiniz?');">
+                                            <button type="submit" class="btn btn-danger btn-sm" title="Sil">
+                                                <i class="bi bi-trash-fill"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            @if (!Model.Any())
+            {
+                <div class="text-center py-5">
+                    <i class="bi bi-inbox text-muted display-1"></i>
+                    <p class="text-muted mt-3">Henüz herhangi bir menü paylaşımı yapılmamış.</p>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a asp-action="Index" class="btn btn-secondary shadow-sm">
+            <i class="bi bi-arrow-left me-2"></i> Admin Panele Dön
+        </a>
+    </div>
+</div>
+
+<style>
+    .table th { font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.5px; }
+    .badge { padding: 0.5em 0.8em; font-weight: 500; }
+    body.dark-mode .table { color: #f7fafc; }
+    body.dark-mode .table-light { background-color: #2d3748; color: #a0aec0; }
+    body.dark-mode .card { background-color: #1e1e1e; border-color: #4a5568; }
+</style>
