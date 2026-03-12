@@ -18,15 +18,29 @@ namespace Kykyemeklistesi.Controllers
         static string deger;
 
         [HttpGet]
-        public IActionResult Index(string? selectedCity = "Ankara")
+        public IActionResult Index(string? selectedCity)
         {
+            // Eğer URL '/' ise verisi olan ilk şehri bulalım
+            if (string.IsNullOrEmpty(selectedCity))
+            {
+                var firstCityWithData = _dbContext.YemekListesi
+                    .Include(x => x.City)
+                    .Where(x => x.SabahYemekListesi != null && x.Day.Month == DateTime.Now.Month && x.Day.Year == DateTime.Now.Year)
+                    .OrderBy(x => x.City.CityName)
+                    .Select(x => x.City.CityName)
+                    .FirstOrDefault();
+
+                selectedCity = firstCityWithData ?? "Ankara";
+                return RedirectToRoute("cityMenu", new { selectedCity = selectedCity.ToLower() });
+            }
 
             selectedCity = NormalizeCityName(selectedCity);
 
-            if (!Request.Path.Value.Contains($"{selectedCity}-yemek-listesi") &&
-        !Request.Path.Value.Contains("/Home/Bugunyemeklistesi"))
+            // SEO dostu URL kontrolü: Eğer path '{sehir}-yemek-listesi' içermiyorsa oraya yönlendir
+            string expectedPath = $"/{selectedCity.ToLower()}-yemek-listesi";
+            if (Request.Path.Value != expectedPath)
             {
-                return RedirectToAction("Index", new { selectedCity });
+                return RedirectToRoute("cityMenu", new { selectedCity = selectedCity.ToLower() });
             }
             DateTime currentDate = DateTime.Now;
 
@@ -67,14 +81,20 @@ namespace Kykyemeklistesi.Controllers
             return View(yemekListesi);
         }
 
-        public IActionResult Bugunyemeklistesi(string? selectedCity = "Ankara")
+        public IActionResult Bugunyemeklistesi(string? selectedCity)
         {
+            if (string.IsNullOrEmpty(selectedCity))
+            {
+                selectedCity = "Ankara";
+            }
 
             selectedCity = NormalizeCityName(selectedCity);
-            if (!Request.Path.Value.Contains($"{selectedCity}-bugun-yemek-listesi") &&
-        !Request.Path.Value.Contains("/Home/Index"))
+
+            // SEO dostu URL kontrolü
+            string expectedPath = $"/{selectedCity.ToLower()}-bugun-yemek-listesi";
+            if (Request.Path.Value != expectedPath)
             {
-                return RedirectToAction("Bugunyemeklistesi", new { selectedCity });
+                return RedirectToRoute("cityTodayMenu", new { selectedCity = selectedCity.ToLower() });
             }
 
             var selectList = _dbContext.YemekListesi.Where(x => x.Day.Month == DateTime.Now.Month &&
