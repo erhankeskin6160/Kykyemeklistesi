@@ -110,6 +110,62 @@ body.dark-mode .modal-footer {
     border-color: var(--border-color);
 }
 
+/* Menü Oylama Butonları */
+.btn-vote {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 2rem;
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    color: var(--text-muted);
+}
+
+.btn-vote i {
+    font-size: 1.1rem;
+}
+
+.btn-like:hover, .btn-like.active {
+    background-color: rgba(40, 167, 69, 0.1);
+    border-color: #28a745;
+    color: #28a745;
+}
+
+.btn-dislike:hover, .btn-dislike.active {
+    background-color: rgba(220, 53, 69, 0.1);
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+body.dark-mode .btn-vote {
+    border-color: #4a5568;
+    color: #a0aec0;
+}
+
+body.dark-mode .btn-like:hover, 
+body.dark-mode .btn-like.active {
+    background-color: rgba(40, 167, 69, 0.2);
+    color: #48bb78;
+}
+
+body.dark-mode .btn-dislike:hover, 
+body.dark-mode .btn-dislike.active {
+    background-color: rgba(220, 53, 69, 0.2);
+    color: #f56565;
+}
+
+.btn-vote:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.voting-section {
+    border-color: var(--border-color) !important;
+}
+
 * {
     margin: 0;
     padding: 0;

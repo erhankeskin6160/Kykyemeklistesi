@@ -24,6 +24,7 @@ namespace Kykyemeklistesi.Models
 
         public DbSet<YemekYorum> YemekYorumlar { get; set; }
         public DbSet<MenuPaylasim> MenuPaylasimlar { get; set; }
+        public DbSet<MenuOy> MenuOylari { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Yemek>()

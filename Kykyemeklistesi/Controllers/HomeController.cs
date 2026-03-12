@@ -56,6 +56,14 @@ namespace Kykyemeklistesi.Controllers
             ViewData["CanonicalUrl"] = $"https://kykyemeklistesi.com.tr/{selectedCity.ToLower()}-yemek-listesi";
 
             deger = selectedCity;
+
+            // Oylama sayılarını yükle
+            foreach (var y in yemekListesi)
+            {
+                y.LikeCount = _dbContext.MenuOylari.Count(o => o.YemekId == y.Id && o.IsLike);
+                y.DislikeCount = _dbContext.MenuOylari.Count(o => o.YemekId == y.Id && !o.IsLike);
+            }
+
             return View(yemekListesi);
         }
 
@@ -91,6 +99,13 @@ namespace Kykyemeklistesi.Controllers
             var bugunyemeklistesi = _dbContext.YemekListesi.Include(x => x.City).OrderBy(x => x.Day)
                 .Where(x => x.City.CityName == selectedCity && x.Day == DateTime.Now.Date)
                 .ToList();
+
+            // Oylama sayılarını yükle
+            foreach (var y in bugunyemeklistesi)
+            {
+                y.LikeCount = _dbContext.MenuOylari.Count(o => o.YemekId == y.Id && o.IsLike);
+                y.DislikeCount = _dbContext.MenuOylari.Count(o => o.YemekId == y.Id && !o.IsLike);
+            }
 
             return View(bugunyemeklistesi);
         }
@@ -448,6 +463,38 @@ namespace Kykyemeklistesi.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Oyla(int yemekId, bool isLike)
+        {
+            var ip = HttpContext.Connection.RemoteIpAddress?.ToString();
+            if (string.IsNullOrEmpty(ip)) ip = "unknown";
+
+            // Bugün bu IP ile bu yemeğe oy verilmiş mi?
+            var existingVote = await _dbContext.MenuOylari
+                .FirstOrDefaultAsync(o => o.YemekId == yemekId && o.IpAdresi == ip && o.OyTarihi.Date == DateTime.Now.Date);
+
+            if (existingVote != null)
+            {
+                return Json(new { success = false, message = "Bugün bu menü için zaten oy kullandınız." });
+            }
+
+            var yeniOy = new MenuOy
+            {
+                YemekId = yemekId,
+                IpAdresi = ip,
+                IsLike = isLike
+            };
+
+            _dbContext.MenuOylari.Add(yeniOy);
+            await _dbContext.SaveChangesAsync();
+
+            // Güncel sayıları alalım
+            var likes = await _dbContext.MenuOylari.CountAsync(o => o.YemekId == yemekId && o.IsLike);
+            var dislikes = await _dbContext.MenuOylari.CountAsync(o => o.YemekId == yemekId && !o.IsLike);
+
+            return Json(new { success = true, likes = likes, dislikes = dislikes });
         }
 
         public static string SecilenSehir()

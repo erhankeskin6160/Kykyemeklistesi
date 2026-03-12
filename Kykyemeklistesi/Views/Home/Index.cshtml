@@ -230,6 +230,18 @@
                                         </ul>
                                     </div>
                                 </div>
+
+                                <!-- Oylama Bölümü -->
+                                <div class="voting-section mt-3 p-3 border-top d-flex justify-content-center gap-4">
+                                    <button class="btn btn-vote btn-like @(item.LikeCount > 0 ? "active":"")" onclick="oyver(@item.Id, true, this)">
+                                        <i class="bi bi-hand-thumbs-up-fill me-1"></i>
+                                        <span class="like-count">@item.LikeCount</span>
+                                    </button>
+                                    <button class="btn btn-vote btn-dislike @(item.DislikeCount > 0 ? "active":"")" onclick="oyver(@item.Id, false, this)">
+                                        <i class="bi bi-hand-thumbs-down-fill me-1"></i>
+                                        <span class="dislike-count">@item.DislikeCount</span>
+                                    </button>
+                                </div>
                             </article>
                         </div>
 

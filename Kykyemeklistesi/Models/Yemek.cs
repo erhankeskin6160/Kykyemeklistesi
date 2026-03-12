@@ -1,4 +1,4 @@
-﻿namespace Kykyemeklistesi.Models
+namespace Kykyemeklistesi.Models
 {
     public class Yemek
     {
@@ -13,5 +13,11 @@
 
 
         public City City { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public int LikeCount { get; set; }
+        
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public int DislikeCount { get; set; }
     }
 }
