@@ -50,9 +50,10 @@ namespace Kykyemeklistesi.Controllers
             ViewBag.SelectedCity = selectedCity;
 
             // SEO Meta Bilgileri
-            ViewData["Title"] = $"{selectedCity} KYK Yemek Listesi - {currentDate.ToString("MMMM yyyy")}";
-            ViewData["Description"] = $"{selectedCity} KYK yurtları için {currentDate.ToString("MMMM yyyy")} ayı yemek menüsünü görüntüleyin. Günlük sabah ve akşam yemek listesi takibi.";
-            ViewData["CanonicalUrl"] = $"https://kykyemeklistesi.com.tr/{selectedCity.ToLower()}-yemek-listesi";
+            ViewData["Title"] = $"{selectedCity} KYK Yemek Listesi {currentDate.Year} | Bugün KYK'da Ne Var?";
+            ViewData["Description"] = $"{selectedCity} KYK yurtları {currentDate.ToString("MMMM yyyy")} aylık yemek menüsü. Bugün KYK sabah kahvaltısı ve akşam yemeğinde ne var? Hemen öğrenin.";
+            ViewData["Keywords"] = $"{selectedCity} kyk yemek listesi, kyk yemek menüsü {currentDate.Year}, {selectedCity} yurt yemekleri";
+            ViewData["CanonicalUrl"] = $"https://kykyemeklistesi.com.tr/Home/Index?selectedCity={selectedCity}";
 
             deger = selectedCity;
             return View(yemekListesi);
@@ -82,9 +83,10 @@ namespace Kykyemeklistesi.Controllers
             ViewBag.SelectedCity = selectedCity;
 
             // SEO Meta Bilgileri
-            ViewData["Title"] = $"Bugünkü KYK Yemek Menüsü - {selectedCity} ({DateTime.Now.ToString("dd.MM.yyyy")})";
-            ViewData["Description"] = $"{selectedCity} KYK yurtlarında bugün ne yemek var? {DateTime.Now.ToString("dd MMMM yyyy")} sabah kahvaltısı ve akşam yemeği menüsü.";
-            ViewData["CanonicalUrl"] = $"https://kykyemeklistesi.com.tr/{selectedCity.ToLower()}-bugun-yemek-listesi";
+            ViewData["Title"] = $"Bugün {selectedCity} KYK'da Ne Yemek Var? | {DateTime.Now:dd MMMM yyyy}";
+            ViewData["Description"] = $"{selectedCity} KYK yurtları {DateTime.Now:dd MMMM yyyy} tarihli en güncel yemek listesi. Kahvaltı ve akşam yemeğinde neler var?";
+            ViewData["Keywords"] = "kyk bugün ne yemek var, kyk yemek menüsü bugün, güncel kyk listesi";
+            ViewData["CanonicalUrl"] = $"https://kykyemeklistesi.com.tr/Home/Bugunyemeklistesi?selectedCity={selectedCity}";
 
             var bugunyemeklistesi = _dbContext.YemekListesi.Include(x => x.City).OrderBy(x => x.Day)
                 .Where(x => x.City.CityName == selectedCity && x.Day == DateTime.Now.Date)
@@ -386,9 +388,10 @@ namespace Kykyemeklistesi.Controllers
             ViewBag.Anayemek = enCokCikanAnaYemekler;
 
             // SEO Meta Bilgileri
-            ViewData["Title"] = $"{selectedCity} KYK Yemek İstatistikleri - En Çok Çıkan Yemekler";
-            ViewData["Description"] = $"{selectedCity} KYK yurtlarında bu ay en çok çıkan çorbalar, ana yemekler ve kahvaltılıklar. Güncel KYK yemek verileri ve analizleri.";
-            ViewData["CanonicalUrl"] = $"https://kykyemeklistesi.com.tr/kyk-yemek-listesi-istatistik/{selectedCity.ToLower()}";
+            ViewData["Title"] = $"{selectedCity} KYK Yemek İstatistikleri ve Kalori Analizi";
+            ViewData["Description"] = $"{selectedCity} KYK yurt yemekleri kalori raporu, besin değerleri ve aylık en çok çıkan yemeklerin istatistik analizi.";
+            ViewData["Keywords"] = "kyk yemek kalori, kyk besin değerleri, kyk yemek istatistikleri, yemek analizi";
+            ViewData["CanonicalUrl"] = $"https://kykyemeklistesi.com.tr/Home/Static?selectedCity={selectedCity}";
 
             return View();
         }

@@ -10,7 +10,25 @@
         
         <meta name="description" content="@(ViewData["Description"] ?? "KYK yemek listesi ile yurtlardaki öğrenciler için günlük yemek menülerini görüntüleyin. Sabah ve akşam yemeklerini takip edin.")">
         
-        <meta name="keywords" content="KYK yemek listesi, KYK yemek menüsü, KYK sabah menüsü, KYK akşam menüsü, KYK yurt yemekleri, bugünkü yemek menüsü, öğrenci yemek listesi, güncel KYK menüsü">
+        <meta name="keywords" content="@(ViewData["Keywords"] ?? "KYK yemek listesi, KYK yemek menüsü, KYK sabah menüsü, KYK akşam menüsü, KYK yurt yemekleri, bugünkü yemek menüsü, öğrenci yemek listesi, güncel KYK menüsü")">
+
+        <!-- Google Search Console & Analytics (ID'lerinizi buraya ekleyin) -->
+        @* <meta name="google-site-verification" content="GSC_ID_BURAYA" /> *@
+        @* <!-- Google Analytics (GA4) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-XXXXXXXXXX');
+        </script> *@
+
+        <style>
+            /* Font yükleme hızı için swap ayarı */
+            @@font-face {
+              font-display: swap;
+            }
+        </style>
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website">

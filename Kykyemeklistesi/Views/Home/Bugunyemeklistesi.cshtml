@@ -9,17 +9,39 @@
         var tarih = DateTime.Now.ToString("dd MMM yyyy ", new System.Globalization.CultureInfo("tr-TR"));
     }
     <script type="application/ld+json">
-    {
-      "@@context": "https://schema.org",
-      "@@type": "Menu",
-      "name": "@(sehir) Bugünkü KYK Yemek Menüsü",
-      "description": "@(sehir) KYK yurtları için @(tarih) tarihli yemek menüsü.",
-      "publisher": {
-        "@@type": "Organization",
-        "name": "KYK Yemek Listesi",
-        "url": "https://kykyemeklistesi.com.tr"
+    [
+      {
+        "@@context": "https://schema.org",
+        "@@type": "Menu",
+        "name": "@(sehir) Bugünkü KYK Yemek Menüsü",
+        "description": "@(sehir) KYK yurtları için @(tarih) tarihli yemek menüsü.",
+        "publisher": {
+          "@@type": "Organization",
+          "name": "KYK Yemek Listesi",
+          "url": "https://kykyemeklistesi.com.tr"
+        }
+      },
+      {
+        "@@context": "https://schema.org",
+        "@@type": "BreadcrumbList",
+        "itemListElement": [{
+          "@@type": "ListItem",
+          "position": 1,
+          "name": "Ana Sayfa",
+          "item": "https://kykyemeklistesi.com.tr"
+        },{
+          "@@type": "ListItem",
+          "position": 2,
+          "name": "@(sehir) KYK Yemek Listesi",
+          "item": "https://kykyemeklistesi.com.tr/Home/Index?selectedCity=@(sehir)"
+        },{
+          "@@type": "ListItem",
+          "position": 3,
+          "name": "Bugünkü Menü",
+          "item": "https://kykyemeklistesi.com.tr/Home/Bugunyemeklistesi?selectedCity=@(sehir)"
+        }]
       }
-    }
+    ]
     </script>
 }
 
@@ -53,6 +75,7 @@
             <!-- Page Title -->
             <div class="page-title">
                 <h1>@ViewBag.SelectedCity KYK Yemek Menüsü</h1>
+                <a asp-action="Index" asp-route-selectedCity="@ViewBag.SelectedCity" class="btn btn-sm btn-outline-light mt-2">30 Günlük Listenin Tamamını Gör</a>
             </div>
 
             <!-- Controls Section -->
