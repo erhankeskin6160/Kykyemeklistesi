@@ -1,4 +1,4 @@
-﻿* {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -617,9 +617,12 @@ body {
 
 
     .sidebar {
-        height: 75px;
+        display: none;
     }
 
+    ins.adsbygoogle {
+        width: 100% !important;
+    }
 }
 
 /* Demo i�eri�i */
@@ -1050,7 +1053,21 @@ h1 {
     }
 
     .content-area {
-        max-width: 296px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    ins.adsbygoogle {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+    }
+
+    .adsense-wrapper {
+        min-height: auto;
+        padding: 5px;
+        overflow: hidden;
     }
 
     .container-fluid {
