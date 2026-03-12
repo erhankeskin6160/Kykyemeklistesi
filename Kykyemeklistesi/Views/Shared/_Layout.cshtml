@@ -72,7 +72,7 @@
     <body>
         <header class="d-flex  flex-column">
             <nav class=" navbar navbar-expand-lg  w-100 navbar-light text-light border-bottom-0.5 box-shadow mb-1 m-0 p-0"
-                style="background-color: #64B5F6;">
+                style="background-color: var(--nav-bg);">
                 <div class="container">
                     <a class="navbar-brand" asp-controller="Home" asp-action="Index">
                         <img class="rounded-circle" fetchpriority="high" src="~/images/Backgroundss.webp" alt="logo"
@@ -129,13 +129,13 @@
                                 else
                                 {
                                     <a href="@Url.Action("Index", "User")">
-                                        <i class="fa-solid fa-user-gear user-panel text-dark fa-2x me-3"></i>
+                                        <i class="fa-solid fa-user-gear user-panel text-light fa-2x me-3"></i>
                                     </a>
 
 
 
                                     <a href="@Url.Action("Logout", "User")">
-                                        <i class="fa-solid fa-right-from-bracket text-dark fa-2x me-2"></i>
+                                        <i class="fa-solid fa-right-from-bracket text-light fa-2x me-2"></i>
                                     </a>
                                 }
                             }
@@ -164,7 +164,7 @@
         </div>
 
         <footer class="border-top footer text-muted d-flex">
-            <div class="container-fluid position-sticky bottom-0" style="background-color: #64B5F6;">
+            <div class="container-fluid position-sticky bottom-0" style="background-color: var(--nav-bg);">
                 &copy; 2024 - Kykyemeklistesi -
                 <a class="text-muted" asp-controller="Home" asp-action="Index" style="text-decoration: none;">
                     Ana Sayfa
