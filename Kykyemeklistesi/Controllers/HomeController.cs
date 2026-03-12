@@ -223,6 +223,32 @@ namespace Kykyemeklistesi.Controllers
 
             xmlDoc.AppendChild(urlSetElement);
 
+            // Ana Sayfa
+            XmlElement homeUrlElement = xmlDoc.CreateElement("url");
+            XmlElement homeLoc = xmlDoc.CreateElement("loc");
+            homeLoc.InnerText = "https://kykyemeklistesi.com.tr/";
+            homeUrlElement.AppendChild(homeLoc);
+            XmlElement homeLastMod = xmlDoc.CreateElement("lastmod");
+            homeLastMod.InnerText = DateTime.UtcNow.ToString("yyyy-MM-dd");
+            homeUrlElement.AppendChild(homeLastMod);
+            XmlElement homeChangeFreq = xmlDoc.CreateElement("changefreq");
+            homeChangeFreq.InnerText = "daily";
+            homeUrlElement.AppendChild(homeChangeFreq);
+            XmlElement homePriority = xmlDoc.CreateElement("priority");
+            homePriority.InnerText = "1.0";
+            homeUrlElement.AppendChild(homePriority);
+            urlSetElement.AppendChild(homeUrlElement);
+
+            // İstatistik sayfası (Ankara varsayılan)
+            XmlElement staticUrlElement = xmlDoc.CreateElement("url");
+            XmlElement staticLoc = xmlDoc.CreateElement("loc");
+            staticLoc.InnerText = "https://kykyemeklistesi.com.tr/kyk-yemek-listesi-istatistik/Ankara";
+            staticUrlElement.AppendChild(staticLoc);
+            XmlElement staticPriority = xmlDoc.CreateElement("priority");
+            staticPriority.InnerText = "0.7";
+            staticUrlElement.AppendChild(staticPriority);
+            urlSetElement.AppendChild(staticUrlElement);
+
             var cities = _dbContext.Cities.ToList();
 
             foreach (var city in cities)
@@ -230,10 +256,6 @@ namespace Kykyemeklistesi.Controllers
                 // SEO dostu URL'leri sitemap'e ekliyoruz
                 string cityUrlSeoFriendly = $"https://kykyemeklistesi.com.tr/{city.CityName.ToLower()}-yemek-listesi";
                 string todayMenuUrlSeoFriendly = $"https://kykyemeklistesi.com.tr/{city.CityName.ToLower()}-bugun-yemek-listesi";
-
-                // Eski URL'leri de ekliyoruz (geriye uyumluluk için)
-                string cityUrl = $"https://kykyemeklistesi.com.tr/Home/Index?selectedCity={city.CityName}";
-                string todayMenuUrl = $"https://kykyemeklistesi.com.tr/Home/Bugunyemeklistesi?selectedCity={city.CityName}";
 
                 // SEO dostu şehir menü URL'i
                 XmlElement cityUrlElement = xmlDoc.CreateElement("url");

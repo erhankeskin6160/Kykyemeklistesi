@@ -105,7 +105,7 @@ function initAdLazyLoad() {
                     observer.disconnect(); // Script yüklendiğinde gözlemlemeyi bırak
                 }
             });
-        }, { rootMargin: '400px' }); // Kullanıcı reklam alanına 400px yaklaşınca yükle
+        }, { rootMargin: '800px' }); // Kullanıcı reklam alanına 800px yaklaşınca yükle
 
         // Sayfada reklam alanı varsa gözlemlemeye başla
         const adElements = document.querySelectorAll('.ad-banner, ins.adsbygoogle');
