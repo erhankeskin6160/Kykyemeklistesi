@@ -1,21 +1,10 @@
-﻿@{
-    ViewData["Title"] = "Grafikler";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    var sehirler = ViewBag.SelectedCity as List<SelectListItem>;
+@section MetaTags {
+    @* _Layout.cshtml zaten başlık ve açıklamayı ViewData dan alıyor *@
 }
 
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="/css/static.css">
-    
-     <link rel="stylesheet" href="/css/fontawesome.css">
-        <link rel="stylesheet" href="/css/bootstrap.css">
-        <link rel="stylesheet" href="/css/styles.css">   
-</head>
-<body>
+@{
+    var sehirler = ViewBag.SelectedCity as List<SelectListItem>;
+}
 
     <div class="main-layout d-flex flex-lg-row flex-column justify-content-center align-items-center">
         <!-- Sol Reklam Alanı -->
@@ -135,6 +124,4 @@
             document.getElementById('loadingSpinner').style.display = 'block';
             document.querySelector('.charts-grid').style.opacity = '0.5';
         });
-    </script>
-</body>
-</html>
+    </script>

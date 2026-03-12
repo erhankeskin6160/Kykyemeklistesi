@@ -49,6 +49,11 @@ namespace Kykyemeklistesi.Controllers
             ViewBag.City = selectList;
             ViewBag.SelectedCity = selectedCity;
 
+            // SEO Meta Bilgileri
+            ViewData["Title"] = $"{selectedCity} KYK Yemek Listesi - {currentDate.ToString("MMMM yyyy")}";
+            ViewData["Description"] = $"{selectedCity} KYK yurtları için {currentDate.ToString("MMMM yyyy")} ayı yemek menüsünü görüntüleyin. Günlük sabah ve akşam yemek listesi takibi.";
+            ViewData["CanonicalUrl"] = $"https://kykyemeklistesi.com.tr/{selectedCity.ToLower()}-yemek-listesi";
+
             deger = selectedCity;
             return View(yemekListesi);
         }
@@ -75,6 +80,11 @@ namespace Kykyemeklistesi.Controllers
 
             ViewBag.City = selectList;
             ViewBag.SelectedCity = selectedCity;
+
+            // SEO Meta Bilgileri
+            ViewData["Title"] = $"Bugünkü KYK Yemek Menüsü - {selectedCity} ({DateTime.Now.ToString("dd.MM.yyyy")})";
+            ViewData["Description"] = $"{selectedCity} KYK yurtlarında bugün ne yemek var? {DateTime.Now.ToString("dd MMMM yyyy")} sabah kahvaltısı ve akşam yemeği menüsü.";
+            ViewData["CanonicalUrl"] = $"https://kykyemeklistesi.com.tr/{selectedCity.ToLower()}-bugun-yemek-listesi";
 
             var bugunyemeklistesi = _dbContext.YemekListesi.Include(x => x.City).OrderBy(x => x.Day)
                 .Where(x => x.City.CityName == selectedCity && x.Day == DateTime.Now.Date)
@@ -375,7 +385,10 @@ namespace Kykyemeklistesi.Controllers
     .ToList();
             ViewBag.Anayemek = enCokCikanAnaYemekler;
 
-
+            // SEO Meta Bilgileri
+            ViewData["Title"] = $"{selectedCity} KYK Yemek İstatistikleri - En Çok Çıkan Yemekler";
+            ViewData["Description"] = $"{selectedCity} KYK yurtlarında bu ay en çok çıkan çorbalar, ana yemekler ve kahvaltılıklar. Güncel KYK yemek verileri ve analizleri.";
+            ViewData["CanonicalUrl"] = $"https://kykyemeklistesi.com.tr/kyk-yemek-listesi-istatistik/{selectedCity.ToLower()}";
 
             return View();
         }

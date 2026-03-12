@@ -1,50 +1,27 @@
-﻿    @using System.Globalization
+    @using System.Globalization
     @using Kykyemeklistesi.Controllers
     @model List<Yemek>
-    <!DOCTYPE html>
-    <html lang="tr">
-
-    @{
-        var sehir = ViewBag.SelectedCity;
-        var sayac = 0;
-        Layout = "~/Views/Shared/_Layout.cshtml";
-
+@section MetaTags {
+    <script type="application/ld+json">
+    {
+      "@@context": "https://schema.org",
+      "@@type": "Menu",
+      "name": "@(ViewBag.SelectedCity) KYK Yemek Listesi",
+      "description": "@(ViewBag.SelectedCity) KYK yurtları için aylık yemek menüsü.",
+      "publisher": {
+        "@@type": "Organization",
+        "name": "KYK Yemek Listesi",
+        "url": "https://kykyemeklistesi.com.tr"
+      }
     }
+    </script>
+}
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="google-adsense-account" content="ca-pub-5290089711270021">
-        <meta name="description" content="KYK yemek listesi ile yurtlardaki öğrenciler için günlük yemek menülerini görüntüleyin. Sabah ve akşam yemeklerini takip edin, duyuruları kaçırmayın.">
-        <meta name="keywords" content="KYK yemek listesi, KYK yemek menüsü, öğrenci yemek listesi, günlük yemek menüsü, KYK duyuruları, KYK yurt yemekleri">
-        <title>@($"{sehir} - KYK Yemek Menüsü - kykyemeklistesi.com.tr")</title>
-        <link rel="canonical" href="https://kykyemeklistesi.com.tr/@ViewBag.SelectedCity.ToLower()-yemek-listesi">
-
-        <link rel="stylesheet" href="/css/fontawesome.css">
-        <link rel="stylesheet" href="/css/bootstrap.css">
-        <link rel="stylesheet" href="/css/styles.css">    
-
-        <meta name="verify-admitad" content="cab80166e8" /> 
-        <meta name="mylead-verification" content="828eb615326a5b5e53db85797f3b41b3">
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-20V1RRPVZ1"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() { dataLayer.push(arguments); }
-            gtag('js', new Date());
-            gtag('config', 'G-20V1RRPVZ1');
-        </script>
-    
-
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5290089711270021" crossorigin="anonymous"></script>
-            <meta name='impact-site-verification' value='611f25ec-1d6e-43d4-8ff5-5c5e90ae0ce4'>
-
-            <meta name="fo-verify" content="14ce4026-197f-43da-a729-dc169ac5d3af" />
-
-        
-    </head>
-
-    <body>
+@{
+    var sehir = ViewBag.SelectedCity;
+    var sayac = 0;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
     <div class="container-xl   ps-2 pe-5 ps-md-3 pe-md-5  ">
 
         <div class="d-flex justify-content-center align-items-center">
@@ -397,6 +374,4 @@
             window.addEventListener('resize', applyFilters);
         </script>
         <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-        <script src="~/js/script.js"></script>
-    </body>
-</html>
+        <script src="~/js/script.js"></script>

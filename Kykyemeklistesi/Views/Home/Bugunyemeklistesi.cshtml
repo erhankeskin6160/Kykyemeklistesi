@@ -1,45 +1,32 @@
-﻿@using System.Globalization
+@using System.Globalization
 @model List<Yemek>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<!DOCTYPE html>
-<html lang="tr">
-
-
-<head>
-    @section MetaTags {
-
-        @{
-            var sehir = ViewBag.SelectedCity;
-            var tarih = DateTime.Now.ToString("dd MMM yyyy ", new System.Globalization.CultureInfo("tr-TR"));
-        }
-
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description"
-            content="@($"{sehir} KYK yurtlarında bugün hangi yemekler var? {tarih} tarihli KYK yemek listesi ile sabah ve akşam menüsünü öğrenin!")">
-        <meta name="keywords"
-            content="KYK yemek listesi, KYK yemek menüsü, kyk yemek listesi bugün, günlük yemek menüsü, kyk yemek, KYK yurt yemekleri">
-        <title>@($"{sehir} KYK Yemek Listesi Bugün | kykyemeklistesi.com.tr")</title>
-        <meta name="google-adsense-account" content="ca-pub-5290089711270021">
+@section MetaTags {
+    @{
+        var sehir = ViewBag.SelectedCity;
+        var tarih = DateTime.Now.ToString("dd MMM yyyy ", new System.Globalization.CultureInfo("tr-TR"));
     }
-    <link rel="stylesheet" href="/css/fontawesome.css">
-    <link rel="stylesheet" href="/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link href="/css/bügününyemeklistesi.css" rel="stylesheet" />
+    <script type="application/ld+json">
+    {
+      "@@context": "https://schema.org",
+      "@@type": "Menu",
+      "name": "@(sehir) Bugünkü KYK Yemek Menüsü",
+      "description": "@(sehir) KYK yurtları için @(tarih) tarihli yemek menüsü.",
+      "publisher": {
+        "@@type": "Organization",
+        "name": "KYK Yemek Listesi",
+        "url": "https://kykyemeklistesi.com.tr"
+      }
+    }
+    </script>
+}
 
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5290089711270021"
-        crossorigin="anonymous"></script>
-
-</head>
 
 
 
-
-<body>
-    
 
     <!-- Main Layout -->
     <div class="main-layout ms-lg-5 ps-lg-0">
@@ -258,7 +245,4 @@
                 todaySection.style.border = '2px solid #fc8181';
             }
         });
-    </script>
-</body>
-
-    </html>
+    </script>
