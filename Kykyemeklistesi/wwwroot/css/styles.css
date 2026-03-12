@@ -757,7 +757,7 @@ h1 {
     .sidebar {
         padding: 1rem;
         border-radius: 15px;
-        width: 50%;
+        width: 100%;
     }
 
     .page-title h1 {

@@ -8,7 +8,6 @@
      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
      padding: 0 0;
-     /* min-height: 100vh; */
  }
 
  .main-layout {
@@ -46,7 +45,7 @@
      padding: 0.5rem;
      text-align: center;
      width: 100%;
-     max-width: 180px;
+     max-width: 100%;
  }
 
  .ad-banner:hover {
@@ -62,15 +61,8 @@
  }
 
  .content-wrapper {
-     flex: 1 1 700px;
-     max-width: 900px;
- }
-
-
-
- /* Ana İçerik Alanı */
- .content-wrapper {
      flex: 1;
+     width: 100%;
      max-width: 1200px;
  }
 
@@ -178,15 +170,9 @@
      max-height: 100%;
  }
 
-
  @keyframes fadeIn {
-     from {
-         opacity: 0;
-     }
-
-     to {
-         opacity: 1;
-     }
+     from { opacity: 0; }
+     to { opacity: 1; }
  }
 
  @keyframes fadeInDown {
@@ -194,7 +180,6 @@
          opacity: 0;
          transform: translateY(-20px);
      }
-
      to {
          opacity: 1;
          transform: translateY(0);
@@ -206,7 +191,6 @@
          opacity: 0;
          transform: translateY(20px);
      }
-
      to {
          opacity: 1;
          transform: translateY(0);
@@ -220,10 +204,7 @@
      color: #3498db;
  }
 
-
-
  @media (max-width: 1200px) {
-
      .charts-grid {
          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
      }
@@ -231,32 +212,21 @@
 
  @media (max-width: 992px) {
      .ad-banner {
-         /* 1. Genişlik çelişkisi düzeltildi. Kapsayıcının %100'ünü kaplasın ama en fazla 320px olsun. */
          width: 100% !important;
-         max-width: 320px;
-         margin: 0 auto;
-
-         /* 2. Yüksekliği zorla. min-height ve max-height ile esnemesini engelle. */
-         height: 240px !important;
-         min-height: 240px !important;
-         max-height: 240px !important;
+         max-width: 100%;
+         margin: 10px auto;
+         height: auto !important;
+         min-height: 100px;
          overflow: hidden;
-         /* Yükseklikten taşan kısmı gizle */
-
-         /* 3. İçeriği ortalamak için (isteğe bağlı ama önerilir) */
          display: flex;
          align-items: center;
          justify-content: center;
      }
 
      .adsbygoogle {
-         /* Bu kural, Google'ın eklediği inline stili ezmeye çalışır. */
          width: 100% !important;
-         /* Genişliği kapsayıcıya uydur */
          height: auto !important;
-         /* Yüksekliği otomatik bırak ama max-height ile sınırla */
-         max-height: 240px !important;
-         /* Kapsayıcıdan taşmasını engelle */
+         max-height: 300px !important;
      }
 
      .content-wrapper {
@@ -277,7 +247,6 @@
          flex-direction: column;
          align-items: center;
      }
-
 
      .page-header h1 {
          font-size: 2rem;
@@ -306,18 +275,16 @@
  }
 
  @media (max-width: 480px) {
-
-
      .main-layout {
          padding: 0 10px;
      }
 
      .page-header h1 {
-         font-size: 1.6rem;
+         font-size: 1.5rem;
      }
 
      .page-header p {
-         font-size: 0.9rem;
+         font-size: 0.85rem;
      }
 
      .city-selector-container {
@@ -325,8 +292,8 @@
      }
 
      .city-dropdown {
-         padding: 12px 15px;
-         font-size: 0.95rem;
+         padding: 10px 12px;
+         font-size: 0.9rem;
      }
 
      .chart-card {
@@ -334,7 +301,11 @@
      }
 
      .chart-wrapper {
-         height: 300px;
+         height: 250px;
+     }
+     
+     .charts-grid {
+         gap: 15px;
      }
  }
 
