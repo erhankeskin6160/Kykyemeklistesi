@@ -75,7 +75,7 @@
                 style="background-color: #64B5F6;">
                 <div class="container">
                     <a class="navbar-brand" asp-controller="Home" asp-action="Index">
-                        <img class="rounded-circle" fetchpriority="low" src="~/images/Backgroundss.webp" alt="logo"
+                        <img class="rounded-circle" fetchpriority="high" src="~/images/Backgroundss.webp" alt="logo"
                             style="width: 85px; margin: 0.1px;">
 
 
@@ -100,6 +100,10 @@
 
                             <li class="nav-item mx-3">
                                 <a class="nav-link text-light fw-semibold" asp-controller="Home" asp-action="SSS">SSS</a>
+                            </li>
+
+                            <li class="nav-item mx-3">
+                                <a class="nav-link text-light fw-semibold" asp-controller="Home" asp-action="Paylas">Menü Paylaş</a>
                             </li>
 
                         <li class="nav-item mx-3">
@@ -136,10 +140,9 @@
                                 }
                             }
 
-
-
-
-
+                            <button id="theme-toggle" class="btn btn-outline-light border-0 me-3" title="Temayı Değiştir">
+                                <i class="bi bi-moon-stars-fill" id="theme-icon"></i>
+                            </button>
 
                         </div>
                     </div>
@@ -149,6 +152,13 @@
 
         <div class="container px-2 px-md-0">
             <main role="main" class="pb-3">
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success mt-3 shadow-sm alert-dismissible fade show" role="alert">
+                        <i class="bi bi-check-circle-fill me-2"></i> @TempData["SuccessMessage"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
                 @RenderBody()
             </main>
         </div>
@@ -162,10 +172,34 @@
             </div>
         </footer>
         <script src="~/lib/jquery/dist/jquery.min.js" defer></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
 
 
-        <script src="~/js/site.js" asp-append-version="true"></script> 
+        <script src="~/js/site.js" asp-append-version="true" defer></script> 
+        <script>
+            // Karanlık Mod Mantığı
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+            const body = document.body;
+
+            // Tercihi yükle
+            if (localStorage.getItem('theme') === 'dark') {
+                body.classList.add('dark-mode');
+                themeIcon.classList.replace('bi-moon-stars-fill', 'bi-sun-fill');
+            }
+
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('theme', 'dark');
+                    themeIcon.classList.replace('bi-moon-stars-fill', 'bi-sun-fill');
+                } else {
+                    localStorage.setItem('theme', 'light');
+                    themeIcon.classList.replace('bi-sun-fill', 'bi-moon-stars-fill');
+                }
+            });
+        </script>
         @await RenderSectionAsync("Scripts", required: false) 
     </body>
 

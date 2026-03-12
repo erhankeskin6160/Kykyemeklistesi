@@ -53,7 +53,7 @@ namespace Kykyemeklistesi.Controllers
             ViewData["Title"] = $"{selectedCity} KYK Yemek Listesi {currentDate.Year} | Bugün KYK'da Ne Var?";
             ViewData["Description"] = $"{selectedCity} KYK yurtları {currentDate.ToString("MMMM yyyy")} aylık yemek menüsü. Bugün KYK sabah kahvaltısı ve akşam yemeğinde ne var? Hemen öğrenin.";
             ViewData["Keywords"] = $"{selectedCity} kyk yemek listesi, kyk yemek menüsü {currentDate.Year}, {selectedCity} yurt yemekleri";
-            ViewData["CanonicalUrl"] = $"https://kykyemeklistesi.com.tr/Home/Index?selectedCity={selectedCity}";
+            ViewData["CanonicalUrl"] = $"https://kykyemeklistesi.com.tr/{selectedCity.ToLower()}-yemek-listesi";
 
             deger = selectedCity;
             return View(yemekListesi);
@@ -86,7 +86,7 @@ namespace Kykyemeklistesi.Controllers
             ViewData["Title"] = $"Bugün {selectedCity} KYK'da Ne Yemek Var? | {DateTime.Now:dd MMMM yyyy}";
             ViewData["Description"] = $"{selectedCity} KYK yurtları {DateTime.Now:dd MMMM yyyy} tarihli en güncel yemek listesi. Kahvaltı ve akşam yemeğinde neler var?";
             ViewData["Keywords"] = "kyk bugün ne yemek var, kyk yemek menüsü bugün, güncel kyk listesi";
-            ViewData["CanonicalUrl"] = $"https://kykyemeklistesi.com.tr/Home/Bugunyemeklistesi?selectedCity={selectedCity}";
+            ViewData["CanonicalUrl"] = $"https://kykyemeklistesi.com.tr/{selectedCity.ToLower()}-bugun-yemek-listesi";
 
             var bugunyemeklistesi = _dbContext.YemekListesi.Include(x => x.City).OrderBy(x => x.Day)
                 .Where(x => x.City.CityName == selectedCity && x.Day == DateTime.Now.Date)
@@ -395,6 +395,61 @@ namespace Kykyemeklistesi.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public IActionResult Paylas()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Paylas(MenuPaylasim model, IFormFile file)
+        {
+            if (ModelState.IsValid)
+            {
+                if (file != null && file.Length > 0)
+                {
+                    // Dosya uzantısı kontrolü
+                    var extension = Path.GetExtension(file.FileName).ToLower();
+                    var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".pdf", ".xlsx", ".xls" };
+                    if (!allowedExtensions.Contains(extension))
+                    {
+                        ModelState.AddModelError("file", "Sadece Resim (JPG, PNG), PDF veya Excel dosyaları yüklenebilir.");
+                        return View(model);
+                    }
+
+                    // Dosya boyutu kontrolü (max 10MB)
+                    if (file.Length > 10 * 1024 * 1024)
+                    {
+                        ModelState.AddModelError("file", "Dosya boyutu 10MB'dan küçük olmalıdır.");
+                        return View(model);
+                    }
+
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await file.CopyToAsync(memoryStream);
+                        model.DosyaVerisi = memoryStream.ToArray();
+                    }
+                    
+                    model.DosyaUzantisi = extension;
+                    model.DosyaYolu = file.FileName; // Orijinal adını referans olarak tutalım
+                }
+                else
+                {
+                    ModelState.AddModelError("file", "Lütfen bir yemek listesi dosyası seçiniz.");
+                    return View(model);
+                }
+
+                _dbContext.MenuPaylasimlar.Add(model);
+                await _dbContext.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = "Yemek listeniz başarıyla gönderildi! İncelemenin ardından sisteme dahil edilecektir. Desteğiniz için teşekkürler.";
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
+
         public static string SecilenSehir()
         {
             var secilensehir = deger;

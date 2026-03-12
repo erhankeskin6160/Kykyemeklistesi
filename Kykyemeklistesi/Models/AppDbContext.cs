@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Kykyemeklistesi.Models
 {
@@ -23,6 +23,7 @@ namespace Kykyemeklistesi.Models
         public DbSet<User> Users { get; set; }
 
         public DbSet<YemekYorum> YemekYorumlar { get; set; }
+        public DbSet<MenuPaylasim> MenuPaylasimlar { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Yemek>()

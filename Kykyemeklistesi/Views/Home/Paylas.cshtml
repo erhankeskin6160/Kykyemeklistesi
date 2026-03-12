@@ -1,0 +1,93 @@
+@model Kykyemeklistesi.Models.MenuPaylasim
+@{
+    ViewData["Title"] = "Menü Paylaş | KYK Yemek Listesi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4 p-md-5">
+                    <h2 class="text-center mb-4" style="color: #1976D2;">
+                        <i class="bi bi-cloud-upload"></i> Menü Paylaş, Destek Ol!
+                    </h2>
+                    <p class="text-muted text-center mb-5">
+                        Yurdundaki yemek listesinin fotoğrafını veya belgesini paylaş, binlerce öğrencinin faydalanmasını sağla.
+                    </p>
+
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success">
+                            @TempData["SuccessMessage"]
+                        </div>
+                    }
+
+                    <form asp-action="Paylas" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="GonderenAdi" class="form-label fw-bold"></label>
+                                <input asp-for="GonderenAdi" class="form-control" placeholder="Örn: Ahmet Yılmaz" />
+                                <span asp-validation-for="GonderenAdi" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Sehir" class="form-label fw-bold"></label>
+                                <input asp-for="Sehir" class="form-control" placeholder="Örn: Ankara" />
+                                <span asp-validation-for="Sehir" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="YurtAdi" class="form-label fw-bold"></label>
+                            <input asp-for="YurtAdi" class="form-control" placeholder="Örn: Tahsin Banguoğlu KYK Yurdu" />
+                            <span asp-validation-for="YurtAdi" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Yemek Listesi Dosyası (Resim, PDF veya Excel)</label>
+                            <div class="upload-area border-dashed p-4 text-center rounded bg-light">
+                                <input type="file" name="file" class="form-control" accept=".jpg,.jpeg,.png,.pdf,.xlsx,.xls" required />
+                                <div class="mt-2 text-muted small">
+                                    Desteklenen Formatlar: JPG, PNG, PDF, Excel (Max: 10MB)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-grid shadow-sm">
+                            <button type="submit" class="btn btn-primary btn-lg fw-bold" style="background-color: #1976D2; border: none;">
+                                <i class="bi bi-send-fill me-2"></i> Menüyü Gönder
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="mt-5 bg-info bg-opacity-10 p-3 rounded border border-info border-opacity-25">
+                        <h6 class="text-info fw-bold"><i class="bi bi-info-circle-fill me-2"></i> Neden Paylaşmalısın?</h6>
+                        <p class="small text-muted mb-0">
+                            Paylaştığın menüler sayesinde diğer öğrenciler de bugün ne yemek olduğunu önceden öğrenebilir. Tüm menüler yönetici onayından geçtikten sonra sisteme eklenir.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .upload-area {
+        border: 2px dashed #dee2e6;
+        transition: all 0.3s ease;
+    }
+    .upload-area:hover {
+        border-color: #1976D2;
+        background-color: #f8f9fa !important;
+    }
+    .form-control:focus {
+        border-color: #1976D2;
+        box-shadow: 0 0 0 0.25rem rgba(25, 118, 210, 0.25);
+    }
+    .border-dashed {
+        border-style: dashed !important;
+    }
+</style>

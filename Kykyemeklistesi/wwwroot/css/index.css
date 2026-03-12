@@ -33,7 +33,12 @@ body {
 
 .day-section.today-meal {
     border: 2px solid #28a745;
-    background: linear-gradient(135deg, #f8fff9 0%, #e8f5e8 100%);
+    background: var(--today-meal-bg, linear-gradient(135deg, #f8fff9 0%, #e8f5e8 100%));
+}
+
+body.dark-mode .day-section.today-meal {
+    background: linear-gradient(135deg, #1b3320 0%, #0d210f 100%);
+    border-color: #28a745;
 }
 
 /* Responsive Optimizations */
