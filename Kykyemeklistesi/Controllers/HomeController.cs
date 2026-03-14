@@ -9,7 +9,7 @@ namespace Kykyemeklistesi.Controllers
 {
     public class HomeController : Controller
     {
-        private static AppDbContext _dbContext;
+        private readonly AppDbContext _dbContext;
 
         public HomeController(AppDbContext appContext)
         {
@@ -20,28 +20,47 @@ namespace Kykyemeklistesi.Controllers
         [HttpGet]
         public IActionResult Index(string? selectedCity)
         {
-            // Eğer URL '/' ise verisi olan ilk şehri bulalım
+            // 1. Ana Sayfa YÖNLENDİRMESİ (/)
             if (string.IsNullOrEmpty(selectedCity))
             {
-                var firstCityWithData = _dbContext.YemekListesi
-                    .Include(x => x.City)
-                    .Where(x => x.SabahYemekListesi != null && x.Day.Month == DateTime.Now.Month && x.Day.Year == DateTime.Now.Year)
-                    .OrderBy(x => x.City.CityName)
-                    .Select(x => x.City.CityName)
-                    .FirstOrDefault();
+                string firstCity = "ankara"; // Varsayılan değer
+                try
+                {
+                    // Bu aya ait verisi olan ilk alfabetik şehri bul
+                    var cityWithData = _dbContext.YemekListesi
+                        .Include(x => x.City)
+                        .Where(x => x.Day.Month == DateTime.Now.Month && x.Day.Year == DateTime.Now.Year && x.City != null)
+                        .OrderBy(x => x.City.CityName)
+                        .Select(x => x.City.CityName)
+                        .FirstOrDefault();
 
-                selectedCity = firstCityWithData ?? "Ankara";
-                return RedirectToRoute("cityMenu", new { selectedCity = selectedCity.ToLower() });
+                    if (!string.IsNullOrEmpty(cityWithData))
+                    {
+                        firstCity = cityWithData;
+                    }
+                }
+                catch
+                {
+                    // DB hatası durumunda varsayılan ile devam et
+                }
+
+                // SEO dostu URL'ye yönlendir (Örn: / -> /ankara-yemek-listesi)
+                return Redirect("/" + firstCity.ToLower() + "-yemek-listesi");
             }
 
-            selectedCity = NormalizeCityName(selectedCity);
-
-            // SEO dostu URL kontrolü: Eğer path '{sehir}-yemek-listesi' içermiyorsa oraya yönlendir
-            string expectedPath = $"/{selectedCity.ToLower()}-yemek-listesi";
-            if (Request.Path.Value != expectedPath)
+            // 2. SEO Dostu URL ve Normalleştirme Kontrolü
+            string cityLower = selectedCity.ToLower();
+            string expectedPath = $"/{cityLower}-yemek-listesi";
+            
+            // Eğer URL yapısı beklenen SEO formatında değilse yönlendir
+            if (!string.Equals(Request.Path.Value, expectedPath, StringComparison.OrdinalIgnoreCase))
             {
-                return RedirectToRoute("cityMenu", new { selectedCity = selectedCity.ToLower() });
+                return Redirect(expectedPath);
             }
+
+            // Veri Yükleme İşlemleri
+            selectedCity = NormalizeCityName(selectedCity);
+            deger = selectedCity;
             DateTime currentDate = DateTime.Now;
 
             var selectList = _dbContext.YemekListesi.Where(x => x.Day.Month == DateTime.Now.Month &&
@@ -68,8 +87,6 @@ namespace Kykyemeklistesi.Controllers
             ViewData["Description"] = $"{selectedCity} KYK yurtları {currentDate.ToString("MMMM yyyy")} aylık yemek menüsü. Bugün KYK sabah kahvaltısı ve akşam yemeğinde ne var? Hemen öğrenin.";
             ViewData["Keywords"] = $"{selectedCity} kyk yemek listesi, kyk yemek menüsü {currentDate.Year}, {selectedCity} yurt yemekleri";
             ViewData["CanonicalUrl"] = $"https://kykyemeklistesi.com.tr/{selectedCity.ToLower()}-yemek-listesi";
-
-            deger = selectedCity;
 
             // Oylama sayılarını yükle
             foreach (var y in yemekListesi)
@@ -543,8 +560,7 @@ namespace Kykyemeklistesi.Controllers
 
         public static string SecilenSehir()
         {
-            var secilensehir = deger;
-            return secilensehir;
+            return deger;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Kykyemeklistesi.Controllers
     {
 
 
-        private static AppDbContext _db;
+        private readonly AppDbContext _db;
 
         public AdminController(AppDbContext appContext)
         {
