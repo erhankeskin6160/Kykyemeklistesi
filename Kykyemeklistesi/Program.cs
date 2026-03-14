@@ -59,6 +59,11 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 // Özel route'larý önce tanýmlýyoruz
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+    
 app.MapControllerRoute(
     name: "Login",
     pattern: "Login",

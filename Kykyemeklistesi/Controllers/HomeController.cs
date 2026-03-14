@@ -21,44 +21,37 @@ namespace Kykyemeklistesi.Controllers
         public IActionResult Index(string? selectedCity)
         {
             // 1. Ana Sayfa YÖNLENDİRMESİ (/)
-            if (string.IsNullOrEmpty(selectedCity))
+            if (string.IsNullOrEmpty(selectedCity="Ankara"))
             {
-                string firstCity = "ankara"; // Varsayılan değer
+                string firstCity = "ankara";
                 try
                 {
-                    // Bu aya ait verisi olan ilk alfabetik şehri bul
+                    // Bu aya ait verisi olan ilk şehri bul
                     var cityWithData = _dbContext.YemekListesi
-                        .Include(x => x.City)
-                        .Where(x => x.Day.Month == DateTime.Now.Month && x.Day.Year == DateTime.Now.Year && x.City != null)
+                        .Where(x => x.Day.Month == DateTime.Now.Month && x.Day.Year == DateTime.Now.Year && x.City != null && x.SabahYemekListesi != null)
                         .OrderBy(x => x.City.CityName)
                         .Select(x => x.City.CityName)
                         .FirstOrDefault();
 
                     if (!string.IsNullOrEmpty(cityWithData))
-                    {
                         firstCity = cityWithData;
-                    }
                 }
-                catch
-                {
-                    // DB hatası durumunda varsayılan ile devam et
-                }
+                catch { }
 
-                // SEO dostu URL'ye yönlendir (Örn: / -> /ankara-yemek-listesi)
-                return Redirect("/" + firstCity.ToLower() + "-yemek-listesi");
+                // Basit ve doğrudan yönlendirme
+                return Redirect("/" + firstCity.ToLowerInvariant() + "-yemek-listesi");
             }
 
-            // 2. SEO Dostu URL ve Normalleştirme Kontrolü
-            string cityLower = selectedCity.ToLower();
-            string expectedPath = $"/{cityLower}-yemek-listesi";
+            // 2. SEO ve Küçük Harf Kontrolü
+            string cityLower = selectedCity.ToLowerInvariant();
+            string expectedPath = "/" + cityLower + "-yemek-listesi";
             
-            // Eğer URL yapısı beklenen SEO formatında değilse yönlendir
             if (!string.Equals(Request.Path.Value, expectedPath, StringComparison.OrdinalIgnoreCase))
             {
                 return Redirect(expectedPath);
             }
 
-            // Veri Yükleme İşlemleri
+            // Verileri Yükle
             selectedCity = NormalizeCityName(selectedCity);
             deger = selectedCity;
             DateTime currentDate = DateTime.Now;
